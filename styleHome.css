@@ -60,11 +60,36 @@ h2 {
 
 }
 .card-img-bottom {
-    background-color: red;
+    background-color: transparent;
+}
+
+.kategoria img {
+    max-width: 150px;
+    background-color: transparent;
+    padding: 0;
 }
 
 .kategoria {
-    width: 10rem;
-    margin: 0;
-    padding: 0;
+    background-color: transparent;
+    border: none;
 }
+.col {
+    padding: 10px 2px 0;
+    border: 1px solid lightgrey;
+}
+
+.col:hover {
+    background-color: #50acc5;
+}
+
+.row-cols-lg-5 {
+    max-width: 720px;
+}
+
+.card-title {
+    margin: 0;
+}
+
+
+
+
