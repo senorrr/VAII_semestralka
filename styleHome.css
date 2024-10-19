@@ -2,6 +2,21 @@
     font-family: "Arial","Gill Sans","system-ui" ;
 }
 
+.nav-link {
+    position: relative;
+    font-size: 1.5em;
+    color: #efefef;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.nav-link:focus, .nav-link:active {
+    color: goldenrod;
+}
+
 .nav-link:hover::after {
     content: "";
     height: 2px;
@@ -12,19 +27,10 @@
     left: 0;
 }
 
-.nav-link:hover {
-    color: white;
-}
-
-.nav-link {
-    position: relative;
-    font-size: 1.5em;
-    color: #efefef;
-}
-
 .navbar {
     background-color: #00437e;
 }
+
 
 .logo {
     width: 50px;
