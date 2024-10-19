@@ -54,10 +54,17 @@ h2 {
 }
 
 .wrapper {
-    max-width: 1054px;
+    max-width: 1200px;
     position: relative;
     margin: 0 auto 0 auto;
 
 }
+.card-img-bottom {
+    background-color: red;
+}
 
-
+.kategoria {
+    width: 10rem;
+    margin: 0;
+    padding: 0;
+}
