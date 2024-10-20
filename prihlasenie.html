@@ -46,15 +46,17 @@
         <form>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control minSirka" id="email" placeholder="Zadajte email">
+            <input type="email" required class="form-control minSirka" id="email" placeholder="Zadajte email">
           </div>
           <div class="form-group">
             <label for="password">Heslo</label>
-            <input type="password" class="form-control minSirka" id="password" placeholder="Zadajte heslo">
+            <input type="password" required class="form-control minSirka" id="password" placeholder="Zadajte heslo">
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-block">Prihlás</button>
-            <button type="button" class="btn btn-block">Ešte nemám účet</button>
+            <a href="registracia.html">
+              <button type="button" class="btn btn-block">Vytvoriť nový účet</button>
+            </a>
           </div>
         </form>
       </div>
