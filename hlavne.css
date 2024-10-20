@@ -1,3 +1,38 @@
+/*
+    Toto je hlavny css najma su tu pravidla pre navbar(header) a footer
+ */
+
+* {
+    font-family: "Arial","Gill Sans","system-ui" ;
+}
+
+body {
+    background-color: #65cbe9 ;
+}
+
+h2 {
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #65cbe9;
+}
+
+.wrapper {
+    max-width: 1200px;
+    position: relative;
+    margin: 0 auto 0 auto;
+
+}
+
+.vyhladanie {
+    background-color: transparent;
+    color: black;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
 
 .navbar-toggler:hover, .navbar-toggler:active, .navbar-toggler:focus {
     border-color: goldenrod;

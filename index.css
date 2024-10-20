@@ -1,34 +1,5 @@
-* {
-    font-family: "Arial","Gill Sans","system-ui" ;
-}
 
-body {
-    background-color: #65cbe9 ;
-}
 
-.vyhladanie {
-    background-color: transparent;
-    color: black;
-    width: 30px;
-    height: 30px;
-    margin: auto;
-}
-
-.btn:hover {
-    background-color: #65cbe9;
-}
-
-h2 {
-    font-size: 1.5em;
-    text-align: center;
-}
-
-.wrapper {
-    max-width: 1200px;
-    position: relative;
-    margin: 0 auto 0 auto;
-
-}
 .card-img-bottom {
     background-color: transparent;
 }
