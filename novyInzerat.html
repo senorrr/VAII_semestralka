@@ -9,9 +9,9 @@
     <link href="styleHome.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="wrapper">
 <header>
-    <nav class="navbar navbar-expand-lg wrapper">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html"><img class="logo" src="resources/logo.png" alt="logo"> </a>
             <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@
             </div>
             <div class="form-group">
                 <label for="price">Cena (€)</label>
-                <input required type="number" class="form-control" id="price" placeholder="Zadajte cenu">
+                <input required type="number" class="form-control" id="price" min="0" placeholder="Zadajte cenu">
             </div>
             <div class="form-group">
                 <label for="photos">Fotky</label>
@@ -71,11 +71,33 @@
             </div>
             <div class="form-group">
                 <label for="description">Popis</label>
-                <textarea required class="form-control" id="description" rows="5" placeholder="Zadajte popis"></textarea>
+                <textarea required maxlength="500" class="form-control" id="description" rows="5" placeholder="Zadajte popis"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Pridať Inzerát</button>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary text-center">Pridať Inzerát</button>
+            </div>
+
+
         </form>
     </div>
 </main>
+<footer>
+    <div class="container-fluid">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="https://github.com/senorrr" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1">
+                    Peter Macko <img class= "ikona" src="resources/github-mark.png" alt="github">
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary">© 2024</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-body-secondary" href="#"><img src="resources/facebook.png" alt="Facebook" class="ikona"></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><img src="resources/twitter.png" alt="Twitter" class="ikona"></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><img src="resources/instagram.png" alt="Instagram" class="ikona"></a></li>
+            </ul>
+        </footer>
+    </div>
+</footer>
 </body>
 </html>
