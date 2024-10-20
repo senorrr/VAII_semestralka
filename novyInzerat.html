@@ -43,30 +43,35 @@
         <h2>Pridanie Inzerátu</h2>
         <form>
             <div class="form-group">
+                <label for="title">Názov</label>
+                <input required type="text" class="form-control" id="title" placeholder="Zadajte názov">
+            </div>
+            <div class="form-group">
                 <label for="category">Kategória</label>
                 <select class="form-control" id="category">
+                    <option>Auto</option>
+                    <option>Domácnosť</option>
+                    <option>Náradie</option>
                     <option>Elektronika</option>
-                    <option>Nábytok</option>
-                    <option>Oblečenie</option>
                     <option>Šport</option>
-                    <option>Iné</option>
+                    <option>Pre deti</option>
+                    <option>Oslavy</option>
+                    <option>Oblečenie</option>
+                    <option>Služby</option>
+                    <option>Ostatné</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="price">Cena (€)</label>
-                <input type="number" class="form-control" id="price" placeholder="Zadajte cenu">
+                <input required type="number" class="form-control" id="price" placeholder="Zadajte cenu">
             </div>
             <div class="form-group">
                 <label for="photos">Fotky</label>
                 <input type="file" class="form-control-file" id="photos" multiple>
             </div>
             <div class="form-group">
-                <label for="title">Názov</label>
-                <input type="text" class="form-control" id="title" placeholder="Zadajte názov">
-            </div>
-            <div class="form-group">
                 <label for="description">Popis</label>
-                <textarea class="form-control" id="description" rows="3" placeholder="Zadajte popis"></textarea>
+                <textarea required class="form-control" id="description" rows="5" placeholder="Zadajte popis"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Pridať Inzerát</button>
         </form>
