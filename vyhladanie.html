@@ -8,6 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
   <link href="hlavne.css" rel="stylesheet">
+  <link href="prihlasenie.css" rel="stylesheet">
 
 </head>
 <body class="wrapper">
@@ -40,8 +41,49 @@
   </nav>
 </header>
 <main>
-  <h2 class="text-center">Vyhľadávanie</h2>
+  <div class="container-fluid">
+    <h2>Vyhľadávanie</h2>
+    <form>
+      <div class="form-group">
+        <label for="phrase">Fráza</label>
+        <input type="text" class="form-control" id="phrase" placeholder="Zadajte frázu">
+      </div>
+      <div class="form-group">
+        <label for="category">Kategória</label>
+        <select class="form-control" id="category">
+          <option>Auto</option>
+          <option>Domácnosť</option>
+          <option>Náradie</option>
+          <option>Elektronika</option>
+          <option>Šport</option>
+          <option>Pre deti</option>
+          <option>Oslavy</option>
+          <option>Oblečenie</option>
+          <option>Služby</option>
+          <option>Ostatné</option>
+        </select>
+        <!-- TODO: potom asi s JS sa bude dat nastavit ze podla cohg si prisiel (ak som tukol na )-->
 
+      </div>
+      <div class="form-group">
+        <label for="dateFrom">Dátum požičania od</label>
+        <input type="date" class="form-control" id="dateFrom">
+      </div>
+      <div class="form-group">
+        <label for="dateTo">Dátum požičania do</label>
+        <input type="date" class="form-control" id="dateTo">
+        <!-- TODO: potom asi s JS sa bude dat obmedzit minimum na dnesny den-->
+      </div>
+      <div class="form-group">
+        <label for="maxPrice">Cena</label>
+        <input type="number" class="form-control" id="maxPrice" min="0" placeholder="Zadajte po akú najvyššiu cenu zobraziť inzeráty">
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn">Vyhľadať</button>
+      </div>
+
+    </form>
+  </div>
 </main>
 
 <footer>
