@@ -1,0 +1,53 @@
+
+.navbar-toggler:hover, .navbar-toggler:active, .navbar-toggler:focus {
+    border-color: goldenrod;
+    color: goldenrod;
+}
+
+.nav-link {
+    position: relative;
+    font-size: 1.5em;
+    color: #efefef;
+    transition: color 0.3s;
+}
+
+@media screen and (max-width: 960px) {
+    .nav-link{
+        border-style: inset none none inset;
+        border-color: #eae69d;
+        border-width: 3px;
+        margin-bottom: 5px;
+        padding: 5px 0 5px 5px;
+        width: 300px;
+    }
+}
+
+
+.nav-link:hover {
+    color: white;
+}
+
+.nav-link:focus, .nav-link:active {
+    color: goldenrod;
+}
+
+.nav-link:hover::after {
+    content: "";
+    height: 2px;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.navbar {
+    background-color: #00437e;
+}
+
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+}
