@@ -54,4 +54,29 @@
 
 .ikona {
     width: 35px;
+    margin-left: 10px;
 }
+
+footer {
+    max-width: 1050px;
+    margin: 0 auto 0 auto
+}
+
+@media screen and (max-width: 1200px) {
+    footer {
+        max-width: 900px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    footer {
+        max-width: 650px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        max-width: 450px !important;
+    }
+}
+
