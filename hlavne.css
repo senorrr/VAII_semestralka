@@ -10,12 +10,19 @@ body {
     background-color: #65cbe9 ;
 }
 
+header h2 {
+    font-size: 1.5em;
+    text-align: center;
+    color:white;
+}
+
 h2 {
     font-size: 1.5em;
     text-align: center;
+    color: #0a2f50;
 }
 
-.btn:hover {
+header .btn:hover {
     background-color: #65cbe9;
 }
 
@@ -114,4 +121,28 @@ footer {
         max-width: 450px !important;
     }
 }
+
+@media screen and (min-width: 992px) {
+    .aktivny {
+        border-top: 2px solid goldenrod;
+        border-bottom: 2px solid goldenrod;
+        border-radius: 300px;
+        font-size: 1.5em;
+        color: white;
+        position: relative;
+        padding: 0.5rem;
+        margin: 2px 0 0 0 !important;
+    }
+}
+
+.aktivny {
+        border: 2px solid goldenrod;
+        border-radius: 300px;
+        font-size: 1.5em;
+        color: white;
+        position: relative;
+        padding: 0.5rem;
+        margin: 5px 0 5px 0;
+}
+
 
