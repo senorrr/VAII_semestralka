@@ -4,6 +4,8 @@ use App\Core\Model;
 
 class User extends Model
 {
+    protected $name;
+    protected $surname;
     protected $email;
     protected $password;
 
@@ -50,6 +52,36 @@ class User extends Model
         $this->password = $password;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * @param mixed $surname
+     */
+    public function setSurname($surname): void
+    {
+        $this->surname = $surname;
+    }
 
 }

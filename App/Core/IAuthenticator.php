@@ -23,6 +23,8 @@ interface IAuthenticator
      */
     public function logout(): void;
 
+    public function register($login, $password, $name, $surname): bool;
+
     /**
      * Return name of a logged user
      * @return string

@@ -7,6 +7,9 @@ use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Core\Responses\ViewResponse;
 
+/** @var \App\Core\LinkGenerator $link */
+
+
 /**
  * Class AuthController
  * Controller for authentication actions
@@ -25,8 +28,22 @@ class AuthController extends AControllerBase
 
     public function register(): Response
     {
-        $data = ['message' => 'Zlý login alebo heslo!'];
-        return $this->html(null, "auth.register");
+        return $this->html();
+    }
+
+    public function vytvorNovy(): Response
+    {
+        $formData = $this->app->getRequest()->getPost();
+        $logged = null;
+        if (isset($formData['submit'])) {
+            $logged = $this->app->getAuth()->register($formData['login'], $formData['password'], $formData['name'], $formData['surname']);
+            if ($logged) {
+                return $this->redirect($this->url("admin.index"));
+            }
+        }
+        $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
+
+        return $this->html($data);
     }
 
     /**

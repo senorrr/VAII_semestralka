@@ -18,7 +18,12 @@ class DbAuthenticator implements IAuthenticator
     }
 
     /**
-     * @inheritDoc
+     * Pokusi sa prihlasit s parametrami, ak sa zhoduju hesla a loginy tak prihlasi
+     *
+     * @param $login
+     * @param $password
+     * @return bool
+     * @throws \Exception
      */
     public function login($login, $password): bool
     {
@@ -30,6 +35,31 @@ class DbAuthenticator implements IAuthenticator
             }
         }
         return false;
+    }
+
+    /**
+     * Skontroluje ze ci neexistuje uzivatel s danym emailom ak nie tak ho vytvori a ulozi do DB
+     * @param $login
+     * @param $password
+     * @param $name
+     * @param $surname
+     * @return bool
+     */
+    public function register($login, $password, $name, $surname): bool
+    {
+        $users = User::getAll();
+        foreach ($users as $user) {
+            if ($user->getEmail() == $login) {
+                return false;
+            }
+        }
+        $novy = new User();
+        $novy->setEmail($login);
+        $novy->setPassword($password);
+        $novy->setName($name);
+        $novy->setSurname($surname);
+        $novy->save();
+        return true;
     }
 
     /**
@@ -79,4 +109,6 @@ class DbAuthenticator implements IAuthenticator
     {
         return $_SESSION['user'];
     }
+
+
 }

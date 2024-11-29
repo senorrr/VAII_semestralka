@@ -12,7 +12,7 @@
             <form action="index.html" method="post">
                 <div class="form-group">
                     <label for="name">Meno</label>
-                    <input required class="form-control minSirka" autocomplete="on" placeholder="Zadajte meno" id="name">
+                    <input required class="form-control minSirka" autofocus autocomplete="on" placeholder="Zadajte meno" id="name">
                 </div>
                 <div class="form-group">
                     <label for="surname">Priezvisko</label>

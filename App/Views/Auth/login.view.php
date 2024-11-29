@@ -22,7 +22,7 @@
                 </div>
                 <div class="text-center">
                     <button name="submit" type="submit" class="btn btn-block">Prihlás</button>
-                    <button onclick="window.location.href=<?= $link->url("home.contact")?>" type="button" class="btn btn-block">Vytvoriť nový účet</button>
+                    <button onclick="window.location.href='<?= $link->url("register")?>' " type="button" class="btn btn-block">Vytvoriť nový účet</button>
                 </div>
             </form>
         </div>
