@@ -19,6 +19,7 @@
 <div class="container-fluid mt-3">
     <div class="web-content">
         <?= $contentHTML ?>
+        ahoj
     </div>
 </div>
 </body>
