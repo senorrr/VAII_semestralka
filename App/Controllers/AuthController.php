@@ -23,6 +23,12 @@ class AuthController extends AControllerBase
         return $this->redirect(Configuration::LOGIN_URL);
     }
 
+    public function register(): Response
+    {
+        $data = ['message' => 'Zlý login alebo heslo!'];
+        return $this->html(null, "auth.register");
+    }
+
     /**
      * Login a user
      * @return Response

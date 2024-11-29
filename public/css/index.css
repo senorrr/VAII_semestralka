@@ -1,40 +1,4 @@
 
 
-.card-img-bottom {
-    background-color: transparent;
-}
-
-.kategoria img {
-    max-width: 150px;
-    background-color: transparent;
-    padding: 0;
-}
-
-.kategoria {
-    background-color: transparent;
-    border: none;
-}
-
-.col {
-    padding-top: 10px;
-
-}
-.col:hover {
-    background-color: #50acc5;
-    border-width: 2px;
-    border-color: #35869c;
-    border-style: solid;
-    border-radius: 10px;
-}
-
-.row-cols-lg-5 {
-    max-width: 720px;
-}
-
-.card-title {
-    margin: 0;
-}
-
-
 
 

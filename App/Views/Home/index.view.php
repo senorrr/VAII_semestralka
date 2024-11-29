@@ -1,30 +1,67 @@
+<div class="">
+    <h2>Na stránke je dostupných 0 inzerátov</h2>
+</div>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col mt-5">
-            <div class="text-center">
-                <h2>Vaííčko MVC FW</h2>
-                <img src="public/images/vaiicko_logo.png">
-                <p>
-                    Gratulujeme vám, úspešne sa vám podarilo nainštalovať a spustiť framework
-                    <strong>Vaííčko</strong> <?= \App\Config\Configuration::FW_VERSION ?>!<br>
-                    Dúfame, že sa Vám pomocou tohto frameworku vytvoríte nejakú skvelú aplikáciu.<br>
-                </p>
-                <p>
-                    Tento jednoduchý framework bol vytvorený pre lepšie pochopenie architektúry MVC.<br>
-                    Je určený pre študentov predmetu <em>vývoj aplikácií pre internet a intranet</em>, ale nielen im.
-                </p>
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-0 g mx-auto ">
+        <div class="col" >
+            <div class="card kategoria">
+                <div><h2 class="card-title">Auto</h2></div>
+                <img class="card-img-bottom align-self-center" src="../resources/auto.png" alt="kategoria auto">
             </div>
         </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col text-center">
-            <h4>Autori</h4>
-            <div>
-                <a href="mailto:Patrik.Hrkut@fri.uniza.sk">doc. Ing. Patrik Hrkút, PhD.</a><br>
-                <a href="mailto:Michal.Duracik@fri.uniza.sk">Ing. Michal Ďuračík, PhD.</a><br>
-                <a href="mailto:Matej.Mesko@fri.uniza.sk">Ing. Matej Meško, PhD.</a><br><br>
-                &copy; 2020-<?= date('Y') ?> Žilinská univerzita v Žiline, Fakulta riadenia a informatiky, Katedra
-                softvérových technológií
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Domácnosť</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/domacnost.png" alt="kategoria">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Náradie</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/naradie.png" alt="kategoria">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Elektronika</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/elektronika.png" alt="kategoria">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Šport</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/sport.png" alt="kategoria">
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Pre deti</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/predeti.png" alt="kategoria">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Oslavy</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/oslavy.png" alt="kategoria">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Oblečenie</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/oblecenie.png" alt="kategoria">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Služby</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/sluzby.png" alt="kategoria">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card kategoria">
+                <h2 class="card-title">Ostatné</h2>
+                <img class="card-img-bottom align-self-center" src="../resources/ostatne.png" alt="kategoria">
             </div>
         </div>
     </div>

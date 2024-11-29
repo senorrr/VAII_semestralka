@@ -16,9 +16,7 @@
 
     <script src="public/js/script.js"></script>
 </head>
-<body>
-
-
+<body class = "wrapper">
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="<?= $link->url("home.index") ?>"><img class="logo" src="../resources/logo.png" alt="logo"> </a>
