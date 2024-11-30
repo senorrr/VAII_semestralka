@@ -33,10 +33,20 @@ class AuthController extends AControllerBase
         $data= null;
         $edit= null;
         //todo kontrola ze ci nie su null hodnoty
-        if (isset($formData['submit'])) {
+
+        if (isset($formData['remove'])) {
+            $user = $this->app->getAuth()->getLoggedUser();
+            $this->app->getAuth()->logout();
+            $user->delete();
+            return $this->redirect($this->url("home.index"));
+        }
+            if (isset($formData['submit'])) {
             if ($formData['passwordOld'] == $this->app->getAuth()->getLoggedUserPassword()) {
                 if ($formData['passwordNew'] == $formData['passwordConfirm']) {
                     $edit = $this->app->getAuth()->edit($formData['login'], $formData['passwordNew'], $formData['name'], $formData['surname']);
+                    if ($edit) {
+                        $data =['message' => "Úspešná zmena!"];
+                    }
                 } else {
                     $data =['message' => "Heslá sa nezhodovali"];
                 }
@@ -59,7 +69,7 @@ class AuthController extends AControllerBase
         if (isset($formData['submit'])) {
             $register = $this->app->getAuth()->register($formData['login'], $formData['password'], $formData['name'], $formData['surname']);
             if ($register) {
-                return $this->redirect($this->url("user.profil"));
+                return $this->redirect($this->url("auth.edit"));
             }
         }
         $data = ($register === false ? ['message' => 'Neúspešná registrácia!'] : []);

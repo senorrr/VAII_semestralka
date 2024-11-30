@@ -118,7 +118,7 @@ class DbAuthenticator implements IAuthenticator
      * Get the context of the logged-in user
      * @return string
      */
-    public function getLoggedUser(): mixed
+    public function getLoggedUser(): User
     {
         $user = User::getOne($this->getLoggedUserEmail());
         return $user;

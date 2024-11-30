@@ -32,15 +32,16 @@
                 </div>
                 <div class="form-group">
                     <label for="new_password">Nové heslo</label>
-                    <input name="passwordNew" required type="password" class="form-control minSirka" id="new_password" placeholder="Zadajte nové heslo">
+                    <input name="passwordNew" type="password" class="form-control minSirka" id="new_password" placeholder="Zadajte nové heslo">
                 </div>
 
                 <div class="form-group">
                     <label for="confirm_password">Zopakujte heslo</label>
-                    <input name="passwordConfirm" required type="password" class="form-control minSirka" id="confirm_password" placeholder="Zopakujte nové heslo">
+                    <input name="passwordConfirm" type="password" class="form-control minSirka" id="confirm_password" placeholder="Zopakujte nové heslo">
                 </div>
 
                 <div class="text-center">
+                    <button name="remove" type="submit" class="btn btn-block bg-danger">Vymaž účet</button>
                     <button name="submit" type="submit" class="btn btn-block">Uložiť zmeny</button>
                 </div>
             </form>
