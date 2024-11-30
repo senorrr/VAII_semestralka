@@ -36,9 +36,14 @@ class AuthController extends AControllerBase
 
         if (isset($formData['remove'])) {
             $user = $this->app->getAuth()->getLoggedUser();
-            $this->app->getAuth()->logout();
-            $user->delete();
-            return $this->redirect($this->url("home.index"));
+            if ($user->getPassword() == $formData['passwordOld']) {
+                $this->app->getAuth()->logout();
+                $user->delete();
+                return $this->redirect($this->url("home.index"));
+            } else {
+                $data =['message' => "Nesprávne heslo!"];
+                return $this->html($data);
+            }
         }
             if (isset($formData['submit'])) {
             if ($formData['passwordOld'] == $this->app->getAuth()->getLoggedUserPassword()) {
