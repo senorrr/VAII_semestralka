@@ -26,22 +26,43 @@ class AuthController extends AControllerBase
         return $this->redirect(Configuration::LOGIN_URL);
     }
 
-    public function register(): Response
+    public function edit(): Response
     {
-        return $this->html();
+        //todo Situacia ked si meni mail!!!
+        $formData = $this->app->getRequest()->getPost();
+        $data= null;
+        $edit= null;
+        //todo kontrola ze ci nie su null hodnoty
+        if (isset($formData['submit'])) {
+            if ($formData['passwordOld'] == $this->app->getAuth()->getLoggedUserPassword()) {
+                if ($formData['passwordNew'] == $formData['passwordConfirm']) {
+                    $edit = $this->app->getAuth()->edit($formData['login'], $formData['passwordNew'], $formData['name'], $formData['surname']);
+                } else {
+                    $data =['message' => "Heslá sa nezhodovali"];
+                }
+            } else {
+                $data =['message' => "Nesprávne aktuálne heslo"];
+            }
+
+        } else {
+            $data = ($edit === false ? ['message' => 'Neúspešná zmena!'] : []);
+        }
+
+        return $this->html($data);
     }
 
-    public function vytvorNovy(): Response
+    public function register(): Response
     {
+        //todo kontrola ze ci nie su null hodnoty
         $formData = $this->app->getRequest()->getPost();
-        $logged = null;
+        $register = null;
         if (isset($formData['submit'])) {
-            $logged = $this->app->getAuth()->register($formData['login'], $formData['password'], $formData['name'], $formData['surname']);
-            if ($logged) {
-                return $this->redirect($this->url("admin.index"));
+            $register = $this->app->getAuth()->register($formData['login'], $formData['password'], $formData['name'], $formData['surname']);
+            if ($register) {
+                return $this->redirect($this->url("user.profil"));
             }
         }
-        $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
+        $data = ($register === false ? ['message' => 'Neúspešná registrácia!'] : []);
 
         return $this->html($data);
     }
@@ -52,6 +73,7 @@ class AuthController extends AControllerBase
      */
     public function login(): Response
     {
+        //todo kontrola ze ci nie su null hodnoty
         $formData = $this->app->getRequest()->getPost();
         $logged = null;
         if (isset($formData['submit'])) {

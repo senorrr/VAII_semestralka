@@ -59,7 +59,25 @@ class DbAuthenticator implements IAuthenticator
         $novy->setName($name);
         $novy->setSurname($surname);
         $novy->save();
+        $_SESSION['user'] = $login;
         return true;
+    }
+
+    public function edit($login, $password, $name, $surname): bool
+    {
+        $users = User::getAll();
+        foreach ($users as $user) {
+            if ($user->getEmail() == $login) {
+                $user->setEmail($login);
+                $user->setPassword($password);
+                $user->setName($name);
+                $user->setSurname($surname);
+                $user->save();
+                //todo situacia ked si meni mail treba zmenit session
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -80,16 +98,30 @@ class DbAuthenticator implements IAuthenticator
      */
     public function getLoggedUserName(): string
     {
-        return isset($_SESSION['user']) ? $_SESSION['user'] : throw new \Exception("User not logged in");
+        $user = User::getOne($this->getLoggedUserEmail());
+        return $user->getName();
     }
+    public function getLoggedUserSurname(): string
+    {
+        $user = User::getOne($this->getLoggedUserEmail());
+        return $user->getSurname();
+    }
+
+
+    public function getLoggedUserEmail(): string
+    {
+        return $_SESSION['user'];
+    }
+
 
     /**
      * Get the context of the logged-in user
      * @return string
      */
-    public function getLoggedUserContext(): mixed
+    public function getLoggedUser(): mixed
     {
-        return null;
+        $user = User::getOne($this->getLoggedUserEmail());
+        return $user;
     }
 
     /**
@@ -101,14 +133,10 @@ class DbAuthenticator implements IAuthenticator
         return isset($_SESSION['user']) && $_SESSION['user'] != null;
     }
 
-    /**
-     * Return the id of the logged-in user
-     * @return mixed
-     */
-    public function getLoggedUserId(): mixed
+
+    public function getLoggedUserPassword(): string
     {
-        return $_SESSION['user'];
+        $user = User::getOne($this->getLoggedUserEmail());
+        return $user->getPassword();
     }
-
-
 }

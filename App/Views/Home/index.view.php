@@ -1,4 +1,5 @@
 <div class="">
+    novy controller pre nove inzeraty...
     <h2>Na stránke je dostupných 0 inzerátov</h2>
 </div>
 <div class="container-fluid">

@@ -30,22 +30,22 @@ interface IAuthenticator
      * @return string
      */
     public function getLoggedUserName(): string;
+    public function getLoggedUserSurname(): string;
+    public function getLoggedUserEmail(): string;
+    public function getLoggedUserPassword(): string;
 
-    /**
-     * Return id of a logged user
-     * @return mixed
-     */
-    public function getLoggedUserId(): mixed;
 
     /**
      * Return a context of logged user, e.g. user class instance
      * @return mixed
      */
-    public function getLoggedUserContext(): mixed;
+    public function getLoggedUser(): mixed;
 
     /**
      * Return, if a user is logged or not
      * @return bool
      */
     public function isLogged(): bool;
+
+    public function edit(mixed $login, mixed $password, mixed $name, mixed $surname): bool;
 }

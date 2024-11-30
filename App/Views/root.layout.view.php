@@ -30,13 +30,17 @@
                 </li>
                 <?php if ($auth->isLogged()) { ?>
 
+
+                <li class="nav-item">
+                    <a class="nav-link" href="novyInzerat.html">Pridaj inzerát</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= $link->url("auth.edit") ?>">Profil</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $link->url("auth.logout") ?>">Odhlásenie</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="novyInzerat.html">Pridaj inzerát</a>
-                    novy controller pre nove inzeraty...
-                </li>
+
                 <?php } else { ?>
                     <li>
                         <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásenie</a>
