@@ -12,15 +12,13 @@ use App\Config\Configuration;
     <div class="row justify-content-center">
         <div class="col-11 col-md-6 col-lg-5 gy-2">
             <h2 class="text-center">Prihlásenie</h2>
-            <div class="text-center text-danger bold">
+            <div class="text-center text-vypis">
                 <?= @$data['message'] ?>
             </div>
             <form method="post" action="<?= $link->url("login") ?>">
                 <div class="form-signin" >
                     <label for="email">Email</label>
-                    <? //<input name="login" type="email" required autofocus class="form-control minSirka" id="email" placeholder="Zadajte email">
-                    ?>
-                    <input name="login" id="email" type="text" required autofocus class="form-control minSirka" placeholder="zadaj text... docasne kym spravim riadne prihlasovanie">
+                    <input name="login" type="email" required autofocus class="form-control minSirka" id="email" placeholder="Zadajte email">
                 </div>
                 <div class="form-signin">
                     <label for="password">Heslo</label>

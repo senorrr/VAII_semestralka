@@ -71,13 +71,19 @@ class AuthController extends AControllerBase
         //todo kontrola ze ci nie su null hodnoty
         $formData = $this->app->getRequest()->getPost();
         $register = null;
+        $data = null;
         if (isset($formData['submit'])) {
-            $register = $this->app->getAuth()->register($formData['login'], $formData['password'], $formData['name'], $formData['surname']);
-            if ($register) {
-                return $this->redirect($this->url("auth.edit"));
+            if ($formData['login'] != null && $formData['password'] != null && $formData['name'] != null && $formData['surname'] != null) {
+                $register = $this->app->getAuth()->register($formData['login'], $formData['password'], $formData['name'], $formData['surname']);
+                if ($register) {
+                    return $this->redirect($this->url("auth.edit"));
+                }
+            } else {
+                $data = ['message' => 'Údaje neboli vyplnené!'];
             }
+        } else {
+            $data = ($register === false ? ['message' => 'Neúspešná registrácia!'] : []);
         }
-        $data = ($register === false ? ['message' => 'Neúspešná registrácia!'] : []);
 
         return $this->html($data);
     }

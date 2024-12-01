@@ -200,12 +200,12 @@ h3 {
 }
 
 .btn-disabled {
-    background-color : yellow !important;
-    color: red !important;
+    background-color : #50acc5 !important;
     cursor: not-allowed;
     opacity: 0.6;
 }
 
-
-
-
+.text-vypis {
+    color: #fb1e1e;
+    font-size: 1.2em;
+}

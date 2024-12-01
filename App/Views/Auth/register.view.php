@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
         <div class="col-11 col-md-6 col-lg-5 gy-2">
             <h2 class="text-center">Registrovať sa</h2>
-            <div class="text-center text-danger bold">
+            <div class="text-center text-vypis">
                 <?= @$data['message'] ?>
             </div>
             <form action="<?= $link->url("auth.register") ?>" method="post">
@@ -34,19 +34,18 @@
                 <div class="form-group">
                     <label for="confirm_password">Zopakujte heslo</label>
                     <input name="passwordConfirm" required type="password" class="form-control minSirka" id="confirm_password" placeholder="Zopakujte heslo">
-                    <small id="passwordHelp" class="form-text text-danger"></small>
+                    <small id="passwordHelp" class="form-text text-vypis"></small>
                 </div>
                 <div class="text-center medzera">
                     <h3>Registráciou súhlasíte so spracovaním osobných údajov</h3>
                 </div>
                 <div class="text-center">
-                    <button name="submit" type="submit" class="btn btn-disabled" id="submitBtn">Vytvoriť účet</button>
+                    <button name="submit" type="submit" class="btn" id="submitBtn">Vytvoriť účet</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
 
 <script>
     document.getElementById("new_password").addEventListener("input", checkPasswords);
@@ -56,6 +55,7 @@
         var password = document.getElementById("new_password").value;
         var confirmPassword = document.getElementById("confirm_password").value;
         var passwordHelp = document.getElementById("passwordHelp");
+        passwordHelp
         var submitBtn = document.getElementById("submitBtn");
 
         if (password !== confirmPassword) {
