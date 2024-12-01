@@ -34,14 +34,40 @@
                 <div class="form-group">
                     <label for="confirm_password">Zopakujte heslo</label>
                     <input name="passwordConfirm" required type="password" class="form-control minSirka" id="confirm_password" placeholder="Zopakujte heslo">
+                    <small id="passwordHelp" class="form-text text-danger"></small>
                 </div>
                 <div class="text-center medzera">
                     <h3>Registráciou súhlasíte so spracovaním osobných údajov</h3>
                 </div>
                 <div class="text-center">
-                    <button name="submit" type="submit" class="btn btn-block">Vytvoriť účet</button>
+                    <button name="submit" type="submit" class="btn btn-disabled" id="submitBtn">Vytvoriť účet</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+
+<script>
+    document.getElementById("new_password").addEventListener("input", checkPasswords);
+    document.getElementById("confirm_password").addEventListener("input", checkPasswords);
+
+    function checkPasswords() {
+        var password = document.getElementById("new_password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+        var passwordHelp = document.getElementById("passwordHelp");
+        var submitBtn = document.getElementById("submitBtn");
+
+        if (password !== confirmPassword) {
+            passwordHelp.textContent = "Heslá sa nezhodujú!";
+            submitBtn.disabled = true;
+            submitBtn.classList.add("btn-disabled");
+            return false;
+        } else {
+            passwordHelp.textContent = "";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("btn-disabled");
+            return true;
+        }
+    }
+</script>
