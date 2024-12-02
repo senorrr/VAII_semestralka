@@ -45,15 +45,40 @@ class AuthController extends AControllerBase
                 return $this->html($data);
             }
         }
-            if (isset($formData['submit'])) {
+        if (isset($formData['submit'])) {
             if ($formData['passwordOld'] == $this->app->getAuth()->getLoggedUserPassword()) {
-                if ($formData['passwordNew'] == $formData['passwordConfirm']) {
-                    $edit = $this->app->getAuth()->edit($formData['login'], $formData['passwordNew'], $formData['name'], $formData['surname']);
-                    if ($edit) {
-                        $data =['message' => "Úspešná zmena!"];
+                if ($formData['name'] != null && $formData['surname'] != null  && ctype_space($formData['name']) &&
+                        ctype_space($formData['surname']) ) { //ctype_space vymaze medzery
+                    if ($formData['passwordOld'] != $formData['passwordNew']) {
+                        if ($formData['passwordNew'] == $formData['passwordConfirm']) {
+                            if ($formData['newEmail'] == null) {
+                                $edit = $this->app->getAuth()->edit($this->app->getAuth()->getLoggedUser(), $formData['passwordNew'],
+                                    $formData['name'], $formData['surname']);
+                            } else {
+                                if ($formData['newEmail'] != $this->app->getAuth()->getLoggedUser()) {
+                                    $edit = $this->app->getAuth()->edit($formData['newEmail'], $formData['passwordNew'],
+                                        $formData['name'], $formData['surname']);
+                                    if ($edit) {
+                                        $user = $this->app->getAuth()->getLoggedUser();
+                                        $this->app->getAuth()->logout();
+                                        $user->delete();
+                                        $this->app->getAuth()->login($formData['newEmail'], $formData['passwordNew'],);
+                                    }
+                                } else {
+                                    $data =['message' => "Starý a nový mail sú rovnaké"];
+                                }
+                            }
+                            if ($edit) {
+                                $data =['message' => "Úspešná zmena!"];
+                            }
+                        } else {
+                            $data =['message' => "Heslá sa nezhodovali"];
+                        }
+                    } else {
+                        $data =['message' => "Staré a nové heslo sú rovnaké"];
                     }
                 } else {
-                    $data =['message' => "Heslá sa nezhodovali"];
+                    $data =['message' => "Neúspešná zmena!"];
                 }
             } else {
                 $data =['message' => "Nesprávne aktuálne heslo"];
@@ -94,17 +119,22 @@ class AuthController extends AControllerBase
      */
     public function login(): Response
     {
-        //todo kontrola ze ci nie su null hodnoty
         $formData = $this->app->getRequest()->getPost();
         $logged = null;
+        $data = null;
         if (isset($formData['submit'])) {
-            $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
-            if ($logged) {
-                return $this->redirect($this->url("admin.index"));
+            if ($formData['login'] != null && $formData['password'] != null) {
+                $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
+                if ($logged) {
+                    return $this->redirect($this->url("admin.index"));
+                }
+            } else {
+                $data = ['message' => 'Údaje neboli vyplnené!'];
             }
+        } else {
+            $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
         }
 
-        $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
         return $this->html($data);
     }
 

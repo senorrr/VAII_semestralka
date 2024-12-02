@@ -180,7 +180,7 @@ footer {
     margin: 0;
 }
 
-.btn:hover {
+.btn:hover, .btn:focus {
     background-color: #0c5da5;
     color: white;
 }
@@ -202,10 +202,11 @@ h3 {
 .btn-disabled {
     background-color : #50acc5 !important;
     cursor: not-allowed;
+    color: black !important;
     opacity: 0.6;
 }
 
 .text-vypis {
     color: #fb1e1e;
-    font-size: 1.2em;
+    font-size: 1.13em;
 }

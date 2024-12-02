@@ -16,11 +16,15 @@
                 <div class="form-group">
                     <label for="name">Meno</label>
                     <input name="name" required class="form-control minSirka" autofocus autocomplete="on" placeholder="Zadajte meno" id="name">
+                    <small id="nameHelp" class="form-text text-vypis"></small>
                 </div>
                 <div class="form-group">
                     <label for="surname">Priezvisko</label>
                     <input name="surname" required class="form-control minSirka" placeholder="Zadajte priezvisko" id="surname">
+                    <small id="surnameHelp" class="form-text text-vypis"></small>
+
                 </div>
+
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input name="login" required type="email" class="form-control minSirka" id="email" placeholder="Zadajte email">
@@ -51,11 +55,53 @@
     document.getElementById("new_password").addEventListener("input", checkPasswords);
     document.getElementById("confirm_password").addEventListener("input", checkPasswords);
 
+    document.getElementById('name').addEventListener('input', validateName);
+    document.getElementById('surname').addEventListener('input', validateSurname);
+
+    function validateName() {
+        var name = document.getElementById("name").value;
+        var submitBtn = document.getElementById("submitBtn");
+        var nameHelp = document.getElementById("nameHelp");
+
+        if (name.trim() === '') {
+            nameHelp.textContent = "Meno nemôže byť len z medzier!";
+            submitBtn.disabled = true;
+            submitBtn.classList.add("btn-disabled");
+            return false
+        } else {
+            nameHelp.textContent = "";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("btn-disabled");
+            return true
+        }
+    }
+
+    function validateSurname() {
+        var surname = document.getElementById("surname").value;
+        var submitBtn = document.getElementById("submitBtn");
+        var surnameHelp = document.getElementById("surnameHelp");
+
+        if (surname.trim() === '') {
+            surnameHelp.textContent = "Priezvisko nemôže byť len z medzier!";
+            submitBtn.disabled = true;
+            submitBtn.classList.add("btn-disabled");
+            return false
+        } else {
+            surnameHelp.textContent = "";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("btn-disabled");
+            return true
+        }
+    }
+
+
+
+
+
     function checkPasswords() {
         var password = document.getElementById("new_password").value;
         var confirmPassword = document.getElementById("confirm_password").value;
         var passwordHelp = document.getElementById("passwordHelp");
-        passwordHelp
         var submitBtn = document.getElementById("submitBtn");
 
         if (password !== confirmPassword) {
