@@ -30,64 +30,71 @@ class AuthController extends AControllerBase
     {
         //todo Situacia ked si meni mail!!!
         $formData = $this->app->getRequest()->getPost();
-        $data= null;
-        $edit= null;
+        $data = null;
+        $edit = null;
         //todo kontrola ze ci nie su null hodnoty
 
         if (isset($formData['remove'])) {
             $user = $this->app->getAuth()->getLoggedUser();
-            if ($user->getPassword() == $formData['passwordOld']) {
+            if ($user->getPassword() == $formData['oldPassword']) {
                 $this->app->getAuth()->logout();
                 $user->delete();
                 return $this->redirect($this->url("home.index"));
             } else {
-                $data =['message' => "Nesprávne heslo!"];
+                $data = ['message' => "Nesprávne heslo!"];
                 return $this->html($data);
             }
         }
         if (isset($formData['submit'])) {
-            if ($formData['passwordOld'] == $this->app->getAuth()->getLoggedUserPassword()) {
-                if ($formData['name'] != null && $formData['surname'] != null  && ctype_space($formData['name']) &&
-                        ctype_space($formData['surname']) ) { //ctype_space vymaze medzery
-                    if ($formData['passwordOld'] != $formData['passwordNew']) {
-                        if ($formData['passwordNew'] == $formData['passwordConfirm']) {
-                            if ($formData['newEmail'] == null) {
-                                $edit = $this->app->getAuth()->edit($this->app->getAuth()->getLoggedUser(), $formData['passwordNew'],
-                                    $formData['name'], $formData['surname']);
-                            } else {
-                                if ($formData['newEmail'] != $this->app->getAuth()->getLoggedUser()) {
-                                    $edit = $this->app->getAuth()->edit($formData['newEmail'], $formData['passwordNew'],
-                                        $formData['name'], $formData['surname']);
-                                    if ($edit) {
-                                        $user = $this->app->getAuth()->getLoggedUser();
-                                        $this->app->getAuth()->logout();
-                                        $user->delete();
-                                        $this->app->getAuth()->login($formData['newEmail'], $formData['passwordNew'],);
-                                    }
-                                } else {
-                                    $data =['message' => "Starý a nový mail sú rovnaké"];
-                                }
-                            }
+            if ($formData['oldPassword'] == $this->app->getAuth()->getLoggedUserPassword()) {
+                if ($formData['name'] != null && $formData['surname'] != null && !ctype_space($formData['name']) &&
+                    !ctype_space($formData['surname'])) { //ctype_space funkcia vrati podla toho ci je su medzery
+                    if (sizeof($formData) == 5) {
+                        // zmena mailu
+                        if ($formData['newLogin'] != $this->app->getAuth()->getLoggedUserEmail()) {
+                            $user = $this->app->getAuth()->getLoggedUser();
+                            $edit = $this->app->getAuth()->register($formData['newLogin'], $formData['oldPassword'],
+                                $formData['name'], $formData['surname']);
+                            //todo pozor ak budu nejake data naviazane na daky mail,
+                            // tak ich bude treba prehodit tiez... napr recenzie
                             if ($edit) {
-                                $data =['message' => "Úspešná zmena!"];
+                                $user->delete();
+                                $data = ['message' => 'Úspešná zmena!'];
+                                return $this->html($data);
                             }
                         } else {
-                            $data =['message' => "Heslá sa nezhodovali"];
+                            $data = ['message' => "Starý a nový mail sú rovnaké"];
+                            return $this->html($data);
+                        }
+                    } else if ($formData['newLogin'] == null && $formData['newPassword'] != null &&
+                        $formData['confirmPassword'] != null) {
+                        if ($formData['newPassword'] == $formData['confirmPassword']) {
+                            if ($formData['oldPassword'] != $formData['newPassword']) {
+                                //ked nemenim mail ale menim hesla
+                                $this->app->getAuth()->edit($this->app->getAuth()->getLoggedUserEmail(), $formData['newPassword'],
+                                    $formData['name'], $formData['surname']);
+                                $data = ['message' => 'Úspešná zmena!'];
+                                return $this->html($data);
+                            } else {
+                                $data = ['message' => "Staré heslo a nové heslo sú rovnaké!"];
+                            }
+                        } else {
+                            $data = ['message' => "Heslá sa nezhodovali"];
                         }
                     } else {
-                        $data =['message' => "Staré a nové heslo sú rovnaké"];
+                        $this->app->getAuth()->edit($this->app->getAuth()->getLoggedUserEmail(), $formData['oldPassword'],
+                            $formData['name'], $formData['surname']);
+                        $data = ['message' => 'Úspešná zmena!'];
+                        return $this->html($data);
                     }
                 } else {
-                    $data =['message' => "Neúspešná zmena!"];
+                    $data = ['message' => 'Neúspešná zmena!'];
                 }
             } else {
-                $data =['message' => "Nesprávne aktuálne heslo"];
+                $data = ['message' => "Nesprávne aktuálne heslo"];
+
             }
-
-        } else {
-            $data = ($edit === false ? ['message' => 'Neúspešná zmena!'] : []);
         }
-
         return $this->html($data);
     }
 

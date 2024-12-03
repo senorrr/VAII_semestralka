@@ -73,7 +73,6 @@ class DbAuthenticator implements IAuthenticator
                 $user->setName($name);
                 $user->setSurname($surname);
                 $user->save();
-                //todo situacia ked si meni mail treba zmenit session
                 return true;
             }
         }
