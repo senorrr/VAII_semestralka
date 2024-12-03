@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `advert`;
-CREATE TABLE `advert` (
+DROP TABLE IF EXISTS `adverts`;
+CREATE TABLE `adverts` (
                           `id` int(11) NOT NULL AUTO_INCREMENT,
                           `dateOfCreate` date NOT NULL,
                           `timeOfLastEdit` datetime NOT NULL,

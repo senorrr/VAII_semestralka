@@ -30,9 +30,8 @@
                 </li>
                 <?php if ($auth->isLogged()) { ?>
 
-
                 <li class="nav-item">
-                    <a class="nav-link" href="novyInzerat.html">Pridaj inzerát</a>
+                    <a class="nav-link" href="<?= $link->url("advert.add")?>">Pridaj inzerát</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $link->url("auth.edit") ?>">Profil</a>
