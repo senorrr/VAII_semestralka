@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
+use App\App;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Advert;
 
 class AdvertController extends AControllerBase
 {

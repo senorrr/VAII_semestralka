@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label for="category">Kategória</label>
-            <select class="form-control" id="category">
+            <select name="category" class="form-control" id="category">
                 <option>Auto</option>
                 <option>Domácnosť</option>
                 <option>Náradie</option>
@@ -27,28 +27,30 @@
         </div>
         <div class="form-group">
             <label for="price">Cena (€)</label>
-            <input name="price" required type="number" class="form-control" id="price" min="0" placeholder="Zadajte cenu">
+            <input name="price" required type="number" class="form-control" id="price" min="0"
+                   placeholder="Zadajte cenu"
+                   value="<?= ($data!=null) ? $data['price'] : '' ?>">
         </div>
         <div class="form-group">
             <h3>Vyberte dni dostupnosti</h3>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="monday">Pondelok</label>
-                <input class="form-check-input" type="checkbox" id="monday" name="days" value="monday">
+                <input class="form-check-input" type="checkbox" id="monday" name="monday">
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="tuesday" name="days" value="tuesday">
+                <input class="form-check-input" type="checkbox" id="tuesday" name="tuesday">
                 <label class="form-check-label" for="tuesday">Utorok</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="wednesday" name="days" value="wednesday">
+                <input class="form-check-input" type="checkbox" id="wednesday" name="wednesday">
                 <label class="form-check-label" for="wednesday">Streda</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="thursday" name="days" value="thursday">
+                <input class="form-check-input" type="checkbox" id="thursday" name="thursday">
                 <label class="form-check-label" for="thursday">Štvrtok</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="friday" name="days" value="friday">
+                <input class="form-check-input" type="checkbox" id="friday" name="friday">
                 <label class="form-check-label" for="friday">Piatok</label>
             </div>
             <div class="form-check form-check-inline">
@@ -66,7 +68,8 @@
         </div>
         <div class="form-group">
             <label for="description">Popis</label>
-            <textarea name="text" required maxlength="500" class="form-control" id="description" rows="5" placeholder="Zadajte popis"></textarea>
+            <textarea name="text" required maxlength="500" class="form-control" id="description"
+                      rows="5" placeholder="Zadajte popis"><?= ($data!=null) ? $data['text'] : '' ?></textarea>
         </div>
         <div class="text-center">
             <button type="submit" name="submit" class="btn btn-primary text-center">Pridať Inzerát</button>
