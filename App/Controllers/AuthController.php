@@ -28,11 +28,9 @@ class AuthController extends AControllerBase
 
     public function edit(): Response
     {
-        //todo Situacia ked si meni mail!!!
         $formData = $this->app->getRequest()->getPost();
         $data = null;
         $edit = null;
-        //todo kontrola ze ci nie su null hodnoty
 
         if (isset($formData['remove'])) {
             $user = $this->app->getAuth()->getLoggedUser();
@@ -100,7 +98,6 @@ class AuthController extends AControllerBase
 
     public function register(): Response
     {
-        //todo kontrola ze ci nie su null hodnoty
         $formData = $this->app->getRequest()->getPost();
         $register = null;
         $data = null;
@@ -109,6 +106,11 @@ class AuthController extends AControllerBase
                 $register = $this->app->getAuth()->register($formData['login'], $formData['password'], $formData['name'], $formData['surname']);
                 if ($register) {
                     return $this->redirect($this->url("auth.edit"));
+                } else {
+                    $data = ['message' => 'Užívateľ s danou emailovou adresou už existuje!',
+                        'name' => $formData['name'],
+                        'surname' => $formData['surname'],
+                        ];
                 }
             } else {
                 $data = ['message' => 'Údaje neboli vyplnené!'];

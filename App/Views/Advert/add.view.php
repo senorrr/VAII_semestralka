@@ -4,10 +4,11 @@
 ?>
 <div class="container">
     <h2>Pridanie inzerátu</h2>
-    <form>
+    <form action="<?= $link->url("advert.add") ?>" method="post">
         <div class="form-group">
             <label for="title">Názov</label>
-            <input required type="text" class="form-control" id="title" placeholder="Zadajte názov">
+            <input name="title" required type="text" class="form-control" id="title" placeholder="Zadajte názov"
+                   value="<?= ($data!=null) ? $data['title'] : '' ?>">
         </div>
         <div class="form-group">
             <label for="category">Kategória</label>
@@ -26,13 +27,13 @@
         </div>
         <div class="form-group">
             <label for="price">Cena (€)</label>
-            <input required type="number" class="form-control" id="price" min="0" placeholder="Zadajte cenu">
+            <input name="price" required type="number" class="form-control" id="price" min="0" placeholder="Zadajte cenu">
         </div>
         <div class="form-group">
             <h3>Vyberte dni dostupnosti</h3>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="monday" name="days" value="monday" required>
                 <label class="form-check-label" for="monday">Pondelok</label>
+                <input class="form-check-input" type="checkbox" id="monday" name="days" value="monday">
             </div>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="tuesday" name="days" value="tuesday">
@@ -65,10 +66,10 @@
         </div>
         <div class="form-group">
             <label for="description">Popis</label>
-            <textarea required maxlength="500" class="form-control" id="description" rows="5" placeholder="Zadajte popis"></textarea>
+            <textarea name="text" required maxlength="500" class="form-control" id="description" rows="5" placeholder="Zadajte popis"></textarea>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary text-center">Pridať Inzerát</button>
+            <button type="submit" name="submit" class="btn btn-primary text-center">Pridať Inzerát</button>
         </div>
     </form>
 </div>

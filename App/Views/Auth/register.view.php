@@ -15,12 +15,16 @@
             <form action="<?= $link->url("auth.register") ?>" method="post">
                 <div class="form-group">
                     <label for="name">Meno</label>
-                    <input name="name" required class="form-control minSirka" autofocus autocomplete="on" placeholder="Zadajte meno" id="name">
+                    <input name="name" required class="form-control minSirka" autofocus autocomplete="on"
+                           placeholder="Zadajte meno" id="name"
+                           value="<?= ($data!=null) && (sizeof($data)>1) ? $data['name'] : '' ?>">
                     <small id="nameHelp" class="form-text text-vypis"></small>
                 </div>
                 <div class="form-group">
                     <label for="surname">Priezvisko</label>
-                    <input name="surname" required class="form-control minSirka" placeholder="Zadajte priezvisko" id="surname">
+                    <input name="surname" required class="form-control minSirka" placeholder="Zadajte priezvisko"
+                           id="surname"
+                           value="<?= ($data!=null) && (sizeof($data)>1) ? $data['surname'] : '' ?>">
                     <small id="surnameHelp" class="form-text text-vypis"></small>
 
                 </div>

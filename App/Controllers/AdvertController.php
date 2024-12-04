@@ -16,8 +16,15 @@ class AdvertController extends AControllerBase
         return $this->html();
     }
 
-    public function add()
+    public function add(): Response
     {
-        return $this->html();
+        $formData = $this->app->getRequest()->getPost();
+        if (isset($formData['submit'])) {
+
+        }
+        if (sizeof($formData) == 0) {
+            return $this->html();
+        }
+        return $this->html($formData);
     }
 }
