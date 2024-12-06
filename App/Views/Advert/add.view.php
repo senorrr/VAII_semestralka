@@ -1,6 +1,9 @@
 <?php
 /** @var Array $data */
 /** @var \App\Core\LinkGenerator $link */
+
+use App\Models\Category;
+
 ?>
 <div class="container">
     <h2>Pridanie inzerátu</h2>
@@ -13,16 +16,9 @@
         <div class="form-group">
             <label for="category">Kategória</label>
             <select name="category" class="form-control" id="category">
-                <option>Auto</option>
-                <option>Domácnosť</option>
-                <option>Náradie</option>
-                <option>Elektronika</option>
-                <option>Šport</option>
-                <option>Pre deti</option>
-                <option>Oslavy</option>
-                <option>Oblečenie</option>
-                <option>Služby</option>
-                <option>Ostatné</option>
+                <?php foreach (Category::getAll() as $category): ?>
+                    <option><?= $category->getName() ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="form-group">
