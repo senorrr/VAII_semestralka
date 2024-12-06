@@ -18,7 +18,7 @@ use App\Config\Configuration;
             <form method="post" action="<?= $link->url("login") ?>">
                 <div class="form-signin" >
                     <label for="email">Email</label>
-                    <input name="login" type="email" required autofocus class="form-control minSirka" id="email" placeholder="Zadajte email">
+                    <input name="login" type="email" required autofocus class="form-control minSirka" id="email" placeholder="Zadajte email" value="<?= ($data['login'] ?? '')?>">
                 </div>
                 <div class="form-signin">
                     <label for="password">Heslo</label>

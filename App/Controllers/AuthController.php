@@ -137,9 +137,10 @@ class AuthController extends AControllerBase
                 if ($logged) {
                     return $this->redirect($this->url("admin.index"));
                 }
+                $data = ['login'=>$formData['login']];
             }
+            $data += ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
         }
-        $data = ($logged === false ? ['message' => 'Zlý login alebo heslo!'] : []);
 
         return $this->html($data);
     }
