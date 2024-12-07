@@ -10,13 +10,6 @@ class Category extends Model
     protected $name;
     protected $destinationOfPicture;
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id): void
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return mixed
@@ -48,6 +41,14 @@ class Category extends Model
     public function setDestinationOfPicture($destinationOfPicture): void
     {
         $this->destinationOfPicture = $destinationOfPicture;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
 

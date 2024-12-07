@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Model;
+use DateTime;
 
 class Advert extends Model
 {
@@ -24,6 +25,10 @@ class Advert extends Model
         return $this->id;
     }
 
+    public function setDateOfCreate($dateOfCreate): void
+    {
+        $this->dateOfCreate = $dateOfCreate;
+    }
 
     /**
      * @return mixed
@@ -33,13 +38,6 @@ class Advert extends Model
         return $this->dateOfCreate;
     }
 
-    /**
-     * @param mixed $dateOfCreate
-     */
-    public function setDateOfCreate($dateOfCreate): void
-    {
-        $this->dateOfCreate = $dateOfCreate;
-    }
 
     /**
      * @return mixed
@@ -103,86 +101,6 @@ class Advert extends Model
     public function setOwner($owner): void
     {
         $this->owner = $owner;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
-    }
-
-    /**
-     * @param mixed $categoryId
-     */
-    public function setCategoryId($categoryId): void
-    {
-        $this->categoryId = $categoryId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategoryName()
-    {
-        return $this->categoryName;
-    }
-
-    /**
-     * @param mixed $categoryName
-     */
-    public function setCategoryName($categoryName): void
-    {
-        $this->categoryName = $categoryName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * @param mixed $city
-     */
-    public function setCity($city): void
-    {
-        $this->city = $city;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getReviewId()
-    {
-        return $this->reviewId;
-    }
-
-    /**
-     * @param mixed $reviewId
-     */
-    public function setReviewId($reviewId): void
-    {
-        $this->reviewId = $reviewId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAvailabilityId()
-    {
-        return $this->availabilityId;
-    }
-
-    /**
-     * @param mixed $availabilityId
-     */
-    public function setAvailabilityId($availabilityId): void
-    {
-        $this->availabilityId = $availabilityId;
     }
 
     /**
@@ -282,22 +200,6 @@ class Advert extends Model
     /**
      * @return mixed
      */
-    public function getVillage()
-    {
-        return $this->village;
-    }
-
-    /**
-     * @param mixed $village
-     */
-    public function setVillage($village): void
-    {
-        $this->village = $village;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getVillageId()
     {
         return $this->villageId;
@@ -309,6 +211,22 @@ class Advert extends Model
     public function setVillageId($villageId): void
     {
         $this->villageId = $villageId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    /**
+     * @param mixed $categoryId
+     */
+    public function setCategoryId($categoryId): void
+    {
+        $this->categoryId = $categoryId;
     }
 
 

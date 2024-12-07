@@ -6,6 +6,7 @@ use App\App;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Advert;
+use App\Models\Category;
 
 class AdvertController extends AControllerBase
 {
@@ -29,6 +30,9 @@ class AdvertController extends AControllerBase
             $advert->setText($formData['text']);
             $advert->setPrice($formData['price']);
             $advert->setOwner($this->app->getAuth()->getLoggedUserEmail());
+            $category = Category::getAll('`name` LIKE ?', [$formData['category']])[0];
+            $advert->setVillageId(11);
+            $advert->setCategoryId($category->getId());
             //$advert->setVillage($formData['village']);
 
             $advert->setMonday(isset($formData['monday']));
@@ -39,8 +43,8 @@ class AdvertController extends AControllerBase
             $advert->setSaturday(isset($formData['saturday']));
             $advert->setSunday(isset($formData['sunday']));
 
-            $advert->save();
-            $data = ['id' => sizeof(Advert::getAll())];
+            $advert->save();        //tu mu nastavi auto increment ID
+            $data = ['id' => $advert->getId()];
 
             return $this->redirect($this->url("advert.index", $data));
         }
@@ -48,6 +52,11 @@ class AdvertController extends AControllerBase
             return $this->html();
         }
         return $this->html($formData);
+    }
+
+    public function newest()
+    {
+        return $this->html();
     }
 
 }
