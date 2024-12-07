@@ -6,15 +6,15 @@ use App\Models\Village;
 ?>
 
 <?php
-$adverts = Advert::getAll(orderBy: '`dateOfCreate` desc');
+$adverts = Advert::getAll(orderBy: '`dateOfCreate` asc');
 ?>
 
 <div class="container">
     <div class="row">
         <?php foreach ($adverts as $advert): ?>
-            <div class="col-md-4 text-center">
+            <div class="col-lg-4">
                 <a href="<?= $link->url('advert.index', ['id' => $advert->getId()]) ?>" class="text-decoration-none">
-                    <div class="card inzerat">
+                    <div class="card inzeratKarta">
                         <h2 class="card-title"><?= $advert->getTitle() ?></h2>
                         <div class="card-body">
                             <p class="card-text">
@@ -31,10 +31,10 @@ $adverts = Advert::getAll(orderBy: '`dateOfCreate` desc');
                                 <small>Cena: <?= $advert->getPrice() ?></small><br>
                                 <small>Mesto: <?= Village::getOne($advert->getVillageId())->getName() ?></small>
                             </div>
-                            <div class="card-footer text-muted">
-                                <small>Vytvorený: <?= $advert->getDateOfCreate() ?></small>
-                                <small>Zobrazenia: <?= $advert->getViews() ?></small>
-                            </div>
+                        </div>
+                        <div class="card-footer text-muted text-center">
+                            <small>Vytvorený: <?= $advert->getDateOfCreate() ?></small>
+                            <small>Zobrazenia: <?= $advert->getViews() ?></small>
                         </div>
                     </div>
                 </a>

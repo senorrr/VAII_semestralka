@@ -211,12 +211,12 @@ h3 {
     font-size: 1.13em;
 }
 
-.inzerat {
+.inzeratKarta {
     min-width: 150px;
-    min-height: 190px;
-    max-height: 190px;
+    min-height: 170px;
+    max-height: 170px;
 }
-.inzerat:hover {
+.inzeratKarta:hover {
     border-width: 2px;
     border-color: #35869c;
     border-style: solid;
@@ -229,4 +229,16 @@ h3 {
 
 .card-body {
     padding-top:0;
+    padding-bottom: 0;
+}
+
+.card-footer {
+    bottom: 1px;
+}
+
+.pozadieInzerat {
+    background-color: white;
+    padding: 0.5em 0.5em;
+    border: #00437e 2px solid;
+    border-radius: 3px;
 }
