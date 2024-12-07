@@ -210,3 +210,12 @@ h3 {
     color: #fb1e1e;
     font-size: 1.13em;
 }
+
+.inzerat:hover {
+    background-color: #50acc5;
+    border-width: 2px;
+    border-color: #35869c;
+    border-style: solid;
+    border-radius: 10px;
+    min-width: 200px;
+}
