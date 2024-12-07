@@ -16,6 +16,9 @@ class AdvertController extends AControllerBase
      */
     public function index(): Response
     {
+        $advert = Advert::getOne($_GET['id']);
+        $advert->setViews($advert->getViews() + 1);
+        $advert->save();
         return $this->html();
     }
 
@@ -33,6 +36,7 @@ class AdvertController extends AControllerBase
             $category = Category::getAll('`name` LIKE ?', [$formData['category']])[0];
             $advert->setVillageId(11);
             $advert->setCategoryId($category->getId());
+            $advert->setViews(0);
             //$advert->setVillage($formData['village']);
 
             $advert->setMonday(isset($formData['monday']));

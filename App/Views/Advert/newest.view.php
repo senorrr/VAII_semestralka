@@ -4,20 +4,23 @@ use App\Models\Advert;
 
 ?>
 
-<div class="container">
+<?php
+$adverts = Advert::getAll(orderBy: '`dateOfCreate` desc');
+?>
 
-    <?php
-    $adverts = Advert::getAll(orderBy: '`dateOfCreate` desc');
-    foreach ($adverts as $advert):
-        ?>
-        <a href="<?= $link->url('advert.index',['id' => $advert->getId()])?>">
-        <div class="col" >
-            <div class="card kategoria">
-                <h2>inzerát <?= $advert->getId() ?></h2>
-                <h3>Nazov: <?= $advert->getTitle() ?></h3>
-                <h3><?= $advert->getText() ?></h3>
+<div class="container">
+    <div class="row">
+        <?php foreach ($adverts as $advert): ?>
+            <div class="col-md-4">
+                <a href="<?= $link->url('advert.index', ['id' => $advert->getId()]) ?>" class="text-decoration-none">
+                    <div class="card mb-4 kategoria">
+                        <div class="card-body">
+                            <h2 class="card-title"><?= $advert->getTitle() ?></h2>
+                            <p class="card-text"><?= $advert->getText() ?></p>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-        </a>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
 </div>

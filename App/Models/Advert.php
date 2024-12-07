@@ -16,6 +16,7 @@ class Advert extends Model
     protected $categoryId;
     protected $villageId;
     protected $price;
+    protected $views;
 
     /**
      * @return mixed
@@ -227,6 +228,22 @@ class Advert extends Model
     public function setCategoryId($categoryId): void
     {
         $this->categoryId = $categoryId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * @param mixed $views
+     */
+    public function setViews($views): void
+    {
+        $this->views = $views;
     }
 
 
