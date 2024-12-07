@@ -5,15 +5,15 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `village`;
+DROP TABLE IF EXISTS `villages`;
 CREATE TABLE `village` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier',
   `fullname` varchar(255) NOT NULL COMMENT 'Fullname',
   `zip` varchar(6) NOT NULL COMMENT 'ZIP',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDb DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
-INSERT INTO `village` (`id`, `fullname`, `zip`) VALUES
+INSERT INTO `villages` (`id`, `fullname`, `zip`) VALUES
 (1,	'Ábelová',	'985 13'),
 (2,	'Abovce',	'980 44'),
 (3,	'Abrahám',	'925 45'),

@@ -7,6 +7,7 @@ use App\Models\Category;
 ?>
 <div class="container">
     <h2>Pridanie inzerátu</h2>
+    pridaj required vsade!
     <form action="<?= $link->url("advert.add") ?>" method="post">
         <div class="form-group">
             <label for="title">Názov</label>
@@ -26,6 +27,16 @@ use App\Models\Category;
             <input name="price"  type="number" class="form-control" id="price" min="0"
                    placeholder="Zadajte cenu"
                    value="<?= ($data!=null) ? $data['price'] : '' ?>">
+        </div>
+        <div class="form-group">
+            <label for="city">Mesto</label>
+            <input name="city"  type="text" class="form-control" id="city"
+                   placeholder="Zadajte mesto"
+                   value="<?= ($data!=null) ? $data['city'] : '' ?>">
+            <label for="cityZip">PSČ</label>
+            <input name="cityZip"  type="text" class="form-control" id="cityZip"
+                   placeholder="Zadajte PSČ"
+                   value="<?= ($data!=null) ? $data['cityZip'] : '' ?>">
         </div>
         <div class="form-group">
             <h3>Vyberte dni dostupnosti</h3>
@@ -60,7 +71,7 @@ use App\Models\Category;
         </div>
         <div class="form-group">
             <label for="photos">Fotky</label>
-            <input type="file" class="form-control-file" id="photos" multiple>
+            <input type="file" class="form-control-file" id="photos" name="photos" multiple>
         </div>
         <div class="form-group">
             <label for="description">Popis</label>
@@ -71,4 +82,5 @@ use App\Models\Category;
             <button type="submit" name="submit" class="btn btn-primary text-center">Pridať Inzerát</button>
         </div>
     </form>
+
 </div>

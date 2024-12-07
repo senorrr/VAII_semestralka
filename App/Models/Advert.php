@@ -13,10 +13,7 @@ class Advert extends Model
     protected $title;
     protected $owner;
     protected $categoryId;
-    protected $categoryName;
-    protected $city;
-    protected $reviewId;
-    protected $availabilityId;
+    protected $villageId;
     protected $price;
 
     /**
@@ -202,6 +199,116 @@ class Advert extends Model
     public function setPrice($price): void
     {
         $this->price = $price;
+    }
+
+    protected ?bool $monday;
+    protected ?bool $tuesday;
+    protected ?bool $wednesday;
+    protected ?bool $thursday;
+    protected ?bool $friday;
+    protected ?bool $saturday;
+    protected ?bool $sunday;
+
+    public function getMonday(): ?bool
+    {
+        return $this->monday;
+    }
+
+    public function setMonday(?bool $monday): void
+    {
+        $this->monday = $monday;
+    }
+
+    public function getTuesday(): ?bool
+    {
+        return $this->tuesday;
+    }
+
+    public function setTuesday(?bool $tuesday): void
+    {
+        $this->tuesday = $tuesday;
+    }
+
+    public function getWednesday(): ?bool
+    {
+        return $this->wednesday;
+    }
+
+    public function setWednesday(?bool $wednesday): void
+    {
+        $this->wednesday = $wednesday;
+    }
+
+    public function getThursday(): ?bool
+    {
+        return $this->thursday;
+    }
+
+    public function setThursday(?bool $thursday): void
+    {
+        $this->thursday = $thursday;
+    }
+
+    public function getFriday(): ?bool
+    {
+        return $this->friday;
+    }
+
+    public function setFriday(?bool $friday): void
+    {
+        $this->friday = $friday;
+    }
+
+    public function getSaturday(): ?bool
+    {
+        return $this->saturday;
+    }
+
+    public function setSaturday(?bool $saturday): void
+    {
+        $this->saturday = $saturday;
+    }
+
+    public function getSunday(): ?bool
+    {
+        return $this->sunday;
+    }
+
+    public function setSunday(?bool $sunday): void
+    {
+        $this->sunday = $sunday;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVillage()
+    {
+        return $this->village;
+    }
+
+    /**
+     * @param mixed $village
+     */
+    public function setVillage($village): void
+    {
+        $this->village = $village;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVillageId()
+    {
+        return $this->villageId;
+    }
+
+    /**
+     * @param mixed $villageId
+     */
+    public function setVillageId($villageId): void
+    {
+        $this->villageId = $villageId;
     }
 
 
