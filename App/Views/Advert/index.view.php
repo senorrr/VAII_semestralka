@@ -7,9 +7,12 @@ use App\Models\Category;
 ?>
 <div class="container">
     <?php $advert = \App\Models\Advert::getOne($_GET['id'])?>
-    <h2>inzerát <?= $advert->getId()?></h2>
-        <div class="form-group">
-            <h3> Nazov: <?= $advert->getTitle()?> </h3>
-            <h3> <?= $advert->getText()?> </h3>
-        </div>
+    <h1 class="text-center"><?= $advert->getTitle()?></h1>
+    <div class="mx-5">
+        <p>
+            <?=$advert->getText()?>
+        </p>
+        <h3>Cena: <?=$advert->getPrice()?></h3>
+
+    </div>
 </div>
