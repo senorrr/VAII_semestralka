@@ -7,6 +7,10 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
+DROP DATABASE IF EXISTS `vaiicko_db`;
+CREATE DATABASE `vaiicko_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
+USE `vaiicko_db`;
+
 DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -22,4 +26,4 @@ CREATE TABLE `reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 
--- 2024-12-06 17:29:23
+-- 2024-12-07 14:08:07

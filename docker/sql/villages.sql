@@ -5,15 +5,21 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+SET NAMES utf8mb4;
+
+DROP DATABASE IF EXISTS `vaiicko_db`;
+CREATE DATABASE `vaiicko_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
+USE `vaiicko_db`;
+
 DROP TABLE IF EXISTS `villages`;
-CREATE TABLE `village` (
+CREATE TABLE `villages` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Unique identifier',
-  `fullname` varchar(255) NOT NULL COMMENT 'Fullname',
+  `name` varchar(255) NOT NULL COMMENT 'Fullname',
   `zip` varchar(6) NOT NULL COMMENT 'ZIP',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDb DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
-INSERT INTO `villages` (`id`, `fullname`, `zip`) VALUES
+INSERT INTO `villages` (`id`, `name`, `zip`) VALUES
 (1,	'Ábelová',	'985 13'),
 (2,	'Abovce',	'980 44'),
 (3,	'Abrahám',	'925 45'),
@@ -4223,4 +4229,4 @@ INSERT INTO `villages` (`id`, `fullname`, `zip`) VALUES
 (4207,	'Župčany',	'080 01'),
 (4208,	'Župkov',	'966 71');
 
--- 2024-12-06 17:29:13
+-- 2024-12-07 14:08:33
