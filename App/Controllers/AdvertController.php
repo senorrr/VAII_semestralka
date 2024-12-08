@@ -58,7 +58,7 @@ class AdvertController extends AControllerBase
         return $this->html($formData);
     }
 
-    public function newest()
+    public function inzeraty()
     {
         return $this->html();
     }

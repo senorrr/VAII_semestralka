@@ -256,3 +256,8 @@ h3 {
     border: #00437e 2px solid;
     border-radius: 3px;
 }
+
+a {
+    text-underline: none;
+    text-decoration: none;
+}

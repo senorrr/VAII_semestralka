@@ -1,15 +1,29 @@
 <?php
 /** @var \App\Core\LinkGenerator $link */
 use App\Models\Advert;
+use App\Models\Category;
 use App\Models\Village;
 
 ?>
 
 <?php
-$adverts = Advert::getAll(orderBy: '`dateOfCreate` asc');
+if (isset($_GET["0"])) {
+    $adverts = Advert::getAll(whereClause: '`categoryId` like ?', whereParams: [$_GET["0"]], limit: 100);
+} else {
+    $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: 100);
+}
 ?>
 
 <div class="container">
+    <div class="text-center">
+        <h1> Inzeráty kategória
+            <?php
+                if (isset($_GET["0"])) {
+                    echo Category::getOne($_GET["0"])->getName();
+                }
+            ?>
+        </h1>
+    </div>
     <div class="row">
         <?php foreach ($adverts as $advert): ?>
             <div class="col-lg-4">
