@@ -67,6 +67,13 @@
         var submitBtn = document.getElementById("submitBtn");
         var nameHelp = document.getElementById("nameHelp");
 
+        if(name ==='') {
+            nameHelp.textContent = "";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("btn-disabled");
+            return false;
+        }
+
         if (name.trim() === '') {
             nameHelp.textContent = "Meno nemôže byť len z medzier!";
             submitBtn.disabled = true;
@@ -84,6 +91,13 @@
         var surname = document.getElementById("surname").value;
         var submitBtn = document.getElementById("submitBtn");
         var surnameHelp = document.getElementById("surnameHelp");
+
+        if(surname ==='') {
+            surnameHelp.textContent = "";
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("btn-disabled");
+            return false;
+        }
 
         if (surname.trim() === '') {
             surnameHelp.textContent = "Priezvisko nemôže byť len z medzier!";
