@@ -164,7 +164,7 @@ footer {
 }
 
 .kategoria img {
-    max-width: 150px;
+    max-width: 60px;
     background-color: transparent;
     padding: 0;
 }
@@ -172,6 +172,7 @@ footer {
 .kategoria {
     background-color: transparent;
     border: none;
+    padding-bottom: 10px;
 }
 
 .col {

@@ -59,6 +59,9 @@ class AuthController extends AControllerBase
                                 $user->delete();
                                 $data = ['message' => 'Úspešná zmena!'];
                                 return $this->html($data);
+                            } else {
+                                $data = ['message' => 'Daný mail už je použitý pri inom užívateľovi!'];
+                                return $this->html($data);
                             }
                         } else {
                             $data = ['message' => "Starý a nový mail sú rovnaké"];

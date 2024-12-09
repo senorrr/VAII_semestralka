@@ -7,14 +7,14 @@
 <div class="container-fluid">
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-0 g mx-auto">
         <?php foreach (Category::getAll() as $category): ?>
-        <a href="<?= $link->url("advert.inzeraty",[$category->getId()]) ?>">
             <div class="col" >
-                <div class="card kategoria">
-                    <div><h2 class="card-title"><?= $category->getName() ?></h2></div>
-                    <img class="card-img-bottom align-self-center" src="<?= $category->getDestinationOfPicture() ?>" alt="kategoria auto">
-                </div>
+                <a href="<?= $link->url("advert.inzeraty",[$category->getId()]) ?>">
+                    <div class="card kategoria">
+                        <div><h2 class="card-title"><?= $category->getName() ?></h2></div>
+                        <img class="card-img-bottom align-self-center" src="<?= $category->getDestinationOfPicture() ?>" alt="kategoria auto">
+                    </div>
+                </a>
             </div>
-        </a>
         <?php endforeach; ?>
     </div>
 </div>
