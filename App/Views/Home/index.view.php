@@ -1,6 +1,7 @@
 <?php use App\Models\Category;
 /** @var \App\Core\LinkGenerator $link */
 ?>
+<link href="../public/css/kategorieDomov.css" rel="stylesheet">
 <div class="">
     <h2>Počet inzerátov na stránke: <?= sizeof(\App\Models\Advert::getAll())?></h2>
 </div>

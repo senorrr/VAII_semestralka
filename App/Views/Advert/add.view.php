@@ -8,7 +8,7 @@ use App\Models\Category;
 <div class="container">
     <h2>Pridanie inzerátu</h2>
     pridaj required vsade!
-    <form action="<?= $link->url("advert.add") ?>" method="post">
+    <form action="<?=''/* $link->url("advert.add")*/ ?>" method="post">
         <div class="form-group">
             <label for="title">Názov</label>
             <input name="title"  type="text" class="form-control" id="title" placeholder="Zadajte názov"
@@ -39,7 +39,7 @@ use App\Models\Category;
                    value="<?= ($data!=null) ? $data['cityZip'] : '' ?>">
         </div>
         <div class="form-group">
-            <h3>Vyberte dni dostupnosti</h3>
+            <label for="monday">Vyberte dni dostupnosti</label><br>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="monday">Pondelok</label>
                 <input class="form-check-input" type="checkbox" id="monday" name="monday" <?= ($data!= null && isset($data['monday']) && $data['monday']=="on" ? "checked" : '') ?>>
@@ -69,9 +69,13 @@ use App\Models\Category;
                 <input class="form-check-input" type="checkbox" id="sunday" name="sunday" <?= ($data!= null && isset($data['sunday']) && $data['sunday']=="on" ? "checked" : '') ?>>
             </div>
         </div>
-        <div class="form-group">
-            <label for="photos">Fotky</label>
-            <input type="file" class="form-control-file" id="photos" name="photos" multiple>
+        <div class="form-group row">
+            <label for="photo">Fotky</label>
+            <div class="col" id="photos">
+                <input name="photo1"  type="url" class="form-control" id="photo" placeholder="Zadajte url adresu 1. fotky">
+            </div>
+            <div class="col"><button>Vymaz</button> </div>
+            <button type="button" class="btn btn-primary text-center" id="pridajFotku" >Pridaj fotku</button>
         </div>
         <div class="form-group">
             <label for="description">Popis</label>
@@ -82,5 +86,19 @@ use App\Models\Category;
             <button type="submit" name="submit" class="btn btn-primary text-center">Pridať Inzerát</button>
         </div>
     </form>
-
 </div>
+
+<script>
+    document.getElementById('pridajFotku').addEventListener('click', function() {
+        var photoFields = document.getElementById('photos');
+        var newField = document.createElement('input');
+        var count = photoFields.getElementsByTagName('input').length + 1;
+
+        newField.name = 'photo' + count;
+        newField.type = 'url';
+        newField.className = 'form-control';
+        newField.placeholder = 'Zadajte url adresu ' + count + '. fotky';
+        //todo pridaj required
+        photoFields.appendChild(newField);
+    });
+</script>

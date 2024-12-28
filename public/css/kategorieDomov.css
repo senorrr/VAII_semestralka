@@ -1,0 +1,15 @@
+.col {
+    padding-top: 10px;
+
+}
+.col:hover {
+    background-color: #50acc5;
+    border-width: 2px;
+    border-color: #35869c;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+
+
+
