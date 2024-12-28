@@ -30,7 +30,6 @@ class AuthController extends AControllerBase
     {
         $formData = $this->app->getRequest()->getPost();
         $data = null;
-        $edit = null;
 
         if (isset($formData['remove'])) {
             $user = $this->app->getAuth()->getLoggedUser();

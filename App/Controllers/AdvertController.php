@@ -11,6 +11,17 @@ use App\Models\Category;
 class AdvertController extends AControllerBase
 {
 
+    public function authorize($action): bool
+    {
+        switch ($action) {
+            case 'add' :
+                return $this->app->getAuth()->isLogged();
+            default:
+                return false;
+        }
+    }
+
+
     /**
      * @inheritDoc
      */
