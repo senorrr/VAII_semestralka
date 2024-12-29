@@ -107,32 +107,16 @@ use App\Models\Category;
             }).then(response => response.json()).then(cities => {
                 const datalist = document.getElementById('cities');
                 datalist.innerHTML = '';
-                cities.forEach(city => {
-                    const option = document.createElement('option');
-                    option.value = city;
-                    datalist.appendChild(option);
-                });
-
-            }).catch((error) => {
-                document.getElementById('result').innerText = 'Error: ' + error
+                if (text.value !== cities[0]) {
+                    cities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        datalist.appendChild(option);
+                    });
+                }
             })
         }
     });
-    /*if (text.value.length > 2) {
-        alert('This is a pop-up message!');
-        fetch('http://localhost/?c=Home&a=getCity', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(text)
-        }).then(response => response.json()).then(data => {
-            var city = document.getElementById('city');
-            city.value = data;
-        }).catch((error) => {
-            document.getElementById('result').innerText = 'Error: ' + error
-        })
-    })*/
 
     function renameFields() {
         var photoFields = document.getElementById('photos');
