@@ -18,6 +18,7 @@ class AdvertController extends AControllerBase
         switch ($action) {
             case 'add' :
                 return $this->app->getAuth()->isLogged();
+            case 'index':
             case 'inzeraty':
                 return true;
             default:
