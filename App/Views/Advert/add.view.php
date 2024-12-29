@@ -74,7 +74,10 @@ use App\Models\Category;
             <?php
                 if (sizeof($data) > 9) {
                     for ($i = 1; $i <= sizeof($data)-9; $i++) {
-
+                        echo '<div class="col url-input d-flex align-items-center">';
+                        echo '<input type="url" name="photo' . $i . '" class="form-control" placeholder="Zadajte url adresu ' . $i . '. fotky" value="' . $data['photo'.$i] . '">';
+                        echo '<button class="vymaz-but" onclick="removeField(this)">X</button>';
+                        echo '</div>';
                     }
                 }
             ?>
