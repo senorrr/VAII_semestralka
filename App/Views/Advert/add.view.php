@@ -30,13 +30,11 @@ use App\Models\Category;
         </div>
         <div class="form-group">
             <label for="city">Mesto</label>
-            <input name="city"  type="text" class="form-control" id="city"
+            <input list="cities" name="city"  type="text" class="form-control" id="city"
                    placeholder="Zadajte mesto"
                    value="<?= ($data!=null) ? $data['city'] : '' ?>">
-            <label for="cityZip">PSČ</label>
-            <input name="cityZip"  type="text" class="form-control" id="cityZip"
-                   placeholder="Zadajte PSČ"
-                   value="<?= ($data!=null) ? $data['cityZip'] : '' ?>">
+            <datalist id="cities">
+            </datalist>
         </div>
         <div class="form-group">
             <label for="monday">Vyberte dni dostupnosti</label><br>
@@ -97,6 +95,54 @@ use App\Models\Category;
 </div>
 
 <script>
+    document.getElementById('city').addEventListener('input', function() {
+        var text = document.getElementById('city');
+        if (text.value.length > 2) {
+            fetch('http://localhost/?c=Home&a=getCity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(text.value)
+            }).then(response => response.json()).then(cities => {
+                const datalist = document.getElementById('cities');
+                datalist.innerHTML = '';
+                cities.forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    datalist.appendChild(option);
+                });
+
+            }).catch((error) => {
+                document.getElementById('result').innerText = 'Error: ' + error
+            })
+        }
+    });
+    /*if (text.value.length > 2) {
+        alert('This is a pop-up message!');
+        fetch('http://localhost/?c=Home&a=getCity', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(text)
+        }).then(response => response.json()).then(data => {
+            var city = document.getElementById('city');
+            city.value = data;
+        }).catch((error) => {
+            document.getElementById('result').innerText = 'Error: ' + error
+        })
+    })*/
+
+    function renameFields() {
+        var photoFields = document.getElementById('photos');
+        var inputs = photoFields.getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].name = 'photo' + (i + 1);
+            inputs[i].placeholder = 'Zadajte url adresu ' + (i + 1) + '. fotky';
+        }
+    }
+
     document.getElementById('pridajFotku').addEventListener('click', function() {
         var photoFields = document.getElementById('photos');
         var newField = document.createElement('input');
@@ -123,13 +169,4 @@ use App\Models\Category;
         newDiv.appendChild(removeButton);
         photoFields.appendChild(newDiv);
     });
-
-    function renameFields() {
-        var photoFields = document.getElementById('photos');
-        var inputs = photoFields.getElementsByTagName('input');
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].name = 'photo' + (i + 1);
-            inputs[i].placeholder = 'Zadajte url adresu ' + (i + 1) + '. fotky';
-        }
-    }
 </script>
