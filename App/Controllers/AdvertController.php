@@ -45,33 +45,33 @@ class AdvertController extends AControllerBase
             return $this->html();
         }
 
-        if (isset($formData['submit']) && isset($formData['title']) && isset($formData['text']) &&  isset($formData['category']) && isset($formData['price'])  && isset($formData['village'])) {
+        if (isset($formData['submit']) && isset($formData['title']) && isset($formData['text']) &&  isset($formData['category']) && isset($formData['price'])  && isset($formData['city'])) {
             if ($formData['price'] < 0) {
-                $formData = ['message' => 'Cena nemôže byť záporné číslo!'];
+                $formData += ['message' => 'Cena nemôže byť záporné číslo!'];
                 return $this->html($formData);
             }
 
             if (ctype_space($formData['title'])) {
-                $formData = ['message' => 'Nebol zadaný názov inzerátu!'];
+                $formData += ['message' => 'Nebol zadaný názov inzerátu!'];
                 return $this->html($formData);
             }
             $category = Category::getAll('`name` LIKE ?', [$formData['category']])[0];
 
             if (!isset($category)) {
-                $formData = ['message' => 'Nebola zvolená správna kategória!'];
+                $formData += ['message' => 'Nebola zvolená správna kategória!'];
                 return $this->html($formData);
             } elseif ($category->getName() != $formData['category']) {
-                $formData = ['message' => 'Nebola zvolená správna kategória!'];
+                $formData += ['message' => 'Nebola zvolená správna kategória!'];
                 return $this->html($formData);
             }
 
             $village = Village::getAll('`name` LIKE ?', [$formData['village']], limit: 1)[0];
 
             if (!isset($village)) {
-                $formData = ['message' => 'Dané mesto neexistuje!'];
+                $formData += ['message' => 'Dané mesto neexistuje!'];
                 return $this->html($formData);
             } elseif ($village->getName() != $formData['village']) {
-                $formData = ['message' => 'Dané mesto neexistuje!'];
+                $formData += ['message' => 'Dané mesto neexistuje!'];
                 return $this->html($formData);
             }
 
@@ -106,6 +106,8 @@ class AdvertController extends AControllerBase
             }
             return $this->redirect($this->url("advert.index", $data));
         }
+        $formData += ['message' => 'Údaje neboli správne vyplnené!'];
+
         return $this->html($formData);
     }
 

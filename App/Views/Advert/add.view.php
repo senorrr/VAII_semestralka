@@ -7,7 +7,6 @@ use App\Models\Category;
 ?>
 <div class="container">
     <h2>Pridanie inzerátu</h2>
-    pridaj required vsade!
     <div class="text-center text-vypis">
         <?= @$data['message'] ?>
     </div>
@@ -15,7 +14,7 @@ use App\Models\Category;
         <div class="form-group">
             <label for="title">Názov</label>
             <input name="title"  type="text" class="form-control" id="title" placeholder="Zadajte názov"
-                   value="<?= ($data!=null) ? $data['title'] : '' ?>">
+                   value="<?= ($data!=null) ? $data['title'] : '' ?>" required>
         </div>
         <div class="form-group">
             <label for="category">Kategória</label>
@@ -27,15 +26,15 @@ use App\Models\Category;
         </div>
         <div class="form-group">
             <label for="price">Cena (€)</label>
-            <input name="price"  type="number" class="form-control" id="price"
+            <input name="price"  type="number" class="form-control" id="price" min="0"
                    placeholder="Zadajte cenu"
-                   value="<?= ($data!=null) ? $data['price'] : '' ?>">
+                   value="<?= ($data!=null) ? $data['price'] : '' ?>" required>
         </div>
         <div class="form-group">
             <label for="city">Mesto</label>
             <input list="cities" name="city"  type="text" class="form-control" id="city"
                    placeholder="Zadajte mesto"
-                   value="<?= ($data!=null) ? $data['city'] : '' ?>">
+                   value="<?= ($data!=null) ? $data['city'] : '' ?>" required>
             <datalist id="cities">
             </datalist>
         </div>
@@ -76,7 +75,7 @@ use App\Models\Category;
                 $i = 1;
                 while (isset($data['photo'.$i])) {
                     echo '<div class="col url-input d-flex align-items-center">';
-                    echo '<input type="url" name="photo' . $i . '" class="form-control" placeholder="Zadajte url adresu ' . $i . '. fotky" value="' . $data['photo'.$i] . '" >';
+                    echo '<input type="url" name="photo' . $i . '" class="form-control" placeholder="Zadajte url adresu ' . $i . '. fotky" value="' . $data['photo'.$i] . '" required>';
                     echo '<button class="vymaz-but" onclick="removePhotoField(this)">X</button>';
                     echo '</div>';
                     $i++;
@@ -86,7 +85,7 @@ use App\Models\Category;
         <button type="button" class="btn btn-primary text-center" id="pridajFotku" >Pridaj fotku</button>
         <div class="form-group">
             <label for="description">Popis</label>
-            <textarea name="text"  maxlength="500" class="form-control" id="description"
+            <textarea name="text"  maxlength="1500" class="form-control" id="description"
                       rows="5" placeholder="Zadajte popis"><?= ($data!=null) ? $data['text'] : '' ?></textarea>
         </div>
         <div class="text-center">
@@ -137,7 +136,7 @@ use App\Models\Category;
         newField.type = 'url';
         newField.className = 'form-control';
         newField.placeholder = 'Zadajte url adresu ' + count + '. fotky';
-        //newField.required = true;
+        newField.required = true;
 
         var newDiv = document.createElement('div');
         newDiv.className = 'col url-input d-flex align-items-center';
