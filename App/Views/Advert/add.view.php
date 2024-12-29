@@ -89,7 +89,7 @@ use App\Models\Category;
                       rows="5" placeholder="Zadajte popis"><?= ($data!=null) ? $data['text'] : '' ?></textarea>
         </div>
         <div class="text-center">
-            <button type="submit" name="submit" class="btn btn-primary text-center">Pridať Inzerát</button>
+            <button type="submit" name="submit" class="btn btn-primary">Pridať Inzerát</button>
         </div>
     </form>
 </div>

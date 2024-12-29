@@ -19,6 +19,7 @@ class AdminController extends AControllerBase
      */
     public function authorize($action)
     {
+        //todo pridaj kontrolu ze ci je to admin
         return $this->app->getAuth()->isLogged();
     }
 
@@ -28,6 +29,13 @@ class AdminController extends AControllerBase
      */
     public function index(): Response
     {
+        return $this->html();
+    }
+
+    public function category(): Response
+    {
+        $formData = $this->app->getRequest()->getPost();
+
         return $this->html();
     }
 }
