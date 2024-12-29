@@ -36,6 +36,7 @@ class AdvertController extends AControllerBase
     public function add(): Response
     {
         $formData = $this->app->getRequest()->getPost();
+        return $this->html($formData);
         if (isset($formData['submit']) && isset($formData['title']) && isset($formData['text']) &&  isset($formData['category']) && isset($formData['price'])) {
             //todo fotky...
             //todo && isset($formData['village'])

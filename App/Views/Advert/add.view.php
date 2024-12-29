@@ -69,14 +69,17 @@ use App\Models\Category;
                 <input class="form-check-input" type="checkbox" id="sunday" name="sunday" <?= ($data!= null && isset($data['sunday']) && $data['sunday']=="on" ? "checked" : '') ?>>
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group"  id="photos">
             <label for="photo">Fotky</label>
-            <div class="col" id="photos">
-                <input name="photo1"  type="url" class="form-control" id="photo" placeholder="Zadajte url adresu 1. fotky">
-            </div>
-            <div class="col"><button>Vymaz</button> </div>
-            <button type="button" class="btn btn-primary text-center" id="pridajFotku" >Pridaj fotku</button>
+            <?php
+                if (sizeof($data) > 9) {
+                    for ($i = 1; $i <= sizeof($data)-9; $i++) {
+
+                    }
+                }
+            ?>
         </div>
+        <button type="button" class="btn btn-primary text-center" id="pridajFotku" >Pridaj fotku</button>
         <div class="form-group">
             <label for="description">Popis</label>
             <textarea name="text"  maxlength="500" class="form-control" id="description"
@@ -98,7 +101,30 @@ use App\Models\Category;
         newField.type = 'url';
         newField.className = 'form-control';
         newField.placeholder = 'Zadajte url adresu ' + count + '. fotky';
-        //todo pridaj required
-        photoFields.appendChild(newField);
+        //newField.required = true;
+
+        var newDiv = document.createElement('div');
+        newDiv.className = 'col url-input d-flex align-items-center';
+        newDiv.appendChild(newField);
+
+        var removeButton = document.createElement('button');
+        removeButton.className = 'vymaz-but';
+        removeButton.textContent = 'X';
+        removeButton.addEventListener('click', function() {
+            photoFields.removeChild(newDiv);
+            renameFields();
+        });
+
+        newDiv.appendChild(removeButton);
+        photoFields.appendChild(newDiv);
     });
+
+    function renameFields() {
+        var photoFields = document.getElementById('photos');
+        var inputs = photoFields.getElementsByTagName('input');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].name = 'photo' + (i + 1);
+            inputs[i].placeholder = 'Zadajte url adresu ' + (i + 1) + '. fotky';
+        }
+    }
 </script>

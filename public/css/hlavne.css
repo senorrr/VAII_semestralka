@@ -30,7 +30,10 @@ header .btn:hover {
     max-width: 1200px;
     position: relative;
     margin: 0 auto 0 auto;
+}
 
+html {
+    min-width: 370px !important;
 }
 
 .vyhladanie {
@@ -248,4 +251,15 @@ h3 {
 a {
     text-underline: none;
     text-decoration: none;
+}
+
+.vymaz-but {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.url-input {
+    padding-right: 0;
 }
