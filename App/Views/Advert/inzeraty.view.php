@@ -16,13 +16,13 @@ if (isset($_GET["0"])) {
 
 <div class="container">
     <div class="text-center">
-        <h1> Inzeráty kategória
+        <h2> Inzeráty kategória
             <?php
                 if (isset($_GET["0"])) {
                     echo Category::getOne($_GET["0"])->getName();
                 }
             ?>
-        </h1>
+        </h2>
     </div>
     <div class="row">
         <?php foreach ($adverts as $advert): ?>

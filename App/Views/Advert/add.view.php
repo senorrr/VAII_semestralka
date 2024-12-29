@@ -70,15 +70,13 @@ use App\Models\Category;
         <div class="form-group"  id="photos">
             <label for="photo">Fotky</label>
             <?php
-                if (sizeof($data) > 9) {
-                    for ($i = 1; $i <= sizeof($data)-9; $i++) {
-                        if (isset($data[$i])) {
-                            echo '<div class="col url-input d-flex align-items-center">';
-                            echo '<input type="url" name="photo' . $i . '" class="form-control" placeholder="Zadajte url adresu ' . $i . '. fotky" value="' . $data['photo'.$i] . '">';
-                            echo '<button class="vymaz-but" onclick="removeField(this)">X</button>';
-                            echo '</div>';
-                        }
-                    }
+                $i = 1;
+                while (isset($data['photo'.$i])) {
+                    echo '<div class="col url-input d-flex align-items-center">';
+                    echo '<input type="url" name="photo' . $i . '" class="form-control" placeholder="Zadajte url adresu ' . $i . '. fotky" value="' . $data['photo'.$i] . '" >';
+                    echo '<button class="vymaz-but" onclick="removePhotoField(this)">X</button>';
+                    echo '</div>';
+                    $i++;
                 }
             ?>
         </div>
@@ -145,12 +143,15 @@ use App\Models\Category;
         var removeButton = document.createElement('button');
         removeButton.className = 'vymaz-but';
         removeButton.textContent = 'X';
-        removeButton.addEventListener('click', function() {
-            photoFields.removeChild(newDiv);
-            renameFields();
-        });
+        removeButton.setAttribute('onclick', 'removePhotoField(this)');
 
         newDiv.appendChild(removeButton);
         photoFields.appendChild(newDiv);
     });
+
+    function removePhotoField(button) {
+        var photoFields = document.getElementById('photos');
+        photoFields.removeChild(button.parentNode);
+        renameFields();
+    }
 </script>

@@ -4,19 +4,19 @@ use App\Core\Model;
 
 class User extends Model
 {
+    protected $id;
     protected $name;
     protected $surname;
     protected $email;
     protected $password;
-
+    
 
     /**
-     * Vrati primarny kluc modelu z databazy
-     * @return string
+     * @return mixed
      */
-    public static function getPkColumnName(): string
+    public function getId()
     {
-        return "email";
+        return $this->id;
     }
 
 

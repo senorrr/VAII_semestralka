@@ -6,6 +6,7 @@ use App\Config\Configuration;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Core\Responses\ViewResponse;
+use App\Models\User;
 
 /** @var \App\Core\LinkGenerator $link */
 
@@ -50,18 +51,16 @@ class AuthController extends AControllerBase
                         // zmena mailu
                         if ($formData['newLogin'] != $this->app->getAuth()->getLoggedUserEmail()) {
                             $user = $this->app->getAuth()->getLoggedUser();
-                            $edit = $this->app->getAuth()->register($formData['newLogin'], $formData['oldPassword'],
-                                $formData['name'], $formData['surname']);
-                            //todo pozor ak budu nejake data naviazane na daky mail,
-                            // tak ich bude treba prehodit tiez... napr recenzie
-                            if ($edit) {
-                                $user->delete();
-                                $data = ['message' => 'Úspešná zmena!'];
-                                return $this->html($data);
-                            } else {
+
+                            $userWithEmail = User::getAll('`email` LIKE ?', [$formData['newLogin']], limit: 1)[0];
+                            if (isset($userWithEmail) && $userWithEmail->getEmail() == $formData['newLogin']) {
                                 $data = ['message' => 'Daný mail už je použitý pri inom užívateľovi!'];
                                 return $this->html($data);
                             }
+                            $user->setEmail($formData['newLogin']);
+                            $user->save();
+                            $data = ['message' => 'Úspešná zmena!'];
+                            return $this->html($data);
                         } else {
                             $data = ['message' => "Starý a nový mail sú rovnaké"];
                             return $this->html($data);

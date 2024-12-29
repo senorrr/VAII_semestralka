@@ -27,7 +27,7 @@ class DbAuthenticator implements IAuthenticator
      */
     public function login($login, $password): bool
     {
-        $user = User::getOne($login);
+        $user = User::getAll('`email` LIKE ?', [$login], limit: 1)[0];
         if ($user != null) {
             if ($user->getPassword() == $password) {
                 $_SESSION['user'] = $login;
@@ -97,12 +97,12 @@ class DbAuthenticator implements IAuthenticator
      */
     public function getLoggedUserName(): string
     {
-        $user = User::getOne($this->getLoggedUserEmail());
+        $user = User::getAll('`email` LIKE ?', [$this->getLoggedUserEmail()], limit: 1)[0];
         return $user->getName();
     }
     public function getLoggedUserSurname(): string
     {
-        $user = User::getOne($this->getLoggedUserEmail());
+        $user = User::getAll('`email` LIKE ?', [$this->getLoggedUserEmail()], limit: 1)[0];
         return $user->getSurname();
     }
 
@@ -119,7 +119,7 @@ class DbAuthenticator implements IAuthenticator
      */
     public function getLoggedUser(): User
     {
-        $user = User::getOne($this->getLoggedUserEmail());
+        $user = User::getAll('`email` LIKE ?', [$this->getLoggedUserEmail()], limit: 1)[0];
         return $user;
     }
 
@@ -135,7 +135,7 @@ class DbAuthenticator implements IAuthenticator
 
     public function getLoggedUserPassword(): string
     {
-        $user = User::getOne($this->getLoggedUserEmail());
+        $user = User::getAll('`email` LIKE ?', [$this->getLoggedUserEmail()], limit: 1)[0];
         return $user->getPassword();
     }
 }
