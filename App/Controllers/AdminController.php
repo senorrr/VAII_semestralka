@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
+use App\Models\Category;
 
 /**
  * Class HomeController
@@ -35,7 +36,33 @@ class AdminController extends AControllerBase
     public function category(): Response
     {
         $formData = $this->app->getRequest()->getPost();
+        if (isset($formData['novaKategoria'])) {
+            $newCategory = new Category();
+            $newCategory->setName($formData['novaKategoria']);
+            if (isset($formData['destination'])) {
+                $newCategory->setDestinationOfPicture($formData['destination']);
+            } else {
+                return $this->html(['message'=> 'Zlá alebo žiadna url adresa!']);
+            }
+            $categories = Category::getAll();
+            foreach ($categories as $category) {
+                if ($category->getName() == $newCategory->getName()) {
+                    return $this->html(['message'=> 'Kategória s týmto názvom už existuje!']);
+                }
+            }
+            $newCategory->save();
+            return $this->html(['message'=> 'Úspešne pridaná!']);
+        }
 
+        if (isset($formData['odstranenie'])) {
+            $categories = Category::getAll();
+            foreach ($categories as $category) {
+                if ($category->getName() == $formData['odstranenie']) {
+                    $category->delete();
+                    return $this->html(['message'=> 'Kategória vymazaná!']);
+                }
+            }
+        }
         return $this->html();
     }
 }

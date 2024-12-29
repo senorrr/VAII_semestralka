@@ -14,7 +14,8 @@ use App\Models\Category; ?>
     <div>
         <form>
             <label for="spravovanie">Vyber spravovanie</label>
-            <select name="spravovanie" class="form-control" id="spravovanie">
+            <select name="spravovanie" class="form-control admin-nav" id="spravovanie">
+                <option selected>Domov</option>
                 <option>Kategórie</option>
                 <option>Inzeráty</option>
             </select>
@@ -30,6 +31,8 @@ use App\Models\Category; ?>
             window.location.href = 'http://localhost/?c=admin&a=category';
         } else if (selectedValue === 'Inzeráty') {
             window.location.href = 'inzeraty.php';
+        } else if (selectedValue === 'Domov') {
+            window.location.href = 'http://localhost/?c=admin';
         }
     });
 </script>

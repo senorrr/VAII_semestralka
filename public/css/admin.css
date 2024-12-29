@@ -3,4 +3,9 @@
     border: 2px solid #35869c;
     margin: 4px;
     padding: 5px 0;
+    min-width: 350px;
+}
+
+.admin-nav {
+    max-width: 100px;
 }
