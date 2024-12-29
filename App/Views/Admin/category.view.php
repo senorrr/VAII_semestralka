@@ -43,13 +43,12 @@ use App\Models\Category; ?>
             <form action="<?=$link->url("admin.category")?>" method="post">
                 <div class="form-group">
                     <label for="zmenaNazvu">Zmena názvu kategórie</label>
-                    <select name="category" class="form-control" id="zmenaNazvu">
+                    <select name="staraKategoria" class="form-control" id="zmenaNazvu">
                         <?php foreach (Category::getAll() as $category): ?>
                             <option><?= $category->getName() ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <input name="novaNazov"  type="text" class="form-control" id="pridanie" placeholder="Zadajte názov"
-                           value="" required>
+                    <input name="novyNazov"  type="text" class="form-control" id="novyNazov" placeholder="Zadajte názov" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Zmeň</button>
             </form>
@@ -57,13 +56,13 @@ use App\Models\Category; ?>
         <div class="col-md-auto stlpec-admin">
             <form action="<?=$link->url("admin.category")?>" method="post">
                 <div class="form-group">
-                    <label for="zmena">Zmena url kategórie</label>
-                    <select name="category" class="form-control" id="zmena">
+                    <label for="staraUrl">Zmena url kategórie</label>
+                    <select name="staraUrl" class="form-control" id="staraUrl">
                         <?php foreach (Category::getAll() as $category): ?>
                             <option><?= $category->getName() ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <input name="novaKategoria"  type="text" class="form-control" id="pridanie" placeholder="Zadajte url" required>
+                    <input name="novaUrl"  type="text" class="form-control" id="novaUrl" placeholder="Zadajte url" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Zmeň</button>
             </form>

@@ -63,6 +63,36 @@ class AdminController extends AControllerBase
                 }
             }
         }
+
+        if (isset($formData['novyNazov'])) {
+            $categories = Category::getAll();
+            if (isset($formData['staraKategoria'])) {
+                foreach ($categories as $category) {
+                    if ($category->getName() == $formData['staraKategoria']) {
+                        $category->setName($formData['novyNazov']);
+                        $category->save();
+                        return $this->html(['message'=> 'Kategória zmenená!']);
+                    }
+                }
+            } else {
+                return $this->html(['message'=> 'Neúspešné zmenenie!']);
+            }
+        }
+
+        if (isset($formData['novaUrl'])) {
+            $categories = Category::getAll();
+            if (isset($formData['staraUrl'])) {
+                foreach ($categories as $category) {
+                    if ($category->getName() == $formData['staraUrl']) {
+                        $category->setDestinationOfPicture($formData['novaUrl']);
+                        $category->save();
+                        return $this->html(['message'=> 'Kategória zmenená!']);
+                    }
+                }
+            } else {
+                return $this->html(['message'=> 'Neúspešné zmenenie!']);
+            }
+        }
         return $this->html();
     }
 }
