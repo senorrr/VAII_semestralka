@@ -8,7 +8,10 @@ use App\Models\Category;
 <div class="container">
     <h2>Pridanie inzerátu</h2>
     pridaj required vsade!
-    <form action="<?=''/* $link->url("advert.add")*/ ?>" method="post">
+    <div class="text-center text-vypis">
+        <?= @$data['message'] ?>
+    </div>
+    <form action="<?=$link->url("advert.add")?>" method="post">
         <div class="form-group">
             <label for="title">Názov</label>
             <input name="title"  type="text" class="form-control" id="title" placeholder="Zadajte názov"
@@ -24,7 +27,7 @@ use App\Models\Category;
         </div>
         <div class="form-group">
             <label for="price">Cena (€)</label>
-            <input name="price"  type="number" class="form-control" id="price" min="0"
+            <input name="price"  type="number" class="form-control" id="price"
                    placeholder="Zadajte cenu"
                    value="<?= ($data!=null) ? $data['price'] : '' ?>">
         </div>

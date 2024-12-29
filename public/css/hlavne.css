@@ -219,7 +219,6 @@ h3 {
 .inzeratKarta {
     min-width: 150px;
     min-height: 170px;
-    max-height: 170px;
 }
 .inzeratKarta:hover {
     border-width: 2px;

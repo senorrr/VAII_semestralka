@@ -2,6 +2,7 @@
 /** @var \App\Core\LinkGenerator $link */
 use App\Models\Advert;
 use App\Models\Category;
+use App\Models\Photo;
 use App\Models\Village;
 
 ?>
@@ -46,6 +47,12 @@ if (isset($_GET["0"])) {
                                 <small>Mesto: <?= Village::getOne($advert->getVillageId())->getName() ?></small>
                             </div>
                         </div>
+                        <?php
+                        $images = Photo::getAll('`advert` LIKE ?', [$advert->getId()]);
+                        if (sizeof($images) > 0) {
+                            echo '<img src="'. $images[0]->getUrl() .'">';
+                        }
+                        ?>
                         <div class="card-footer text-muted text-center">
                             <small>Vytvorený: <?= $advert->getDateOfCreate() ?></small>
                             <small>Zobrazenia: <?= $advert->getViews() ?></small>
