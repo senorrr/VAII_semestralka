@@ -81,6 +81,12 @@ use App\Models\Category; ?>
                 <button type="submit" class="btn btn-primary">Odstráň</button>
             </form>
         </div>
+
+        <div class="col-md-auto stlpec-admin">
+            <a href="https://icons8.com/icons/set/motorcycle--static--white">
+                stranka s ikonami
+            </a>
+        </div>
     </div>
 </div>
 
