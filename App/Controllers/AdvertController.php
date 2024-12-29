@@ -65,12 +65,12 @@ class AdvertController extends AControllerBase
                 return $this->html($formData);
             }
 
-            $village = Village::getAll('`name` LIKE ?', [$formData['village']], limit: 1)[0];
+            $village = Village::getAll('`name` LIKE ?', [$formData['city']], limit: 1)[0];
 
             if (!isset($village)) {
                 $formData += ['message' => 'Dané mesto neexistuje!'];
                 return $this->html($formData);
-            } elseif ($village->getName() != $formData['village']) {
+            } elseif ($village->getName() != $formData['city']) {
                 $formData += ['message' => 'Dané mesto neexistuje!'];
                 return $this->html($formData);
             }
@@ -103,6 +103,7 @@ class AdvertController extends AControllerBase
                     $photo->setAdvert($advert->getId());
                     $photo->save();
                 }
+                $i++;
             }
             return $this->redirect($this->url("advert.index", $data));
         }
