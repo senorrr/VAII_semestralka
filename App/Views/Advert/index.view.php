@@ -5,6 +5,7 @@
 use App\Models\Advert;
 use App\Models\Category;
 use App\Models\Photo;
+use App\Models\User;
 use App\Models\Village;
 
 ?>
@@ -55,6 +56,10 @@ use App\Models\Village;
         <p class="mx-2">
             <?=$advert->getText()?>
         </p>
+        <div class="row inzerat-oramovanie">
+            <h3 class="col-3 col-sm-2 col-lg-1">Meno:</h3>
+            <h3 class="col"><?=User::getOne($advert->getOwnerId())->getName() . " " . User::getOne($advert->getOwnerId())->getSurname()?></h3>
+        </div>
         <div class="row inzerat-oramovanie">
             <h3 class="col-3 col-sm-2 col-lg-1">Lokalita:</h3>
             <h3 class="col"><?=Village::getOne($advert->getVillageId())->getName()?></h3>

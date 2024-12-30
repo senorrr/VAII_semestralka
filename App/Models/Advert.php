@@ -12,7 +12,7 @@ class Advert extends Model
     protected $timeOfLastEdit;
     protected $text;
     protected $title;
-    protected $owner;
+    protected $ownerId;
     protected $categoryId;
     protected $villageId;
     protected $price;
@@ -87,21 +87,20 @@ class Advert extends Model
     {
         $this->title = $title;
     }
-
     /**
      * @return mixed
      */
-    public function getOwner()
+    public function getOwnerId()
     {
-        return $this->owner;
+        return $this->ownerId;
     }
 
     /**
-     * @param mixed $owner
+     * @param mixed $ownerId
      */
-    public function setOwner($owner): void
+    public function setOwnerId($ownerId): void
     {
-        $this->owner = $owner;
+        $this->ownerId = $ownerId;
     }
 
     /**
@@ -247,6 +246,8 @@ class Advert extends Model
     {
         $this->sunday = $sunday;
     }
+
+
 
 
 }
