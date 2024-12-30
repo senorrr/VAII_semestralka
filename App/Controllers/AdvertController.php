@@ -179,9 +179,11 @@ class AdvertController extends AControllerBase
 
 
     private function createPagination($current_page, $total_pages) {
+        $range = 2;
+
         $pagination = '<nav aria-label="Page navigation example"><ul class="pagination">';
 
-        // Previous button
+        // tlacidlo predosle
         if ($current_page > 1) {
             $url = $this->url("advert.all", ['newest', $current_page-1]);
             $pagination .= '<li class="page-item"><a class="page-link" href="' . $url .'  " tabindex="-1">Predošlá</a></li>';
@@ -189,8 +191,17 @@ class AdvertController extends AControllerBase
             $pagination .= '<li class="page-item disabled"><a class="page-link" tabindex="-1">Predošlá</a></li>';
         }
 
-        // Page numbers
-        for ($i = 1; $i <= $total_pages; $i++) {
+        //prva strana
+        if ($current_page > $range + 1) {
+            $url = $this->url("advert.all", ['newest']);
+            $pagination .= '<li class="page-item"><a class="page-link" href=" '. $url .' ">1</a></li>';
+            if ($current_page > $range + 2) {
+                $pagination .= '<li class="page-item disabled"><a class="page-link" >...</a></li>';
+            }
+        }
+
+        // cisla stran podla range upravene
+        for ($i = max(1, $current_page - $range); $i <= min($total_pages, $current_page + $range); $i++) {
             if ($i == $current_page) {
                 $pagination .= '<li class="page-item active"><a class="page-link">' . $i . '</a></li>';
             } else {
@@ -199,7 +210,17 @@ class AdvertController extends AControllerBase
             }
         }
 
-        // Next button
+        // posledna strana
+        if ($current_page < $total_pages - $range) {
+            if ($current_page < $total_pages - $range - 1) {
+                $pagination .= '<li class="page-item disabled"><a class="page-link">...</a></li>';
+            }
+            $url = $this->url("advert.all", ['newest', $total_pages]);
+            $pagination .= '<li class="page-item"><a class="page-link" href="' . $url . '">' . $total_pages . '</a></li>';
+        }
+
+
+        // dalsia strana tlacidlo
         if ($current_page < $total_pages) {
             $url = $this->url("advert.all", ['newest', $current_page+1]);
             $pagination .= '<li class="page-item"><a class="page-link" href="' . $url . ' ">Ďalšia</a></li>';
