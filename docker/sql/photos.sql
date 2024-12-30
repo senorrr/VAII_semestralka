@@ -7,10 +7,6 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
-DROP DATABASE IF EXISTS `vaiicko_db`;
-CREATE DATABASE `vaiicko_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
-USE `vaiicko_db`;
-
 DROP TABLE IF EXISTS `photos`;
 CREATE TABLE `photos` (
   `advert` int(11) NOT NULL,
