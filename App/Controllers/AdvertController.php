@@ -114,24 +114,32 @@ class AdvertController extends AControllerBase
 
     public function all(): Response
     {
+        $dataSent = [];
         if (!isset($page)) {
             $page = 1;
         } else {
             $page++;
         }
-        $data = $this->app->getRequest()->getPost();
-        if (sizeof($data) > 0) {
-            $vyhladanie = '%' . $data['search'] . '%';
+        $dataSent['page'] = $page;
+        $dataGet = $this->app->getRequest()->getPost();
+        if (sizeof($dataGet) > 0) {
+            $vyhladanie = '%' . $dataGet['search'] . '%';
             $adverts = Advert::getAll(whereClause: '`title` like ?', whereParams: [$vyhladanie], limit: 100);
-            return $this->html($adverts);
+            $dataSent['text'] = 'Inzeráty pre hľadanie: ' . $dataGet['search'];
+            $dataSent['adverts'] = $adverts;
+            return $this->html($dataSent);
         }
-        $data = $this->app->getRequest()->getGet()['0'];
+        $dataGet = $this->app->getRequest()->getGet()['0'];
 
-        if (is_numeric($data)) {
-            $adverts = Advert::getAll(whereClause: '`categoryId` like ?', whereParams: [$data], limit: 100);
-            return $this->html($adverts);
+        if (is_numeric($dataGet)) {
+            $adverts = Advert::getAll(whereClause: '`categoryId` like ?', whereParams: [$dataGet], limit: 100);
+            $dataSent['text'] = 'Inzeráty pre kategóriu ' . Category::getOne($dataGet)->getName();
+            $dataSent['adverts'] = $adverts;
+            return $this->html($dataSent);
         }
         $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: 100);
-        return $this->html($adverts);
+        $dataSent['text'] = 'Najnovšie inzeráty';
+        $dataSent['adverts'] = $adverts;
+        return $this->html($dataSent);
     }
 }

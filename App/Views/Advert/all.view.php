@@ -13,11 +13,10 @@ use App\Models\Village;
 
 <div class="container">
     <div class="text-center">
-        <h2> Inzeráty
-        </h2>
+        <h2><?= $data['text']?></h2>
     </div>
     <div class="row">
-        <?php foreach ($data as $advert): ?>
+        <?php foreach ($data['adverts'] as $advert): ?>
             <div class="col-lg-4 align-items-stretch">
                 <a href="<?= $link->url('advert.index', ['id' => $advert->getId()]) ?>" class="text-decoration-none">
                     <div class="card inzeratKarta">

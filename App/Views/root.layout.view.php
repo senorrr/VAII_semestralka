@@ -50,7 +50,8 @@
 
             </ul>
             <form class="d-flex" role="search" action="<?= $link->url("advert.all")?>" method="post">
-                <input name="search" id="search" class="form-control" type="search" placeholder="napr. búracie kladivo" aria-label="Search">
+                <input name="search" id="search" class="form-control" type="search" placeholder="napr. búracie kladivo"
+                       aria-label="Search" maxlength="50">
                 <button class="btn mx-1 btn-primary" type="submit" title="Hľadať">
                     <img class= "vyhladanie" src="public/images//lupa.png" alt="vyhľadanie" >
                 </button>
