@@ -53,4 +53,10 @@ use App\Models\Village;
             </div>
         <?php endforeach; ?>
     </div>
+    <div>
+
+        <?php
+            //todo pridaj cisla stran a samotne strany
+        ?>
+    </div>
 </div>
