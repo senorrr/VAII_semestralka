@@ -112,9 +112,11 @@ class AdvertController extends AControllerBase
         return $this->html($formData);
     }
 
-    public function inzeraty()
+    public function inzeraty(): Response
     {
-        return $this->html();
+        $formData = $this->app->getRequest()->getPost();
+
+        return $this->html($formData);
     }
 
 }
