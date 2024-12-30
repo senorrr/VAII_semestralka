@@ -1,40 +1,23 @@
 <?php
 /** @var \App\Core\LinkGenerator $link */
-/** @var array $data */
+/** @var Advert $data */
 use App\Models\Advert;
-use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Village;
 
 ?>
 
 <?php
-if (isset($_GET["0"])) {
-    $adverts = Advert::getAll(whereClause: '`categoryId` like ?', whereParams: [$_GET["0"]], limit: 100);
-} elseif (isset($data['search'])) {
-    $vyhladanie = '%' . $data['search'] . '%';
-    $adverts = Advert::getAll(whereClause: '`title` like ?', whereParams: [$vyhladanie], limit: 100);
-    if (sizeof($adverts) < 100) {
-        $adverts += Advert::getAll(whereClause: '`text` like ?', whereParams: [$vyhladanie], limit: 100-sizeof($adverts));
-    }
-} else {
-    $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: 100);
-}
+
 ?>
 
 <div class="container">
     <div class="text-center">
         <h2> Inzeráty
-            <?php
-                if (isset($_GET["0"])) {
-                    echo ' kategória ';
-                    echo Category::getOne($_GET["0"])->getName();
-                }
-            ?>
         </h2>
     </div>
     <div class="row">
-        <?php foreach ($adverts as $advert): ?>
+        <?php foreach ($data as $advert): ?>
             <div class="col-lg-4 align-items-stretch">
                 <a href="<?= $link->url('advert.index', ['id' => $advert->getId()]) ?>" class="text-decoration-none">
                     <div class="card inzeratKarta">

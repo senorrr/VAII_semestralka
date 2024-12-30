@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto ">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= $link->url("advert.inzeraty")?>">Najnovšie inzeráty</a>
+                    <a class="nav-link" href="<?= $link->url("advert.all", ['newest'])?>">Najnovšie inzeráty</a>
                 </li>
                 <?php if ($auth->isLogged()) { ?>
 
@@ -49,7 +49,7 @@
                 </li>
 
             </ul>
-            <form class="d-flex" role="search" action="<?= $link->url("advert.inzeraty")?>" method="post">
+            <form class="d-flex" role="search" action="<?= $link->url("advert.all")?>" method="post">
                 <input name="search" id="search" class="form-control" type="search" placeholder="napr. búracie kladivo" aria-label="Search">
                 <button class="btn mx-1 btn-primary" type="submit" title="Hľadať">
                     <img class= "vyhladanie" src="public/images//lupa.png" alt="vyhľadanie" >

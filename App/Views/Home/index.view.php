@@ -9,7 +9,7 @@
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-0 g mx-auto">
         <?php foreach (Category::getAll() as $category): ?>
             <div class="col" >
-                <a href="<?= $link->url("advert.inzeraty",[$category->getId()]) ?>">
+                <a href="<?= $link->url("advert.all",[$category->getId()]) ?>">
                     <div class="card kategoria">
                         <div><h2 class="card-title"><?= $category->getName() ?></h2></div>
                         <img class="card-img-bottom align-self-center" src="<?= $category->getDestinationOfPicture() ?>" alt="kategoria auto">
