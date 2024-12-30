@@ -38,7 +38,7 @@ class Configuration
     /**
      * Add all SQL queries after app output
      */
-    public const SHOW_SQL_QUERY = false;
+    public const SHOW_SQL_QUERY = true;
 
     /**
      * Show detailed stacktrace using default exception handler. Should be used only for development.

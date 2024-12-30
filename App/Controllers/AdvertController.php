@@ -4,11 +4,13 @@ namespace App\Controllers;
 
 use App\App;
 use App\Core\AControllerBase;
+use App\Core\DB\Connection;
 use App\Core\Responses\Response;
 use App\Models\Advert;
 use App\Models\Category;
 use App\Models\Photo;
 use App\Models\Village;
+use PDO;
 
 class AdvertController extends AControllerBase
 {
@@ -127,6 +129,7 @@ class AdvertController extends AControllerBase
             $adverts = Advert::getAll(whereClause: '`title` like ?', whereParams: [$vyhladanie], limit: 100);
             $dataSent['text'] = 'Inzeráty pre hľadanie: ' . $dataGet['search'];
             $dataSent['adverts'] = $adverts;
+            $dataSent['count'] = $this->getCounfOfTitledverts($vyhladanie);
             return $this->html($dataSent);
         }
         $dataGet = $this->app->getRequest()->getGet()['0'];
@@ -135,11 +138,42 @@ class AdvertController extends AControllerBase
             $adverts = Advert::getAll(whereClause: '`categoryId` like ?', whereParams: [$dataGet], limit: 100);
             $dataSent['text'] = 'Inzeráty pre kategóriu ' . Category::getOne($dataGet)->getName();
             $dataSent['adverts'] = $adverts;
+            $dataSent['count'] = $this->getCounfOfCategoryAdverts($dataGet);
             return $this->html($dataSent);
         }
         $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: 100);
         $dataSent['text'] = 'Najnovšie inzeráty';
         $dataSent['adverts'] = $adverts;
+        $dataSent['count'] = $this->getCounfOfAllAdverts();
         return $this->html($dataSent);
     }
+
+    private function getCounfOfCategoryAdverts($catId)
+    {
+        $con = Connection::connect();
+        $stmt = $con->prepare("SELECT count(*) FROM `adverts` where `categoryId` like $catId");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count(*)'];
+    }
+
+    private function getCounfOfTitledverts($title)
+    {
+        $con = Connection::connect();
+        $stmt = $con->prepare("SELECT count(*) FROM `adverts` where `title` like $title");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count(*)'];
+    }
+
+    public function getCounfOfAllAdverts()
+    {
+        $con = Connection::connect();
+        $stmt = $con->prepare("SELECT count(*) FROM `adverts`");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count(*)'];
+    }
+
+
 }

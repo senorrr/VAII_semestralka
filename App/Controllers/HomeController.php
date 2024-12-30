@@ -29,7 +29,9 @@ class HomeController extends AControllerBase
      */
     public function index(): Response
     {
-        return $this->html();
+        $advertController = new AdvertController();
+        return $this->html($advertController->getCounfOfAllAdverts());
+        //todo konzultuj!
     }
 
     /**
