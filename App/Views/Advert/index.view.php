@@ -1,6 +1,8 @@
 <?php
 /** @var Advert $data */
 /** @var \App\Core\LinkGenerator $link */
+/** @var \App\Core\IAuthenticator $auth */
+
 
 use App\Models\Advert;
 use App\Models\Category;
@@ -53,7 +55,7 @@ use App\Models\Village;
             <?php
         }
         ?>
-        <p class="mx-2">
+        <p class="mx-2 mt-2">
             <?=$advert->getText()?>
         </p>
         <div class="row inzerat-oramovanie">
@@ -67,6 +69,19 @@ use App\Models\Village;
         <div class="row inzerat-oramovanie">
             <h3 class="col-3 col-sm-2 col-lg-1">Cena: </h3>
             <h3 class="col"><?=$advert->getPrice()?>€</h3>
+        </div>
+        <div class="row inzerat-oramovanie">
+            <h3 class="col-3 col-sm-2 col-lg-1">Videnia: </h3>
+            <h3 class="col"><?=$advert->getViews()?></h3>
+        </div>
+        <div>
+            <button class="btn btn-primary ms-3">Rezervuj</button>
+            <?php
+                if ($auth->getLoggedUserId() == $advert->getOwnerId()) {
+                    echo '<button class="btn btn-primary ms-3">Edituj</button>';
+                    echo '<button class="btn bg-danger ms-3">Vymaž</button>';
+                }
+            ?>
         </div>
     </div>
 </div>

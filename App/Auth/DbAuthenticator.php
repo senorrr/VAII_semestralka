@@ -30,7 +30,7 @@ class DbAuthenticator implements IAuthenticator
         $user = User::getAll('`email` LIKE ?', [$login], limit: 1)[0];
         if ($user != null) {
             if ($user->getPassword() == $password) {
-                $_SESSION['user'] = $login;
+                $_SESSION['user'] = $user->getId();
                 return true;
             }
         }
@@ -59,7 +59,7 @@ class DbAuthenticator implements IAuthenticator
         $novy->setName($name);
         $novy->setSurname($surname);
         $novy->save();
-        $_SESSION['user'] = $login;
+        $_SESSION['user'] = $novy->getId();
         return true;
     }
 
@@ -97,17 +97,19 @@ class DbAuthenticator implements IAuthenticator
      */
     public function getLoggedUserName(): string
     {
-        $user = User::getAll('`email` LIKE ?', [$this->getLoggedUserEmail()], limit: 1)[0];
-        return $user->getName();
+        return User::getOne($_SESSION['user'])->getName();
     }
     public function getLoggedUserSurname(): string
     {
-        $user = User::getAll('`email` LIKE ?', [$this->getLoggedUserEmail()], limit: 1)[0];
-        return $user->getSurname();
+        return User::getOne($_SESSION['user'])->getSurname();
     }
 
 
     public function getLoggedUserEmail(): string
+    {
+        return User::getOne($_SESSION['user'])->getEmail();
+    }
+    public function getLoggedUserId(): int
     {
         return $_SESSION['user'];
     }
@@ -135,7 +137,6 @@ class DbAuthenticator implements IAuthenticator
 
     public function getLoggedUserPassword(): string
     {
-        $user = User::getAll('`email` LIKE ?', [$this->getLoggedUserEmail()], limit: 1)[0];
-        return $user->getPassword();
+        return User::getOne($_SESSION['user'])->getPassword();
     }
 }

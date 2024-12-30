@@ -35,6 +35,7 @@ interface IAuthenticator
     public function getLoggedUserSurname(): string;
     public function getLoggedUserEmail(): string;
     public function getLoggedUserPassword(): string;
+    public function getLoggedUserId(): int;
 
 
     /**
