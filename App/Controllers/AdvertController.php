@@ -117,10 +117,10 @@ class AdvertController extends AControllerBase
     public function all(): Response
     {
         $dataSent = [];
-        if (!isset($page)) {
-            $page = 1;
+        if (isset($_GET['1'])) {
+            $page = $_GET['1'];
         } else {
-            $page++;
+            $page = 1;
         }
         $dataSent['page'] = $page;
         $dataGet = $this->app->getRequest()->getPost();
@@ -141,10 +141,12 @@ class AdvertController extends AControllerBase
             $dataSent['count'] = $this->getCounfOfCategoryAdverts($dataGet);
             return $this->html($dataSent);
         }
-        $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: 100);
+        $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: 1,offset: $page-1);
+        //todo uprav offset
         $dataSent['text'] = 'Najnovšie inzeráty';
         $dataSent['adverts'] = $adverts;
         $dataSent['count'] = $this->getCounfOfAllAdverts();
+        $dataSent['pagination'] = $this->createPagination($page, $dataSent['count']);
         return $this->html($dataSent);
     }
 
@@ -176,4 +178,36 @@ class AdvertController extends AControllerBase
     }
 
 
+    private function createPagination($current_page, $total_pages) {
+        $pagination = '<nav aria-label="Page navigation example"><ul class="pagination">';
+
+        // Previous button
+        if ($current_page > 1) {
+            $url = $this->url("advert.all", ['newest', $current_page-1]);
+            $pagination .= '<li class="page-item"><a class="page-link" href="' . $url .'  " tabindex="-1">Predošlá</a></li>';
+        } else {
+            $pagination .= '<li class="page-item disabled"><a class="page-link" tabindex="-1">Predošlá</a></li>';
+        }
+
+        // Page numbers
+        for ($i = 1; $i <= $total_pages; $i++) {
+            if ($i == $current_page) {
+                $pagination .= '<li class="page-item active"><a class="page-link">' . $i . '</a></li>';
+            } else {
+                $url = $this->url("advert.all", ['newest', $i]);
+                $pagination .= '<li class="page-item"><a class="page-link" href="' . $url . '">' . $i . '</a></li>';
+            }
+        }
+
+        // Next button
+        if ($current_page < $total_pages) {
+            $url = $this->url("advert.all", ['newest', $current_page+1]);
+            $pagination .= '<li class="page-item"><a class="page-link" href="' . $url . ' ">Ďalšia</a></li>';
+        } else {
+            $pagination .= '<li class="page-item disabled"><a class="page-link" href="#">Ďalšia</a></li>';
+        }
+
+        $pagination .= '</ul></nav>';
+        return $pagination;
+    }
 }
