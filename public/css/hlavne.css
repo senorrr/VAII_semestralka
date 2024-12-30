@@ -185,21 +185,7 @@ footer {
     margin: 0;
 }
 
-.btn:hover, .btn:focus {
-    background-color: #0c5da5;
-    color: white;
-}
-
-.btn-danger {
-    background-color: rgb(220, 53, 69) !important;
-}
-
-.btn-danger:hover, .btn-danger:focus {
-    background-color: rgb(204, 35, 51) !important;
-}
-
-form .btn {
-    margin-top: 3px;
+.btn-primary {
     background-color: #0e79d6;
     color: white;
 }
@@ -260,13 +246,6 @@ a {
     text-decoration: none;
 }
 
-.vymaz-but {
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
 .url-input {
     padding: 2px 0 2px;
 }
@@ -277,7 +256,6 @@ a {
     margin: auto;
     object-fit: contain;
 }
-
 
 
 .carousel-control-prev-icon, .carousel-control-next-icon {

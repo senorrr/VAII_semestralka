@@ -50,9 +50,9 @@
                     <small id="passwordHelp" class="form-text text-vypis"></small>
                 </div>
 
-                <div class="text-center">
+                <div class="text-center mt-1">
                     <button name="remove" type="submit" class="btn btn-danger">Vymaž účet</button>
-                    <button name="submit" type="submit" class="btn " id="submitBtn">Uložiť zmeny</button>
+                    <button name="submit" type="submit" class="btn btn-primary" id="submitBtn">Uložiť zmeny</button>
                 </div>
             </form>
         </div>

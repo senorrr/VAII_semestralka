@@ -26,7 +26,6 @@
                            id="surname"
                            value="<?= ($data!=null) && (sizeof($data)>1) ? $data['surname'] : '' ?>">
                     <small id="surnameHelp" class="form-text text-vypis"></small>
-
                 </div>
 
                 <div class="form-group">
@@ -48,7 +47,7 @@
                     <h3>Registráciou súhlasíte so spracovaním osobných údajov</h3>
                 </div>
                 <div class="text-center">
-                    <button name="submit" type="submit" class="btn" id="submitBtn">Vytvoriť účet</button>
+                    <button name="submit" type="submit" class="btn btn-primary" id="submitBtn">Vytvoriť účet</button>
                 </div>
             </form>
         </div>

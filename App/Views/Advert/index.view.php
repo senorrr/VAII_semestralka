@@ -75,7 +75,7 @@ use App\Models\Village;
             <h3 class="col"><?=$advert->getViews()?></h3>
         </div>
         <div>
-            <button class="btn btn-primary ms-3">Rezervuj</button>
+            <button class="btn btn-success ms-3">Rezervuj</button>
             <?php
                 if ($auth->getLoggedUserId() == $advert->getOwnerId()) {
                     echo '<button class="btn btn-primary ms-3">Edituj</button>';

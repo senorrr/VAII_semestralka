@@ -24,9 +24,9 @@ use App\Config\Configuration;
                     <label for="password">Heslo</label>
                     <input name="password" type="password" required class="form-control minSirka" id="password" placeholder="Zadajte heslo">
                 </div>
-                <div class="text-center">
-                    <button name="submit" type="submit" class="btn btn-block">Prihlás</button>
-                    <button onclick="window.location.href='<?= $link->url("auth.register")?>' " type="button" class="btn btn-block">Vytvoriť nový účet</button>
+                <div class="text-center mt-1">
+                    <button name="submit" type="submit" class="btn btn-primary">Prihlás</button>
+                    <button onclick="window.location.href='<?= $link->url("auth.register")?>' " type="button" class="btn btn-primary">Vytvoriť nový účet</button>
                 </div>
             </form>
         </div>

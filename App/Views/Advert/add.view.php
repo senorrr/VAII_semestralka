@@ -76,7 +76,7 @@ use App\Models\Category;
                 while (isset($data['photo'.$i])) {
                     echo '<div class="col url-input d-flex align-items-center">';
                     echo '<input type="url" name="photo' . $i . '" class="form-control" placeholder="Zadajte url adresu ' . $i . '. fotky" value="' . $data['photo'.$i] . '" required>';
-                    echo '<button class="vymaz-but" onclick="removePhotoField(this)">X</button>';
+                    echo '<button class="btn-danger" onclick="removePhotoField(this)">X</button>';
                     echo '</div>';
                     $i++;
                 }
@@ -88,7 +88,7 @@ use App\Models\Category;
             <textarea name="text"  maxlength="1500" class="form-control" id="description"
                       rows="5" placeholder="Zadajte popis"><?= ($data!=null) ? $data['text'] : '' ?></textarea>
         </div>
-        <div class="text-center">
+        <div class="text-center mt-1">
             <button type="submit" name="submit" class="btn btn-primary">Pridať Inzerát</button>
         </div>
     </form>
@@ -143,7 +143,7 @@ use App\Models\Category;
         newDiv.appendChild(newField);
 
         var removeButton = document.createElement('button');
-        removeButton.className = 'vymaz-but';
+        removeButton.className = 'btn btn-danger';
         removeButton.textContent = 'X';
         removeButton.setAttribute('onclick', 'removePhotoField(this)');
 
