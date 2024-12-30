@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button name="remove" type="submit" class="btn bg-danger">Vymaž účet</button>
+                    <button name="remove" type="submit" class="btn btn-danger">Vymaž účet</button>
                     <button name="submit" type="submit" class="btn " id="submitBtn">Uložiť zmeny</button>
                 </div>
             </form>

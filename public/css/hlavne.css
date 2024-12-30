@@ -190,6 +190,14 @@ footer {
     color: white;
 }
 
+.btn-danger {
+    background-color: rgb(220, 53, 69) !important;
+}
+
+.btn-danger:hover, .btn-danger:focus {
+    background-color: rgb(204, 35, 51) !important;
+}
+
 form .btn {
     margin-top: 3px;
     background-color: #0e79d6;
@@ -294,4 +302,5 @@ a {
 .col-inzerat {
     margin-right: 25px;
 }
+
 

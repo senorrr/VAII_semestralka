@@ -79,7 +79,7 @@ use App\Models\Village;
             <?php
                 if ($auth->getLoggedUserId() == $advert->getOwnerId()) {
                     echo '<button class="btn btn-primary ms-3">Edituj</button>';
-                    echo '<button class="btn bg-danger ms-3">Vymaž</button>';
+                    echo '<button class="btn btn-danger ms-3">Vymaž</button>';
                 }
             ?>
         </div>
