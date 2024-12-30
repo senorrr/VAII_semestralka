@@ -74,14 +74,16 @@ use App\Models\Village;
             <h3 class="col-3 col-sm-2 col-lg-1">Videnia: </h3>
             <h3 class="col"><?=$advert->getViews()?></h3>
         </div>
-        <div>
-            <button class="btn btn-success ms-3">Rezervuj</button>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-success me-1">Rezervuj</button>
             <?php
-                if ($auth->getLoggedUserId() == $advert->getOwnerId()) {
-                    echo '<button class="btn btn-primary ms-3">Edituj</button>';
-                    echo '<button class="btn btn-danger ms-3">Vymaž</button>';
+                if ($auth->getIfLogged() && $auth->getLoggedUserId() == $advert->getOwnerId()) {
+                    echo '<button class="btn btn-primary me-1">Edituj</button>';
+                    echo '<button class="btn btn-danger">Vymaž</button>';
                 }
             ?>
+            <!--<button class="btn btn-info">Kontaktuj</button>
+
         </div>
     </div>
 </div>

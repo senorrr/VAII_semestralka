@@ -114,6 +114,11 @@ class DbAuthenticator implements IAuthenticator
         return $_SESSION['user'];
     }
 
+    public function getIfLogged(): bool
+    {
+        return isset($_SESSION['user']);
+    }
+
 
     /**
      * Get the context of the logged-in user
