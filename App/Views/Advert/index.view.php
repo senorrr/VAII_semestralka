@@ -13,11 +13,12 @@ use App\Models\Village;
     $advert = Advert::getOne($_GET['id']);
     $images = Photo::getAll('`advert` LIKE ?', [$_GET['id']]);
     ?>
-    <h2 class="text-center"><?= $advert->getTitle()?> - <?= $advert->getDateOfCreate()?></h2>
-    <div class="mx-5 pozadieInzerat">
-        <h3>Kategória: <?=Category::getOne($advert->getCategoryId())->getName()?></h3>
-        <h3>Lokalita: <?=Village::getOne($advert->getVillageId())->getName()?></h3>
-        <h3>Cena: <?=$advert->getPrice()?>€</h3>
+    <h2 class="text-center"><?= $advert->getTitle()?> - <?= date('d.m.Y', strtotime($advert->getDateOfCreate()))?></h2>
+    <div class="pozadieInzerat">
+        <div class="row d-flex justify-content-around inzerat-oramovanie">
+            <h3 class="col-auto">Kategória: <?=Category::getOne($advert->getCategoryId())->getName()?></h3>
+            <h3 class="col-auto">Číslo inzerátu: <?= $advert->getId()?></h3>
+        </div>
         <?php
         if (sizeof($images) > 0) {
             ?>
@@ -51,8 +52,16 @@ use App\Models\Village;
             <?php
         }
         ?>
-        <p>
+        <p class="mx-2">
             <?=$advert->getText()?>
         </p>
+        <div class="row inzerat-oramovanie">
+            <h3 class="col-3 col-sm-2 col-lg-1">Lokalita:</h3>
+            <h3 class="col"><?=Village::getOne($advert->getVillageId())->getName()?></h3>
+        </div>
+        <div class="row inzerat-oramovanie">
+            <h3 class="col-3 col-sm-2 col-lg-1">Cena: </h3>
+            <h3 class="col"><?=$advert->getPrice()?>€</h3>
+        </div>
     </div>
 </div>

@@ -54,7 +54,7 @@ if (isset($_GET["0"])) {
                         }
                         ?>
                         <div class="card-footer text-muted text-center">
-                            <small>Vytvorený: <?= $advert->getDateOfCreate() ?></small>
+                            <small>Vytvorený: <?= date('d.m.Y H:i', strtotime($advert->getDateOfCreate())) ?></small>
                             <small>Zobrazenia: <?= $advert->getViews() ?></small>
                         </div>
                     </div>

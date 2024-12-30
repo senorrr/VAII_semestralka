@@ -36,7 +36,7 @@ class Advert extends Model
      */
     public function getDateOfCreate()
     {
-        return date('d.m.Y', strtotime($this->dateOfCreate));
+        return $this->dateOfCreate;
     }
 
 

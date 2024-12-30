@@ -242,7 +242,7 @@ h3 {
 
 .pozadieInzerat {
     background-color: white;
-    padding: 0.5em 0.5em;
+    padding: 0 0.5em 0.5em;
     border: #00437e 2px solid;
     border-radius: 3px;
 }
@@ -270,10 +270,7 @@ a {
     object-fit: contain;
 }
 
-.carousel-inner {
-    min-height: 600px;
-    min-width: 1000px;
-}
+
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
     border-radius: 7px;
@@ -284,3 +281,17 @@ a {
     background-color: gray;
     opacity: 40%;
 }
+
+.inzerat-oramovanie {
+    border: solid 2px gray;
+    border-radius: 5px;
+    margin: 4px 10px 4px;
+    padding-top: 8px;
+    background-color: #00437e;
+    color: white;
+}
+
+.col-inzerat {
+    margin-right: 25px;
+}
+
