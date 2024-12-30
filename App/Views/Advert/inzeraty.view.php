@@ -27,7 +27,7 @@ if (isset($_GET["0"])) {
     </div>
     <div class="row">
         <?php foreach ($adverts as $advert): ?>
-            <div class="col-lg-4">
+            <div class="col-lg-4 align-items-stretch">
                 <a href="<?= $link->url('advert.index', ['id' => $advert->getId()]) ?>" class="text-decoration-none">
                     <div class="card inzeratKarta">
                         <h2 class="card-title"><?= $advert->getTitle() ?></h2>

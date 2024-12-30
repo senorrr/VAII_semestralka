@@ -13,7 +13,7 @@ use App\Models\Village;
     $advert = Advert::getOne($_GET['id']);
     $images = Photo::getAll('`advert` LIKE ?', [$_GET['id']]);
     ?>
-    <h1 class="text-center"><?= $advert->getTitle()?></h1>
+    <h2 class="text-center"><?= $advert->getTitle()?> - <?= $advert->getDateOfCreate()?></h2>
     <div class="mx-5 pozadieInzerat">
         <h3>Kategória: <?=Category::getOne($advert->getCategoryId())->getName()?></h3>
         <h3>Lokalita: <?=Village::getOne($advert->getVillageId())->getName()?></h3>

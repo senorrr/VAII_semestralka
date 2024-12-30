@@ -36,7 +36,7 @@ class Advert extends Model
      */
     public function getDateOfCreate()
     {
-        return $this->dateOfCreate;
+        return date('d.m.Y', strtotime($this->dateOfCreate));
     }
 
 
@@ -120,6 +120,56 @@ class Advert extends Model
         $this->price = $price;
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function getVillageId()
+    {
+        return $this->villageId;
+    }
+
+    /**
+     * @param mixed $villageId
+     */
+    public function setVillageId($villageId): void
+    {
+        $this->villageId = $villageId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+
+    /**
+     * @param mixed $categoryId
+     */
+    public function setCategoryId($categoryId): void
+    {
+        $this->categoryId = $categoryId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * @param mixed $views
+     */
+    public function setViews($views): void
+    {
+        $this->views = $views;
+    }
+
+
     protected ?bool $monday;
     protected ?bool $tuesday;
     protected ?bool $wednesday;
@@ -196,54 +246,6 @@ class Advert extends Model
     public function setSunday(?bool $sunday): void
     {
         $this->sunday = $sunday;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVillageId()
-    {
-        return $this->villageId;
-    }
-
-    /**
-     * @param mixed $villageId
-     */
-    public function setVillageId($villageId): void
-    {
-        $this->villageId = $villageId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCategoryId()
-    {
-        return $this->categoryId;
-    }
-
-    /**
-     * @param mixed $categoryId
-     */
-    public function setCategoryId($categoryId): void
-    {
-        $this->categoryId = $categoryId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getViews()
-    {
-        return $this->views;
-    }
-
-    /**
-     * @param mixed $views
-     */
-    public function setViews($views): void
-    {
-        $this->views = $views;
     }
 
 
