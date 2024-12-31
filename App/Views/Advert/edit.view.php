@@ -64,7 +64,7 @@ use App\Models\Village;
         </div>
         <div class="row inzerat-oramovanie">
             <h3 class="col-3 col-sm-2 col-lg-1">Lokalita:</h3>
-            <h3 class="col"><?=Village::getOne($advert->getVillageId())->getName()?></h3>
+            <input class="col" value="<?=Village::getOne($advert->getVillageId())->getName()?>">
         </div>
         <div class="row inzerat-oramovanie">
             <h3 class="col-3 col-sm-2 col-lg-1">Cena: </h3>

@@ -42,8 +42,12 @@ class AdvertController extends AControllerBase
 
     public function edit(): Response
     {
-        if ($this->app->getAuth()->isLogged())
-        return $this->html();
+        $advertId = $this->app->getRequest()->getGet()['0'];
+        $advert = Advert::getOne($advertId);
+        if ($this->app->getAuth()->isLogged() && $this->app->getAuth()->getLoggedUserId() == $advert->getOwnerId()) {
+            return $this->html($advertId);
+        }
+        return $this->redirect($this->url(('home.index')));
     }
 
     public function add(): Response

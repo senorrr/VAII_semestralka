@@ -78,7 +78,7 @@ use App\Models\Village;
             <button class="btn btn-success me-1">Rezervuj</button>
             <?php
                 if ($auth->isLogged() && $auth->getLoggedUserId() == $advert->getOwnerId()) {
-                    echo '<button class="btn btn-primary me-1" onclick="window.location.href=\'' . $link->url('advert.add', ['edit', $advert]) . '\'">Edituj</button>';
+                    echo '<button class="btn btn-primary me-1" onclick="window.location.href=\'' . $link->url('advert.edit', [$advert->getId()]) . '\'">Edituj</button>';
                     echo '<button class="btn btn-danger">Vymaž</button>';
 
                 }
