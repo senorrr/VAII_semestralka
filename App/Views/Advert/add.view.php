@@ -94,7 +94,8 @@ use App\Models\Category;
         <div class="form-group">
             <label for="description">Popis</label>
             <textarea name="text"  maxlength="1500" class="form-control" id="description"
-                      rows="5" placeholder="Zadajte popis"><?= ($data!=null) ? $data['text'] : '' ?></textarea>
+                      rows="5" placeholder="Zadajte popis"><?= ($data!=null) ? $data['text'] : '' ?>
+            </textarea>
         </div>
         <div class="text-center mt-1">
             <button type="submit" name="submit" class="btn btn-primary">Pridať Inzerát</button>
