@@ -46,7 +46,8 @@ class AdvertController extends AControllerBase
             return $this->html();
         }
 
-        if (isset($formData['submit']) && isset($formData['title']) && isset($formData['text']) &&  isset($formData['category']) && isset($formData['price'])  && isset($formData['city'])) {
+        if (isset($formData['submit']) && isset($formData['title']) && isset($formData['text']) &&
+            isset($formData['category']) && isset($formData['price'])  && isset($formData['city'])) {
             if ($formData['price'] < 0) {
                 $formData += ['message' => 'Cena nemôže byť záporné číslo!'];
                 return $this->html($formData);
@@ -158,8 +159,8 @@ class AdvertController extends AControllerBase
     private function getCounfOfCategoryAdverts($catId)
     {
         $con = Connection::connect();
-        $stmt = $con->prepare("SELECT count(*) FROM `adverts` where `categoryId` like $catId");
-        $stmt->execute();
+        $stmt = $con->prepare("SELECT count(*) FROM `adverts` where `categoryId` like ?");
+        $stmt->execute([$catId]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['count(*)'];
     }
@@ -167,8 +168,8 @@ class AdvertController extends AControllerBase
     private function getCounfOfTitleAdverts($title)
     {
         $con = Connection::connect();
-        $stmt = $con->prepare("SELECT count(*) FROM `adverts` where `title` like $title");
-        $stmt->execute();
+        $stmt = $con->prepare("SELECT count(*) FROM `adverts` where `title` like ?");
+        $stmt->execute([$title]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['count(*)'];
     }
