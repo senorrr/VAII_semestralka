@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\App;
 use App\Core\AControllerBase;
 use App\Core\DB\Connection;
 use App\Core\Responses\Response;
@@ -116,6 +115,7 @@ class AdvertController extends AControllerBase
 
     public function all(): Response
     {
+        $inzeratyNaStrane = 20; //pocet inzeratov na jednu stranu
         $dataSent = [];
         if (isset($_GET['1'])) {
             $page = $_GET['1'];
@@ -125,28 +125,33 @@ class AdvertController extends AControllerBase
         $dataSent['page'] = $page;
         $dataGet = $this->app->getRequest()->getPost();
         if (sizeof($dataGet) > 0) {
-            $vyhladanie = '%' . $dataGet['search'] . '%';
-            $adverts = Advert::getAll(whereClause: '`title` like ?', whereParams: [$vyhladanie], limit: 100);
-            $dataSent['text'] = 'Inzeráty pre hľadanie: ' . $dataGet['search'];
-            $dataSent['adverts'] = $adverts;
-            $dataSent['count'] = $this->getCounfOfTitledverts($vyhladanie);
-            return $this->html($dataSent);
+            if (strlen($dataGet['search']) <=50) {
+                $vyhladanie = '%' . $dataGet['search'] . '%';
+                $adverts = Advert::getAll(whereClause: '`title` like ?', whereParams: [$vyhladanie], limit: 20);
+                $dataSent['text'] = 'Inzeráty pre hľadanie: ' . $dataGet['search'];
+                $dataSent['adverts'] = $adverts;
+                $dataSent['count'] = $this->getCounfOfTitleAdverts($vyhladanie);
+                return $this->html($dataSent);
+            }
+            return $this->redirect('index');
         }
         $dataGet = $this->app->getRequest()->getGet()['0'];
 
         if (is_numeric($dataGet)) {
-            $adverts = Advert::getAll(whereClause: '`categoryId` like ?', whereParams: [$dataGet], limit: 100);
-            $dataSent['text'] = 'Inzeráty pre kategóriu ' . Category::getOne($dataGet)->getName();
+            $adverts = Advert::getAll(whereClause: '`categoryId` like ?', whereParams: [$dataGet],
+                limit: $inzeratyNaStrane,offset: ($page-1) * $inzeratyNaStrane);
+            $category = Category::getOne($dataGet);
+            $dataSent['text'] = 'Inzeráty pre kategóriu ' . $category->getName();
             $dataSent['adverts'] = $adverts;
             $dataSent['count'] = $this->getCounfOfCategoryAdverts($dataGet);
+            $dataSent['pagination'] = $this->createPagination($page, $dataSent['count']/$inzeratyNaStrane, $category->getId());
             return $this->html($dataSent);
         }
-        $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: 1,offset: $page-1);
-        //todo uprav offset
+        $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: $inzeratyNaStrane,offset: ($page-1) * $inzeratyNaStrane);
         $dataSent['text'] = 'Najnovšie inzeráty';
         $dataSent['adverts'] = $adverts;
         $dataSent['count'] = $this->getCounfOfAllAdverts();
-        $dataSent['pagination'] = $this->createPagination($page, $dataSent['count']);
+        $dataSent['pagination'] = $this->createPagination($page, $dataSent['count']/$inzeratyNaStrane, 'newest');
         return $this->html($dataSent);
     }
 
@@ -159,7 +164,7 @@ class AdvertController extends AControllerBase
         return $result['count(*)'];
     }
 
-    private function getCounfOfTitledverts($title)
+    private function getCounfOfTitleAdverts($title)
     {
         $con = Connection::connect();
         $stmt = $con->prepare("SELECT count(*) FROM `adverts` where `title` like $title");
@@ -178,14 +183,14 @@ class AdvertController extends AControllerBase
     }
 
 
-    private function createPagination($current_page, $total_pages) {
+    private function createPagination($current_page, $total_pages, $type) {
         $range = 2;
-
+        $total_pages = ceil($total_pages);
         $pagination = '<nav aria-label="Page navigation example"><ul class="pagination">';
 
         // tlacidlo predosle
         if ($current_page > 1) {
-            $url = $this->url("advert.all", ['newest', $current_page-1]);
+            $url = $this->url("advert.all", [$type, $current_page-1]);
             $pagination .= '<li class="page-item"><a class="page-link" href="' . $url .'  " tabindex="-1">Predošlá</a></li>';
         } else {
             $pagination .= '<li class="page-item disabled"><a class="page-link" tabindex="-1">Predošlá</a></li>';
@@ -193,7 +198,7 @@ class AdvertController extends AControllerBase
 
         //prva strana
         if ($current_page > $range + 1) {
-            $url = $this->url("advert.all", ['newest']);
+            $url = $this->url("advert.all", [$type]);
             $pagination .= '<li class="page-item"><a class="page-link" href=" '. $url .' ">1</a></li>';
             if ($current_page > $range + 2) {
                 $pagination .= '<li class="page-item disabled"><a class="page-link" >...</a></li>';
@@ -205,7 +210,7 @@ class AdvertController extends AControllerBase
             if ($i == $current_page) {
                 $pagination .= '<li class="page-item active"><a class="page-link">' . $i . '</a></li>';
             } else {
-                $url = $this->url("advert.all", ['newest', $i]);
+                $url = $this->url("advert.all", [$type, $i]);
                 $pagination .= '<li class="page-item"><a class="page-link" href="' . $url . '">' . $i . '</a></li>';
             }
         }
@@ -215,14 +220,14 @@ class AdvertController extends AControllerBase
             if ($current_page < $total_pages - $range - 1) {
                 $pagination .= '<li class="page-item disabled"><a class="page-link">...</a></li>';
             }
-            $url = $this->url("advert.all", ['newest', $total_pages]);
+            $url = $this->url("advert.all", [$type, $total_pages]);
             $pagination .= '<li class="page-item"><a class="page-link" href="' . $url . '">' . $total_pages . '</a></li>';
         }
 
 
         // dalsia strana tlacidlo
         if ($current_page < $total_pages) {
-            $url = $this->url("advert.all", ['newest', $current_page+1]);
+            $url = $this->url("advert.all", [$type, $current_page+1]);
             $pagination .= '<li class="page-item"><a class="page-link" href="' . $url . ' ">Ďalšia</a></li>';
         } else {
             $pagination .= '<li class="page-item disabled"><a class="page-link" href="#">Ďalšia</a></li>';
