@@ -42,31 +42,38 @@ use App\Models\Category;
             <label for="monday">Vyberte dni dostupnosti</label><br>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="monday">Pondelok</label>
-                <input class="form-check-input" type="checkbox" id="monday" name="monday" <?= ($data!= null && isset($data['monday']) && $data['monday']=="on" ? "checked" : '') ?>>
+                <input class="form-check-input" type="checkbox" id="monday" name="monday" <?= ($data!= null &&
+                isset($data['monday']) && $data['monday']=="on" ? "checked" : '') ?>>
             </div>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="tuesday">Utorok</label>
-                <input class="form-check-input" type="checkbox" id="tuesday" name="tuesday" <?= ($data!= null && isset($data['tuesday']) && $data['tuesday']=="on" ? "checked" : '') ?>>
+                <input class="form-check-input" type="checkbox" id="tuesday" name="tuesday" <?= ($data!= null &&
+                isset($data['tuesday']) && $data['tuesday']=="on" ? "checked" : '') ?>>
             </div>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="wednesday">Streda</label>
-                <input class="form-check-input" type="checkbox" id="wednesday" name="wednesday" <?= ($data!= null && isset($data['wednesday']) && $data['wednesday']=="on" ? "checked" : '') ?>>
+                <input class="form-check-input" type="checkbox" id="wednesday" name="wednesday" <?= ($data!= null &&
+                isset($data['wednesday']) && $data['wednesday']=="on" ? "checked" : '') ?>>
             </div>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="thursday">Štvrtok</label>
-                <input class="form-check-input" type="checkbox" id="thursday" name="thursday" <?= ($data!= null && isset($data['thursday']) && $data['thursday']=="on" ? "checked" : '') ?>>
+                <input class="form-check-input" type="checkbox" id="thursday" name="thursday" <?= ($data!= null &&
+                isset($data['thursday']) && $data['thursday']=="on" ? "checked" : '') ?>>
             </div>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="friday">Piatok</label>
-                <input class="form-check-input" type="checkbox" id="friday" name="friday" <?= ($data!= null && isset($data['friday']) && $data['friday']=="on" ? "checked" : '') ?>>
+                <input class="form-check-input" type="checkbox" id="friday" name="friday" <?= ($data!= null &&
+                isset($data['friday']) && $data['friday']=="on" ? "checked" : '') ?>>
             </div>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="saturday">Sobota</label>
-                <input class="form-check-input" type="checkbox" id="saturday" name="saturday" <?= ($data!= null && isset($data['saturday']) && $data['saturday']=="on" ? "checked" : '') ?>>
+                <input class="form-check-input" type="checkbox" id="saturday" name="saturday" <?= ($data!= null &&
+                isset($data['saturday']) && $data['saturday']=="on" ? "checked" : '') ?>>
             </div>
             <div class="form-check form-check-inline">
                 <label class="form-check-label" for="sunday">Nedeľa</label>
-                <input class="form-check-input" type="checkbox" id="sunday" name="sunday" <?= ($data!= null && isset($data['sunday']) && $data['sunday']=="on" ? "checked" : '') ?>>
+                <input class="form-check-input" type="checkbox" id="sunday" name="sunday" <?= ($data!= null &&
+                isset($data['sunday']) && $data['sunday']=="on" ? "checked" : '') ?>>
             </div>
         </div>
         <div class="form-group"  id="photos">
@@ -75,7 +82,8 @@ use App\Models\Category;
                 $i = 1;
                 while (isset($data['photo'.$i])) {
                     echo '<div class="col url-input d-flex align-items-center">';
-                    echo '<input type="url" name="photo' . $i . '" class="form-control" placeholder="Zadajte url adresu ' . $i . '. fotky" value="' . $data['photo'.$i] . '" required>';
+                    echo '<input type="url" name="photo' . $i . '" class="form-control" placeholder="Zadajte url adresu '
+                        . $i . '. fotky" value="' . $data['photo'.$i] . '" required>';
                     echo '<button class="btn-danger" onclick="removePhotoField(this)">X</button>';
                     echo '</div>';
                     $i++;

@@ -8,7 +8,11 @@
     border-color: #00437e;
     border-style: solid;
     border-radius: 10px;
+    h2 {
+        color:white;
+    }
 }
+
 
 
 

@@ -18,6 +18,7 @@ class AdvertController extends AControllerBase
     {
         switch ($action) {
             case 'add' :
+            case 'edit' :
                 return $this->app->getAuth()->isLogged();
             case 'index':
             case 'all':
@@ -39,12 +40,19 @@ class AdvertController extends AControllerBase
         return $this->html();
     }
 
+    public function edit(): Response
+    {
+        if ($this->app->getAuth()->isLogged())
+        return $this->html();
+    }
+
     public function add(): Response
     {
         $formData = $this->app->getRequest()->getPost();
         if (sizeof($formData) == 0) {
             return $this->html();
         }
+
 
         if (isset($formData['submit']) && isset($formData['title']) && isset($formData['text']) &&
             isset($formData['category']) && isset($formData['price'])  && isset($formData['city'])) {

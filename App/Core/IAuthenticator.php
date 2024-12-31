@@ -36,8 +36,6 @@ interface IAuthenticator
     public function getLoggedUserEmail(): string;
     public function getLoggedUserPassword(): string;
     public function getLoggedUserId(): int;
-    public function getIfLogged(): bool;
-
 
     /**
      * Return a context of logged user, e.g. user class instance

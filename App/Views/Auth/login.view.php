@@ -18,15 +18,18 @@ use App\Config\Configuration;
             <form method="post" action="<?= $link->url("login") ?>">
                 <div class="form-signin" >
                     <label for="email">Email</label>
-                    <input name="login" type="email" required autofocus class="form-control minSirka" id="email" placeholder="Zadajte email" value="<?= ($data['login'] ?? '')?>">
+                    <input name="login" type="email" required autofocus class="form-control minSirka" id="email"
+                           placeholder="Zadajte email" value="<?= ($data['login'] ?? '')?>">
                 </div>
                 <div class="form-signin">
                     <label for="password">Heslo</label>
-                    <input name="password" type="password" required class="form-control minSirka" id="password" placeholder="Zadajte heslo">
+                    <input name="password" type="password" required class="form-control minSirka" id="password"
+                           placeholder="Zadajte heslo">
                 </div>
                 <div class="text-center mt-1">
                     <button name="submit" type="submit" class="btn btn-primary">Prihlás</button>
-                    <button onclick="window.location.href='<?= $link->url("auth.register")?>' " type="button" class="btn btn-primary">Vytvoriť nový účet</button>
+                    <button onclick="window.location.href='<?= $link->url("auth.register")?>' "
+                            type="button" class="btn btn-primary">Vytvoriť nový účet</button>
                 </div>
             </form>
         </div>
