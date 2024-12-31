@@ -1,13 +1,9 @@
-/*
-    Toto je hlavny css najma su tu pravidla pre navbar(header) a footer
- */
-
 * {
     font-family: "Arial","Gill Sans","system-ui" ;
 }
 
 body {
-    background-color: #65cbe9 ;
+    background-color: #D1E8E2;
 }
 
 header h2 {
