@@ -50,8 +50,8 @@ class AdvertController extends AControllerBase
             $advertId = $this->app->getRequest()->getGet()['0'];
             if ($advertId != null) {
                 $photo = new Photo();
-                $photo->setAdvert($advertId);
-                $photo->setUrl($formdata['submitPhoto']);
+                $photo->setAdvertId($advertId);
+                $photo->setUrl($formdata['url']);
                 $photo->save();
                 return $this->redirect($this->url('advert.index', ['id' => $advertId]));
             }
@@ -128,7 +128,7 @@ class AdvertController extends AControllerBase
                 if (!empty($formData['photo' . $i])) {
                     $photo = new Photo();
                     $photo->setUrl($formData['photo' . $i]);
-                    $photo->setAdvert($advert->getId());
+                    $photo->setAdvertId($advert->getId());
                     $photo->save();
                 }
                 $i++;

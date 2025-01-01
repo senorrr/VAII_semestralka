@@ -38,7 +38,7 @@ use App\Models\Village;
                             </div>
                         </div>
                         <?php
-                        $images = Photo::getAll('`advert` LIKE ?', [$advert->getId()]);
+                        $images = Photo::getAll('`advertId` LIKE ?', [$advert->getId()]);
                         if (sizeof($images) > 0) {
                             echo '<img src="'. $images[0]->getUrl() .'">';
                         }

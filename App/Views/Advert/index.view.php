@@ -14,7 +14,7 @@ use App\Models\Village;
 <div class="container">
     <?php
     $advert = Advert::getOne($_GET['id']);
-    $images = Photo::getAll('`advert` LIKE ?', [$_GET['id']]);
+    $images = Photo::getAll('`advertId` LIKE ?', [$_GET['id']]);
     ?>
     <h2 class="text-center"><?= $advert->getTitle()?> - <?= date('d.m.Y', strtotime($advert->getDateOfCreate()))?></h2>
     <div class="pozadieInzerat">

@@ -10,11 +10,6 @@ class Photo extends Model
     protected $id;
     protected $advertId;
 
-    public static function getPkColumnName(): string
-    {
-        return 'url';
-    }
-
     /**
      * @return mixed
      */

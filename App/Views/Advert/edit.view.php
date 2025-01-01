@@ -14,7 +14,7 @@ use App\Models\Village;
 <div class="container">
     <?php
     $advert = Advert::getOne($data);
-    $images = Photo::getAll('`advert` LIKE ?', [$data]);
+    $images = Photo::getAll('`advertId` LIKE ?', [$data]);
     ?>
     <h2 class="text-center"><?= $advert->getTitle()?> - <?= date('d.m.Y', strtotime($advert->getDateOfCreate()))?></h2>
     <div class="pozadieInzerat">
@@ -68,7 +68,7 @@ use App\Models\Village;
         ?>
         <form action="<?=$link->url('advert.edit', [$advert->getId()])?>" method="post">
             <div class="inzerat-oramovanie-edit d-flex align-items-center">
-                <input class="form-control ms-3" type="url" placeholder="Zadajte url adresu">
+                <input class="form-control ms-3" type="url" placeholder="Zadajte url adresu" name="url" id="url">
                 <button class="btn btn-primary ms-2" type="submit" name="submitPhoto">Pridaj fotku</button>
                 <button class="btn btn-danger mx-2" type="submit" name="submitRemovePhoto">Odstráň fotku</button>
             </div>
