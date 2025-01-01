@@ -25,7 +25,7 @@ use App\Models\Village;
                     <?php foreach (Category::getAll() as $category): ?>
                         <option <?php if ($category->getId() == $advert->getCategoryId()) {
                             echo 'selected';
-                        }?>><?= $category->getName() ?></option>
+                        } ?>><?= $category->getName() ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -54,11 +54,11 @@ use App\Models\Village;
                         <?php $i++?>
                     <?php endforeach; ?>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <button id="prev" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <button id="next" class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -70,7 +70,7 @@ use App\Models\Village;
             <div class="inzerat-oramovanie-edit d-flex align-items-center">
                 <input class="form-control ms-3" type="url" placeholder="Zadajte url adresu" name="url" id="url">
                 <button class="btn btn-primary ms-2" type="submit" name="submitPhoto">Pridaj fotku</button>
-                <button class="btn btn-danger mx-2" type="submit" name="submitRemovePhoto">Odstráň fotku</button>
+                <button class="btn btn-danger mx-2" type="submit" name="submitRemovePhoto">Načítaj url fotky</button>
             </div>
         </form>
         <div class="m-2">
@@ -100,3 +100,32 @@ use App\Models\Village;
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const removePhotoButton = document.querySelector('button[name="submitRemovePhoto"]');
+        const urlInput = document.querySelector('input[name="url"]');
+
+        removePhotoButton.addEventListener('click', function(event) {
+            const activeItem = document.querySelector('.carousel-item.active img');
+            if (activeItem && urlInput.value !== activeItem.src) {
+                event.preventDefault();
+                urlInput.value = activeItem.src;
+                removePhotoButton.textContent = 'Odstráň';
+            }
+        });
+
+        const prev = document.querySelector('.carousel-control-prev');
+        prev.addEventListener('click', function() {
+            removePhotoButton.textContent = 'Načítaj url fotky';
+            urlInput.value = '';
+        });
+
+        const next = document.querySelector('.carousel-control-next');
+        next.addEventListener('click', function() {
+            removePhotoButton.textContent = 'Načítaj url fotky';
+            urlInput.value = '';
+        });
+    });
+
+</script>

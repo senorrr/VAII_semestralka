@@ -56,6 +56,15 @@ class AdvertController extends AControllerBase
                 return $this->redirect($this->url('advert.index', ['id' => $advertId]));
             }
         }
+
+        if (isset($formdata['submitRemovePhoto'])) {
+            $advertId = $this->app->getRequest()->getGet()['0'];
+            if ($advertId != null) {
+                $photo = Photo::getAll(whereClause: '`advertId` LIKE ? && `url` LIKE ?', whereParams: [$advertId, $formdata['url']])[0];
+                $photo->delete();
+                return $this->redirect($this->url('advert.index', ['id' => $advertId]));
+            }
+        }
         $advertId = $this->app->getRequest()->getGet()['0'];
         $advert = Advert::getOne($advertId);
         if ($this->app->getAuth()->isLogged() && $this->app->getAuth()->getLoggedUserId() == $advert->getOwnerId()) {
