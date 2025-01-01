@@ -51,18 +51,26 @@ class AdvertController extends AControllerBase
             if ($advertId != null) {
                 $photo = new Photo();
                 $photo->setAdvertId($advertId);
-                $photo->setUrl($formdata['url']);
-                $photo->save();
-                return $this->redirect($this->url('advert.index', ['id' => $advertId]));
+                if (ctype_space($formdata['url']) != '') {
+                    $photo->setUrl($formdata['url']);
+                    $photo->save();
+                    return $this->redirect($this->url('advert.index', ['id' => $advertId]));
+                } else {
+                    return $this->html($advertId);
+                }
             }
         }
 
         if (isset($formdata['submitRemovePhoto'])) {
             $advertId = $this->app->getRequest()->getGet()['0'];
             if ($advertId != null) {
-                $photo = Photo::getAll(whereClause: '`advertId` LIKE ? && `url` LIKE ?', whereParams: [$advertId, $formdata['url']])[0];
-                $photo->delete();
-                return $this->redirect($this->url('advert.index', ['id' => $advertId]));
+                if (ctype_space($formdata['url']) != '') {
+                    $photo = Photo::getAll(whereClause: '`advertId` LIKE ? && `url` LIKE ?', whereParams: [$advertId, $formdata['url']])[0];
+                    $photo->delete();
+                    return $this->redirect($this->url('advert.index', ['id' => $advertId]));
+                } else {
+                    return $this->html($advertId);
+                }
             }
         }
         $advertId = $this->app->getRequest()->getGet()['0'];

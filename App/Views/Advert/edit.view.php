@@ -102,6 +102,29 @@ use App\Models\Village;
 </div>
 
 <script>
+    //pridanie fotky
+    document.addEventListener('DOMContentLoaded', function() {
+        const pridaj = document.querySelector('button[name="submitPhoto"]');
+        pridaj.addEventListener('click', function(event) {
+            const urlInput = document.querySelector('input[name="url"]');
+            if (urlInput.value.trim() === '') {
+                event.preventDefault();
+            }
+        });
+
+    });
+
+    //ked zacnem editovat url adresu nech zmeni tlacidlo
+    document.addEventListener('DOMContentLoaded', function() {
+        const removePhotoButton = document.querySelector('button[name="submitRemovePhoto"]');
+        const urlInput = document.querySelector('input[name="url"]');
+
+        urlInput.addEventListener('input', function() {
+            removePhotoButton.textContent = 'Načítaj url fotky';
+        });
+    });
+
+    //zmenenie tlacidla podla toho ci je spravne nacitana url
     document.addEventListener('DOMContentLoaded', function() {
         const removePhotoButton = document.querySelector('button[name="submitRemovePhoto"]');
         const urlInput = document.querySelector('input[name="url"]');
@@ -112,6 +135,9 @@ use App\Models\Village;
                 event.preventDefault();
                 urlInput.value = activeItem.src;
                 removePhotoButton.textContent = 'Odstráň';
+            }
+            if (removePhotoButton.textContent !== 'Odstráň') {
+                event.preventDefault();
             }
         });
 
