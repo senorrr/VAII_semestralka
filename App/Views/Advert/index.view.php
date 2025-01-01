@@ -13,7 +13,11 @@ use App\Models\Village;
 ?>
 <div class="container">
     <div class="text-center text-vypis">
-        <?= @$data['message'] ?>
+        <?php
+        if (isset($data['message'])) {
+            echo $data['message'];
+        }
+        ?>
     </div>
     <?php
     $advert = Advert::getOne($data['id']);

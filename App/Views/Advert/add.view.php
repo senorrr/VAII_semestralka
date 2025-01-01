@@ -8,7 +8,11 @@ use App\Models\Category;
 <div class="container">
     <h2>Pridanie inzerátu</h2>
     <div class="text-center text-vypis">
-        <?= @$data['message'] ?>
+        <?php
+        if (isset($data['message'])) {
+            echo $data['message'];
+        }
+        ?>
     </div>
     <form action="<?=$link->url("advert.add")?>" method="post">
         <div class="form-group">

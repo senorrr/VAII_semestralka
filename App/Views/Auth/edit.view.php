@@ -9,8 +9,11 @@
         <div class="col-11 col-md-6 col-lg-5 gy-2">
             <h2>Vitaj, <?= $auth->getLoggedUserName();  $auth->getLoggedUserSurname()?> toto je tvoj profil</h2>
             <div class="text-center text-vypis">
-                <?= @$data['message'] ?>
-            </div>
+                <?php
+                if (isset($data['message'])) {
+                    echo $data['message'];
+                }
+                ?>            </div>
             <form action="<?= $link->url("auth.edit") ?>" method="post">
                 <div class="form-group">
                     <label for="name">Meno</label>
