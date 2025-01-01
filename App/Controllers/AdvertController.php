@@ -51,7 +51,7 @@ class AdvertController extends AControllerBase
             if ($advertId != null) {
                 $photo = new Photo();
                 $photo->setAdvertId($advertId);
-                if (ctype_space($formdata['url']) != '') {
+                if (trim($formdata['url']) != '') {
                     $photo->setUrl($formdata['url']);
                     $photo->save();
                     return $this->redirect($this->url('advert.index', ['id' => $advertId]));
@@ -64,7 +64,7 @@ class AdvertController extends AControllerBase
         if (isset($formdata['submitRemovePhoto'])) {
             $advertId = $this->app->getRequest()->getGet()['0'];
             if ($advertId != null) {
-                if (ctype_space($formdata['url']) != '') {
+                if (trim($formdata['url']) != '') {
                     $photo = Photo::getAll(whereClause: '`advertId` LIKE ? && `url` LIKE ?', whereParams: [$advertId, $formdata['url']])[0];
                     $photo->delete();
                     return $this->redirect($this->url('advert.index', ['id' => $advertId]));
@@ -73,6 +73,10 @@ class AdvertController extends AControllerBase
                 }
             }
         }
+        if (isset($formdata['submitAll'])) {
+            //todo tu som ostal
+        }
+
         $advertId = $this->app->getRequest()->getGet()['0'];
         $advert = Advert::getOne($advertId);
         if ($this->app->getAuth()->isLogged() && $this->app->getAuth()->getLoggedUserId() == $advert->getOwnerId()) {
@@ -227,7 +231,8 @@ class AdvertController extends AControllerBase
     }
 
 
-    private function createPagination($current_page, $total_pages, $type) {
+    private function createPagination($current_page, $total_pages, $type): string
+    {
         $range = 2;
         $total_pages = ceil($total_pages);
         $pagination = '<nav aria-label="Page navigation example"><ul class="pagination">';
