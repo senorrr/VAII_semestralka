@@ -9,11 +9,12 @@ SET NAMES utf8mb4;
 
 DROP TABLE IF EXISTS `photos`;
 CREATE TABLE `photos` (
-  `advert` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `advertId` int(11) NOT NULL,
   `url` varchar(500) NOT NULL,
-  PRIMARY KEY (`url`),
-  KEY `advert` (`advert`),
-  CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`advert`) REFERENCES `adverts` (`id`)
+  PRIMARY KEY (`id`),
+  KEY `advertId` (`advertId`),
+  CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`advertId`) REFERENCES `adverts` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 

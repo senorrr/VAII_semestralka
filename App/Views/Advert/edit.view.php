@@ -39,7 +39,8 @@ use App\Models\Village;
                 <div class="carousel-indicators">
                     <?php
                     for ($i = 0; $i < sizeof($images); $i++) {
-                        echo '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' . $i . '" class="' . ($i === 0 ? 'active' : '') . '" aria-current="true" aria-label="Slide ' . ($i + 1) . '"></button>';
+                        echo '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' . $i . '" class="' . ($i === 0 ? 'active' : '') .
+                            '" aria-current="true" aria-label="Slide ' . ($i + 1) . '"></button>';
                     }
                     ?>
                 </div>
@@ -65,34 +66,37 @@ use App\Models\Village;
             <?php
         }
         ?>
-        <div class="inzerat-oramovanie-edit">
-            <input class="ms-3" type="url">
-            <button class="btn btn-primary">Pridaj fotku</button>
-            <button class="btn btn-danger">Odstráň fotku</button>
+        <form action="<?=$link->url('advert.edit', [$advert->getId()])?>" method="post">
+            <div class="inzerat-oramovanie-edit d-flex align-items-center">
+                <input class="form-control ms-3" type="url" placeholder="Zadajte url adresu">
+                <button class="btn btn-primary ms-2" type="submit" name="submitPhoto">Pridaj fotku</button>
+                <button class="btn btn-danger mx-2" type="submit" name="submitRemovePhoto">Odstráň fotku</button>
+            </div>
+        </form>
+        <div class="m-2">
+            <textarea name="text"  maxlength="1500" class="form-control" id="description"
+                      rows="5" placeholder="Zadajte popis"><?=$advert->getText() ?>
+            </textarea>
         </div>
-        <textarea name="text"  maxlength="1500" class="form-control mx-2 mt-2" id="description"
-                  rows="5" placeholder="Zadajte popis"><?=$advert->getText() ?>
-        </textarea>
-
         <div class="row inzerat-oramovanie">
             <h3 class="col-3 col-sm-2 col-lg-1">Meno:</h3>
             <h3 class="col ms-2"><?=User::getOne($advert->getOwnerId())->getName() . " " . User::getOne($advert->getOwnerId())->getSurname()?></h3>
         </div>
         <div class="row inzerat-oramovanie-edit">
-            <label for="lokalita" class="col-3 col-sm-2 col-lg-1 mt-1">Lokalita:</label>
-            <input class="col ms-2 me-3" id="lokalita" value="<?=Village::getOne($advert->getVillageId())->getName()?>">
+            <label for="lokalita" class="col-3 col-sm-2 col-lg-1 mt-2">Lokalita:</label>
+            <input class="form-control col ms-2 me-3" id="lokalita" value="<?=Village::getOne($advert->getVillageId())->getName()?>">
         </div>
         <div class="row inzerat-oramovanie-edit">
-            <label for="cena" class="col-3 col-sm-2 col-lg-1">Cena: </label>
-            <input class="col ms-2 me-3" id="cena" value="<?=$advert->getPrice()?>">
+            <label for="cena" class="col-3 col-sm-2 col-lg-1 mt-2">Cena: </label>
+            <input class="form-control col ms-2 me-3" id="cena" value="<?=$advert->getPrice()?>">
         </div>
         <div class="row inzerat-oramovanie">
             <h3 class="col-3 col-sm-2 col-lg-1">Videnia: </h3>
-            <h3 class="col"><?=$advert->getViews()?></h3>
+            <h3 class="col ms-2"><?=$advert->getViews()?></h3>
         </div>
         <div class="d-flex justify-content-center">
-            <button class="btn btn-success me-1">Ulož</button>
-            <button class="btn btn-danger">Zruš</button>
+            <button class="btn btn-success me-1">Uložiť</button>
+            <button class="btn btn-danger" onclick="window.location.href='<?= $link->url('advert.index', ['id' => $advert->getId()]) ?>'">Zrušiť</button>
         </div>
     </div>
 </div>

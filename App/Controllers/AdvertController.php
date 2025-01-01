@@ -34,14 +34,28 @@ class AdvertController extends AControllerBase
      */
     public function index(): Response
     {
-        $advert = Advert::getOne($_GET['id']);
-        $advert->setViews($advert->getViews() + 1);
-        $advert->save();
-        return $this->html();
+        if (isset($_GET['id'])) {
+            $advert = Advert::getOne($_GET['id']);
+            $advert->setViews($advert->getViews() + 1);
+            $advert->save();
+            return $this->html();
+        }
+        return $this->redirect($this->url(('home.index')));
     }
 
     public function edit(): Response
     {
+        $formdata = $this->app->getRequest()->getPost();
+        if (isset($formdata['submitPhoto'])) {
+            $advertId = $this->app->getRequest()->getGet()['0'];
+            if ($advertId != null) {
+                $photo = new Photo();
+                $photo->setAdvert($advertId);
+                $photo->setUrl($formdata['submitPhoto']);
+                $photo->save();
+                return $this->redirect($this->url('advert.index', ['id' => $advertId]));
+            }
+        }
         $advertId = $this->app->getRequest()->getGet()['0'];
         $advert = Advert::getOne($advertId);
         if ($this->app->getAuth()->isLogged() && $this->app->getAuth()->getLoggedUserId() == $advert->getOwnerId()) {
@@ -93,7 +107,7 @@ class AdvertController extends AControllerBase
             $advert->setTitle($formData['title']);
             $advert->setText($formData['text']);
             $advert->setPrice($formData['price']);
-            $advert->setOwner($this->app->getAuth()->getLoggedUserEmail());
+            $advert->setOwnerId($this->app->getAuth()->getLoggedUserEmail());
             $advert->setVillageId($village->getId());
             $advert->setCategoryId($category->getId());
             $advert->setViews(0);

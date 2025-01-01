@@ -7,7 +7,8 @@ use App\Core\Model;
 class Photo extends Model
 {
     protected $url;
-    protected $advert;
+    protected $id;
+    protected $advertId;
 
     public static function getPkColumnName(): string
     {
@@ -33,20 +34,26 @@ class Photo extends Model
     /**
      * @return mixed
      */
-    public function getAdvert()
+    public function getAdvertId()
     {
-        return $this->advert;
+        return $this->advertId;
     }
 
     /**
-     * @param mixed $advert
+     * @param mixed $advertId
      */
-    public function setAdvert($advert): void
+    public function setAdvertId($advertId): void
     {
-        $this->advert = $advert;
+        $this->advertId = $advertId;
     }
 
-
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
 
 }
