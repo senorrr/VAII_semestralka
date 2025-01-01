@@ -12,9 +12,12 @@ use App\Models\Village;
 
 ?>
 <div class="container">
+    <div class="text-center text-vypis">
+        <?= @$data['message'] ?>
+    </div>
     <?php
-    $advert = Advert::getOne($_GET['id']);
-    $images = Photo::getAll('`advertId` LIKE ?', [$_GET['id']]);
+    $advert = Advert::getOne($data['id']);
+    $images = Photo::getAll('`advertId` LIKE ?', [$data['id']]);
     ?>
     <h2 class="text-center"><?= $advert->getTitle()?> - <?= date('d.m.Y', strtotime($advert->getDateOfCreate()))?></h2>
     <div class="pozadieInzerat">

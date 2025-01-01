@@ -4,7 +4,6 @@
 use App\Models\Advert;
 use App\Models\Photo;
 use App\Models\Village;
-
 ?>
 
 <?php
@@ -16,9 +15,11 @@ use App\Models\Village;
         <h2><?= $data['text']?></h2>
     </div>
     <div class="row">
-        <?php foreach ($data['adverts'] as $advert): ?>
+        <?php
+            foreach ($data['adverts'] as $advert):?>
             <div class="col-lg-4 align-items-stretch">
-                <a href="<?= $link->url('advert.index', ['id' => $advert->getId()]) ?>" class="text-decoration-none">
+
+                <a href="<?= $link->url('advert.index', [['id' => $advert->getId()]]) ?>" class="text-decoration-none">
                     <div class="card inzeratKarta">
                         <h2 class="card-title"><?= $advert->getTitle() ?></h2>
                         <div class="card-body">

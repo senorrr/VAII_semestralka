@@ -16,13 +16,13 @@ use App\Models\Village;
     $advert = Advert::getOne($data);
     $images = Photo::getAll('`advertId` LIKE ?', [$data]);
     ?>
-    <div class="d-flex justify-content-center text-nowrap mb-3">
-        <input name="title"  type="text" class="form-control obmedzenie-sirky me-1" id="title" placeholder="Zadajte názov"
-               value="<?= $advert->getTitle() ?>" required>
-    <h2 class="mt-2">- <?= date('d.m.Y', strtotime($advert->getDateOfCreate()))?></h2>
-    </div>
-    <div class="pozadieInzerat">
-        <form action="<?=$link->url('advert.edit', [$advert->getId()])?>" id="velkaForm" method="post">
+    <form action="<?=$link->url('advert.edit', [$advert->getId()])?>" id="velkaForm" method="post">
+        <div class="d-flex justify-content-center text-nowrap mb-3">
+            <input name="title"  type="text" class="form-control obmedzenie-sirky me-1" id="title" placeholder="Zadajte názov"
+                   value="<?= $advert->getTitle() ?>" required>
+        <h2 class="mt-2">- <?= date('d.m.Y', strtotime($advert->getDateOfCreate()))?></h2>
+        </div>
+        <div class="pozadieInzerat">
             <div class="row justify-content-around inzerat-oramovanie-edit">
                 <div class="col-auto d-flex align-items-center">
                     <label for="category" class="mr-2">Kategória:</label>
@@ -88,13 +88,13 @@ use App\Models\Village;
             <div class="row inzerat-oramovanie-edit">
                 <label for="lokalita" class="col-3 col-sm-2 col-lg-1 mt-2">Lokalita:</label>
                 <div class="col">
-                    <input class="form-control col obmedzenie-sirky" name="lokalita" id="city" value="<?=Village::getOne($advert->getVillageId())->getName()?>">
+                    <input class="form-control col obmedzenie-sirky" name="city" id="city" value="<?=Village::getOne($advert->getVillageId())->getName()?>">
                 </div>
             </div>
             <div class="row inzerat-oramovanie-edit">
                 <label for="cena" class="col-3 col-sm-2 col-lg-1 mt-2">Cena: </label>
                 <div class="col">
-                    <input class="form-control obmedzenie-sirky" name="price" id="cena" required min="0" value="<?=$advert->getPrice()?>">
+                    <input class="form-control obmedzenie-sirky" name="price" id="price" required min="0" value="<?=$advert->getPrice()?>">
                 </div>
             </div>
             <div class="row inzerat-oramovanie">
@@ -103,7 +103,7 @@ use App\Models\Village;
             </div>
             <div class="d-flex justify-content-center">
                 <button class="btn btn-success me-1" type="submit" name="submitAll"  id="submitAll">Uložiť</button>
-                <button class="btn btn-danger" type="button" onclick="window.location.href='<?= $link->url('advert.index', ['id' => $advert->getId()]) ?>'">Zrušiť</button>
+                <button class="btn btn-danger" type="button" onclick="window.location.href='<?= $link->url('advert.index', [['id' => $advert->getId()]]) ?>'">Zrušiť</button>
             </div>
         </form>
     </div>

@@ -34,11 +34,12 @@ class AdvertController extends AControllerBase
      */
     public function index(): Response
     {
-        if (isset($_GET['id'])) {
-            $advert = Advert::getOne($_GET['id']);
+        $data = $this->app->getRequest()->getGet()['0'];
+        if (isset($data['id'])) {
+            $advert = Advert::getOne($data['id']);
             $advert->setViews($advert->getViews() + 1);
             $advert->save();
-            return $this->html();
+            return $this->html($data);
         }
         return $this->redirect($this->url(('home.index')));
     }
@@ -54,7 +55,10 @@ class AdvertController extends AControllerBase
                 if (trim($formdata['url']) != '') {
                     $photo->setUrl($formdata['url']);
                     $photo->save();
-                    return $this->redirect($this->url('advert.index', ['id' => $advertId]));
+                    $data['id'] = $advertId;
+                    $data['message'] = 'Fotka úspšene pridaná';
+
+                    return $this->redirect($this->url('advert.index', [$data]));
                 } else {
                     return $this->html($advertId);
                 }
@@ -67,14 +71,37 @@ class AdvertController extends AControllerBase
                 if (trim($formdata['url']) != '') {
                     $photo = Photo::getAll(whereClause: '`advertId` LIKE ? && `url` LIKE ?', whereParams: [$advertId, $formdata['url']])[0];
                     $photo->delete();
-                    return $this->redirect($this->url('advert.index', ['id' => $advertId]));
+                    $data['id'] = $advertId;
+                    $data['message'] ='Fotka úspšene odstránená';
+
+                    return $this->redirect($this->url('advert.index', [$data]));
                 } else {
                     return $this->html($advertId);
                 }
             }
         }
-        if (isset($formdata['submitAll'])) {
-            //todo tu som ostal
+
+        if (isset($formdata['submitAll']) && $this->checkData($formdata)) {
+            $formdata = $this->checkDataContinue($formdata);
+            $advertId = $this->app->getRequest()->getGet()['0'];
+            if ($advertId != null) {
+                if (!isset($foarmData['message'])) {
+                    $advert = Advert::getOne($advertId);
+                    $advert->setTitle($formdata['title']);
+                    $advert->setText($formdata['text']);
+                    $advert->setPrice($formdata['price']);
+                    $advert->setVillageId($formdata['villageId']);
+                    $advert->setCategoryId($formdata['categoryId']);
+                    $advert->save();
+
+                    $data['id'] = $advertId;
+                    $data['message'] = 'Inzerát úspšene upravený';
+                    return $this->redirect($this->url('advert.index', [$data]));
+            } else {
+                    return $this->html($advertId);
+                }
+            }
+
         }
 
         $advertId = $this->app->getRequest()->getGet()['0'];
@@ -85,6 +112,46 @@ class AdvertController extends AControllerBase
         return $this->redirect($this->url(('home.index')));
     }
 
+    private function checkData($formData): bool
+    {
+        if (isset($formData['title']) && isset($formData['text']) &&
+            isset($formData['category']) && isset($formData['price'])  && isset($formData['city'])) {
+            return true;
+        }
+        return false;
+    }
+
+    private function checkDataContinue($formData): array
+    {
+        if ($formData['price'] < 0) {
+            $formData += ['message' => 'Cena nemôže byť záporné číslo!'];
+        }
+
+        if (ctype_space($formData['title'])) {
+            $formData += ['message' => 'Nebol zadaný názov inzerátu!'];
+        }
+        $category = Category::getAll('`name` LIKE ?', [$formData['category']])[0];
+
+        if (!isset($category)) {
+            $formData += ['message' => 'Nebola zvolená správna kategória!'];
+        } elseif ($category->getName() != $formData['category']) {
+            $formData += ['message' => 'Nebola zvolená správna kategória!'];
+        }
+        $formData += ['categoryId' => $category->getId()];
+
+        $village = Village::getAll('`name` LIKE ?', [$formData['city']], limit: 1)[0];
+
+        if (!isset($village)) {
+            $formData += ['message' => 'Dané mesto neexistuje!'];
+        } elseif ($village->getName() != $formData['city']) {
+            $formData += ['message' => 'Dané mesto neexistuje!'];
+        }
+
+        $formData += ['villageId' => $village->getId()];
+
+        return $formData;
+    }
+
     public function add(): Response
     {
         $formData = $this->app->getRequest()->getPost();
@@ -93,68 +160,43 @@ class AdvertController extends AControllerBase
         }
 
 
-        if (isset($formData['submit']) && isset($formData['title']) && isset($formData['text']) &&
-            isset($formData['category']) && isset($formData['price'])  && isset($formData['city'])) {
-            if ($formData['price'] < 0) {
-                $formData += ['message' => 'Cena nemôže byť záporné číslo!'];
-                return $this->html($formData);
-            }
+        if (isset($formData['submit']) && $this->checkData($formData)) {
+            $formData = $this->checkDataContinue($formData);
+            if (!isset($formData['message'])) {
+                $advert = new Advert();
+                $advert->setTitle($formData['title']);
+                $advert->setText($formData['text']);
+                $advert->setPrice($formData['price']);
+                $advert->setOwnerId($this->app->getAuth()->getLoggedUserId());
+                $advert->setVillageId($formData['villageId']);
+                $advert->setCategoryId($formData['categoryId']);
+                $advert->setViews(0);
 
-            if (ctype_space($formData['title'])) {
-                $formData += ['message' => 'Nebol zadaný názov inzerátu!'];
-                return $this->html($formData);
-            }
-            $category = Category::getAll('`name` LIKE ?', [$formData['category']])[0];
+                $advert->setMonday(isset($formData['monday']));
+                $advert->setTuesday(isset($formData['tuesday']));
+                $advert->setWednesday(isset($formData['wednesday']));
+                $advert->setThursday(isset($formData['thursday']));
+                $advert->setFriday(isset($formData['friday']));
+                $advert->setSaturday(isset($formData['saturday']));
+                $advert->setSunday(isset($formData['sunday']));
 
-            if (!isset($category)) {
-                $formData += ['message' => 'Nebola zvolená správna kategória!'];
-                return $this->html($formData);
-            } elseif ($category->getName() != $formData['category']) {
-                $formData += ['message' => 'Nebola zvolená správna kategória!'];
-                return $this->html($formData);
-            }
+                $advert->save();        //tu mu nastavi auto increment ID
+                $data = ['id' => $advert->getId()];
 
-            $village = Village::getAll('`name` LIKE ?', [$formData['city']], limit: 1)[0];
-
-            if (!isset($village)) {
-                $formData += ['message' => 'Dané mesto neexistuje!'];
-                return $this->html($formData);
-            } elseif ($village->getName() != $formData['city']) {
-                $formData += ['message' => 'Dané mesto neexistuje!'];
-                return $this->html($formData);
-            }
-
-            $advert = new Advert();
-            $advert->setTitle($formData['title']);
-            $advert->setText($formData['text']);
-            $advert->setPrice($formData['price']);
-            $advert->setOwnerId($this->app->getAuth()->getLoggedUserEmail());
-            $advert->setVillageId($village->getId());
-            $advert->setCategoryId($category->getId());
-            $advert->setViews(0);
-
-            $advert->setMonday(isset($formData['monday']));
-            $advert->setTuesday(isset($formData['tuesday']));
-            $advert->setWednesday(isset($formData['wednesday']));
-            $advert->setThursday(isset($formData['thursday']));
-            $advert->setFriday(isset($formData['friday']));
-            $advert->setSaturday(isset($formData['saturday']));
-            $advert->setSunday(isset($formData['sunday']));
-
-            $advert->save();        //tu mu nastavi auto increment ID
-            $data = ['id' => $advert->getId()];
-
-            $i = 1;
-            while (isset($formData['photo' . $i])) {
-                if (!empty($formData['photo' . $i])) {
-                    $photo = new Photo();
-                    $photo->setUrl($formData['photo' . $i]);
-                    $photo->setAdvertId($advert->getId());
-                    $photo->save();
+                $i = 1;
+                while (isset($formData['photo' . $i])) {
+                    if (!empty($formData['photo' . $i])) {
+                        $photo = new Photo();
+                        $photo->setUrl($formData['photo' . $i]);
+                        $photo->setAdvertId($advert->getId());
+                        $photo->save();
+                    }
+                    $i++;
                 }
-                $i++;
+                return $this->redirect($this->url("advert.index", [$data]));
+            } else {
+                return $this->html($formData);
             }
-            return $this->redirect($this->url("advert.index", $data));
         }
         $formData += ['message' => 'Údaje neboli správne vyplnené!'];
 
