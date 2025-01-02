@@ -111,7 +111,7 @@ use App\Models\Category;
     document.getElementById('city').addEventListener('input', function() {
         var text = document.getElementById('city');
         if (text.value.length > 2) {
-            fetch('http://localhost/?c=Home&a=getCity', {
+            fetch('http://127.0.0.1/?c=Home&a=getCity', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
