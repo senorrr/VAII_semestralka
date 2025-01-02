@@ -12,7 +12,7 @@ class Reservation extends Model
     protected string $to;
     protected int $reservedBy;
     protected string $message;
-    protected int $stav;
+    protected int $status;
     protected float $totalCost;
 
     public function getId(): int
@@ -70,14 +70,14 @@ class Reservation extends Model
         $this->message = $message;
     }
 
-    public function getStav(): int
+    public function getStatus(): int
     {
-        return $this->stav;
+        return $this->status;
     }
 
-    public function setStav(int $stav): void
+    public function setStatus(int $status): void
     {
-        $this->stav = $stav;
+        $this->status = $status;
     }
 
     public function getTotalCost(): float
