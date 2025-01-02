@@ -1,6 +1,9 @@
 <?php
-/** @var Advert $data */
+/** @var \App\Models\Reservation $data */
 /** @var \App\Core\LinkGenerator $link */
+
+use App\Models\Status;
+
 ?>
 
 <body>
@@ -14,7 +17,7 @@
                     <th>Od</th>
                     <th>Do</th>
                     <th>Správa</th>
-                    <th>Stav</th>
+                    <th>Stav rezervácie</th>
                     <th>Cena</th>
                 </tr>
             </thead>
@@ -26,7 +29,7 @@
                         <td><?= $reservation->getFrom() ?></td>
                         <td><?= $reservation->getTo() ?></td>
                         <td><?= $reservation->getMessage() ?></td>
-                        <td><?= $reservation->getStatus() ?></td>
+                        <td><?= Status::getOne($reservation->getStatusId())->getPopis() ?></td>
                         <td><?= $reservation->getTotalCost() ?></td>
                     </tr>
                 <?php endforeach; ?>
