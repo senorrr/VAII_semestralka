@@ -249,7 +249,7 @@ class AdvertController extends AControllerBase
             $dataSent['pagination'] = $this->createPagination($page, $dataSent['count']/$inzeratyNaStrane, $category->getId());
             return $this->html($dataSent);
         }
-        $adverts = Advert::getAll(orderBy: '`dateOfCreate` asc', limit: $inzeratyNaStrane,offset: ($page-1) * $inzeratyNaStrane);
+        $adverts = Advert::getAll(orderBy: '`dateOfCreate` desc', limit: $inzeratyNaStrane,offset: ($page-1) * $inzeratyNaStrane);
         $dataSent['text'] = 'Najnovšie inzeráty';
         $dataSent['adverts'] = $adverts;
         $dataSent['count'] = $this->getCounfOfAllAdverts();

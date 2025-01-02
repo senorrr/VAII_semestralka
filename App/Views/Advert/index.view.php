@@ -62,35 +62,51 @@ use App\Models\Village;
             <?php
         }
         ?>
-        <p class="mx-2 mt-2">
+        <p class="mx-4 mt-2">
             <?=$advert->getText()?>
         </p>
         <div class="row inzerat-oramovanie">
-            <h3 class="col-3 col-sm-2 col-lg-1">Meno:</h3>
+            <h3 class="col-2 col-sm-2 col-lg-1">Meno:</h3>
             <h3 class="col"><?=User::getOne($advert->getOwnerId())->getName() . " " . User::getOne($advert->getOwnerId())->getSurname()?></h3>
         </div>
         <div class="row inzerat-oramovanie">
-            <h3 class="col-3 col-sm-2 col-lg-1">Lokalita:</h3>
+            <h3 class="col-2 col-sm-2 col-lg-1">Lokalita:</h3>
             <h3 class="col"><?=Village::getOne($advert->getVillageId())->getName()?></h3>
         </div>
         <div class="row inzerat-oramovanie">
-            <h3 class="col-3 col-sm-2 col-lg-1">Cena: </h3>
+            <h3 class="col-2 col-sm-2 col-lg-1">Cena: </h3>
             <h3 class="col"><?=$advert->getPrice()?>€</h3>
         </div>
-        <div class="row inzerat-oramovanie">
-            <h3 class="col-3 col-sm-2 col-lg-1">Cena: </h3>
-            <h3 class="col"><?=$advert->getPrice()?>€</h3>
-        </div>
-        <div class="row inzerat-oramovanie">
-            <h3>Dostupné dni:
-                <?= $advert->getMonday() ? 'Pondelok ' : '' ?>
-                <?= $advert->getTuesday() ? 'Utorok ' : '' ?>
-                <?= $advert->getWednesday() ? 'Streda ' : '' ?>
-                <?= $advert->getThursday() ? 'Štvrtok ' : '' ?>
-                <?= $advert->getFriday() ? 'Piatok ' : '' ?>
-                <?= $advert->getSaturday() ? 'Sobota ' : '' ?>
-                <?= $advert->getSunday() ? 'Nedeľa ' : '' ?>
+        <div class="row inzerat-oramovanie justify-content-start " >
+            <h3 class="col-auto">Dostupné dni:
+                <?php
+                if ($advert->getMonday() == 1) {
+                    echo '<h3 class="col-auto">Pondelok</h3>';
+                }
+                if ($advert->getTuesday() == 1) {
+                    echo '<h3 class="col-auto">Utorok</h3>';
+                }
+                if ($advert->getWednesday() == 1) {
+                    echo '<h3 class="col-auto">Streda</h3>';
+                }
+                if ($advert->getThursday() == 1) {
+                    echo '<h3 class="col-auto">Štvrtok</h3>';
+                }
+                if ($advert->getFriday() == 1) {
+                    echo '<h3 class="col-auto">Piatok</h3>';
+                }
+                if ($advert->getSaturday() == 1) {
+                    echo '<h3 class="col-auto">Sobota</h3>';
+                }
+                if ($advert->getSunday() == 1) {
+                    echo '<h3 class="col-auto">Nedeľa</h3>';
+                }
+                ?>
             </h3>
+        </div>
+        <div class="row inzerat-oramovanie">
+            <h3 class="col-auto col-xs-1 col-sm-3 col-md-2 col-lg-auto">Zobrazenia: </h3>
+            <h3 class="col"><?=$advert->getViews()?></h3>
         </div>
         <div class="d-flex justify-content-center">
             <button class="btn btn-success me-1">Rezervuj</button>

@@ -97,6 +97,29 @@ use App\Models\Village;
                     <input class="form-control obmedzenie-sirky" name="price" id="price" required min="0" value="<?=$advert->getPrice()?>">
                 </div>
             </div>
+            <div class="inzerat-oramovanie-edit ps-2">
+                <label class="form-check-label" for="monday">Pondelok</label>
+                <input class="form-check-input" type="checkbox" id="monday" name="monday" <?= ($advert->getMonday() == 1 ? "checked" : '') ?>>
+
+                <label class="form-check-label ps-4" for="tuesday">Utorok</label>
+                <input class="form-check-input" type="checkbox" id="tuesday" name="tuesday" <?= ($advert->getTuesday() == 1 ? "checked" : '') ?>>
+
+                <label class="form-check-label ps-4" for="wednesday">Streda</label>
+                <input class="form-check-input" type="checkbox" id="wednesday" name="wednesday" <?= ($advert->getWednesday() == 1 ? "checked" : '') ?>>
+
+                <label class="form-check-label ps-4" for="thursday">Štvrtok</label>
+                <input class="form-check-input" type="checkbox" id="thursday" name="thursday" <?= ($advert->getThursday() == 1 ? "checked" : '') ?>>
+
+                <label class="form-check-label ps-4" for="friday">Piatok</label>
+                <input class="form-check-input" type="checkbox" id="friday" name="friday" <?= ($advert->getFriday() == 1 ? "checked" : '') ?>>
+
+                <label class="form-check-label ps-4" for="saturday">Sobota</label>
+                <input class="form-check-input" type="checkbox" id="saturday" name="saturday" <?= ($advert->getSaturday() == 1 ? "checked" : '') ?>>
+
+                <label class="form-check-label ps-4" for="sunday">Nedeľa</label>
+                <input class="form-check-input" type="checkbox" id="sunday" name="sunday" <?= ($advert->getSunday() == 1 ? "checked" : '') ?>>
+            </div>
+
             <div class="row inzerat-oramovanie">
                 <h3 class="col-3 col-sm-2 col-lg-1">Videnia: </h3>
                 <h3 class="col ms-2"><?=$advert->getViews()?></h3>

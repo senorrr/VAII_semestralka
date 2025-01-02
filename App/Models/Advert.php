@@ -177,73 +177,117 @@ class Advert extends Model
     protected $saturday;
     protected $sunday;
 
-    public function getMonday(): bool
+    /**
+     * @return mixed
+     */
+    public function getMonday()
     {
-        return $this->monday == 1;
+        return $this->monday;
     }
 
-    public function setMonday(?bool $monday): void
+    /**
+     * @param mixed $monday
+     */
+    public function setMonday($monday): void
     {
-        $this->monday = $monday ? 1 : 0;
+        $this->monday = $monday;
     }
 
-    public function getTuesday(): bool
+    /**
+     * @return mixed
+     */
+    public function getTuesday()
     {
-        return $this->tuesday == 1;
+        return $this->tuesday;
     }
 
-    public function setTuesday(?bool $tuesday): void
+    /**
+     * @param mixed $tuesday
+     */
+    public function setTuesday($tuesday): void
     {
-        $this->tuesday = $tuesday ? 1 : 0;
+        $this->tuesday = $tuesday;
     }
 
-    public function getWednesday(): bool
+    /**
+     * @return mixed
+     */
+    public function getWednesday()
     {
-        return $this->wednesday == 1;
+        return $this->wednesday;
     }
 
-    public function setWednesday(?bool $wednesday): void
+    /**
+     * @param mixed $wednesday
+     */
+    public function setWednesday($wednesday): void
     {
-        $this->wednesday = $wednesday ? 1 : 0;
+        $this->wednesday = $wednesday;
     }
 
-    public function getThursday(): bool
+    /**
+     * @return mixed
+     */
+    public function getThursday()
     {
-        return $this->thursday == 1;
+        return $this->thursday;
     }
 
-    public function setThursday(?bool $thursday): void
+    /**
+     * @param mixed $thursday
+     */
+    public function setThursday($thursday): void
     {
-        $this->thursday = $thursday ? 1 : 0;
+        $this->thursday = $thursday;
     }
 
-    public function getFriday(): bool
+    /**
+     * @return mixed
+     */
+    public function getFriday()
     {
-        return $this->friday == 1;
+        return $this->friday;
     }
 
-    public function setFriday(?bool $friday): void
+    /**
+     * @param mixed $friday
+     */
+    public function setFriday($friday): void
     {
-        $this->friday = $friday ? 1 : 0;
+        $this->friday = $friday;
     }
 
-    public function getSaturday(): bool
+    /**
+     * @return mixed
+     */
+    public function getSaturday()
     {
-        return $this->saturday == 1;
+        return $this->saturday;
     }
 
-    public function setSaturday(?bool $saturday): void
+    /**
+     * @param mixed $saturday
+     */
+    public function setSaturday($saturday): void
     {
-        $this->saturday = $saturday ? 1 : 0;
+        $this->saturday = $saturday;
     }
 
-    public function getSunday(): bool
+    /**
+     * @return mixed
+     */
+    public function getSunday()
     {
-        return $this->sunday == 1;
+        return $this->sunday;
     }
 
-    public function setSunday(?bool $sunday): void
+    /**
+     * @param mixed $sunday
+     */
+    public function setSunday($sunday): void
     {
-        $this->sunday = $sunday ? 1 : 0;
+        $this->sunday = $sunday;
     }
+
+
 }
