@@ -169,81 +169,81 @@ class Advert extends Model
     }
 
 
-    protected ?bool $monday;
-    protected ?bool $tuesday;
-    protected ?bool $wednesday;
-    protected ?bool $thursday;
-    protected ?bool $friday;
-    protected ?bool $saturday;
-    protected ?bool $sunday;
+    protected  $monday;
+    protected  $tuesday;
+    protected  $wednesday;
+    protected  $thursday;
+    protected  $friday;
+    protected $saturday;
+    protected $sunday;
 
-    public function getMonday(): ?bool
+    public function getMonday(): bool
     {
-        return $this->monday;
+        return $this->monday == 1;
     }
 
     public function setMonday(?bool $monday): void
     {
-        $this->monday = $monday;
+        $this->monday = $monday ? 1 : 0;
     }
 
-    public function getTuesday(): ?bool
+    public function getTuesday(): bool
     {
-        return $this->tuesday;
+        return $this->tuesday == 1;
     }
 
     public function setTuesday(?bool $tuesday): void
     {
-        $this->tuesday = $tuesday;
+        $this->tuesday = $tuesday ? 1 : 0;
     }
 
-    public function getWednesday(): ?bool
+    public function getWednesday(): bool
     {
-        return $this->wednesday;
+        return $this->wednesday == 1;
     }
 
     public function setWednesday(?bool $wednesday): void
     {
-        $this->wednesday = $wednesday;
+        $this->wednesday = $wednesday ? 1 : 0;
     }
 
-    public function getThursday(): ?bool
+    public function getThursday(): bool
     {
-        return $this->thursday;
+        return $this->thursday == 1;
     }
 
     public function setThursday(?bool $thursday): void
     {
-        $this->thursday = $thursday;
+        $this->thursday = $thursday ? 1 : 0;
     }
 
-    public function getFriday(): ?bool
+    public function getFriday(): bool
     {
-        return $this->friday;
+        return $this->friday == 1;
     }
 
     public function setFriday(?bool $friday): void
     {
-        $this->friday = $friday;
+        $this->friday = $friday ? 1 : 0;
     }
 
-    public function getSaturday(): ?bool
+    public function getSaturday(): bool
     {
-        return $this->saturday;
+        return $this->saturday == 1;
     }
 
     public function setSaturday(?bool $saturday): void
     {
-        $this->saturday = $saturday;
+        $this->saturday = $saturday ? 1 : 0;
     }
 
-    public function getSunday(): ?bool
+    public function getSunday(): bool
     {
-        return $this->sunday;
+        return $this->sunday == 1;
     }
 
     public function setSunday(?bool $sunday): void
     {
-        $this->sunday = $sunday;
+        $this->sunday = $sunday ? 1 : 0;
     }
 }

@@ -78,8 +78,19 @@ use App\Models\Village;
             <h3 class="col"><?=$advert->getPrice()?>€</h3>
         </div>
         <div class="row inzerat-oramovanie">
-            <h3 class="col-3 col-sm-2 col-lg-1">Videnia: </h3>
-            <h3 class="col"><?=$advert->getViews()?></h3>
+            <h3 class="col-3 col-sm-2 col-lg-1">Cena: </h3>
+            <h3 class="col"><?=$advert->getPrice()?>€</h3>
+        </div>
+        <div class="row inzerat-oramovanie">
+            <h3>Dostupné dni:
+                <?= $advert->getMonday() ? 'Pondelok ' : '' ?>
+                <?= $advert->getTuesday() ? 'Utorok ' : '' ?>
+                <?= $advert->getWednesday() ? 'Streda ' : '' ?>
+                <?= $advert->getThursday() ? 'Štvrtok ' : '' ?>
+                <?= $advert->getFriday() ? 'Piatok ' : '' ?>
+                <?= $advert->getSaturday() ? 'Sobota ' : '' ?>
+                <?= $advert->getSunday() ? 'Nedeľa ' : '' ?>
+            </h3>
         </div>
         <div class="d-flex justify-content-center">
             <button class="btn btn-success me-1">Rezervuj</button>
