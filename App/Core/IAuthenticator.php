@@ -27,21 +27,8 @@ interface IAuthenticator
 
     public function register($login, $password, $name, $surname): bool;
 
-    /**
-     * Return name of a logged user
-     * @return string
-     */
-    public function getLoggedUserName(): string;
-    public function getLoggedUserSurname(): string;
-    public function getLoggedUserEmail(): string;
-    public function getLoggedUserPassword(): string;
     public function getLoggedUserId(): int;
 
-    /**
-     * Return a context of logged user, e.g. user class instance
-     * @return mixed
-     */
-    public function getLoggedUser(): User;
     /**
      * Return, if a user is logged or not
      * @return bool
@@ -49,4 +36,6 @@ interface IAuthenticator
     public function isLogged(): bool;
 
     public function edit(mixed $login, mixed $password, mixed $name, mixed $surname): bool;
+
+    public function getPermissionLevel(): int;
 }

@@ -1,14 +1,20 @@
 <?php
 /** @var Array $data */
 /** @var \App\Core\LinkGenerator $link */
-/** @var \App\Core\IAuthenticator $auth */ ?>
+/** @var \App\Core\IAuthenticator $auth */
+$user = \App\Models\User::getOne($auth->getLoggedUserId())
+?>
 
 <div class="text-center">
 
 <div class="d-inline-flex align-content-center justify-content-center mt-0 mojNavbar text-center">
-
     <a class="mojNavbar-text me-4" href="<?= $link->url("reservation.myReservations")?>"> <h4> Moje rezervácie</a>
     <a class="mojNavbar-text me-4" href="">Moje inzeráty</a>
+    <?php
+    if ($auth->isLogged() && $auth->getPermissionLevel() > 0) {
+        echo '<a class="mojNavbar-text me-4" href="' . $link->url('admin.index') . ' ">Admin panel</a>';
+    }
+    ?>
 </div>
 </div>
 
@@ -17,7 +23,7 @@
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-11 col-md-6 col-lg-5 gy-2">
-            <h2>Vitaj, <?= $auth->getLoggedUserName();  $auth->getLoggedUserSurname()?> toto je tvoj profil</h2>
+            <h2>Vitaj, <?= $user->getName() . ' '. $user->getSurname()?> toto je tvoj profil</h2>
             <div class="text-center text-vypis">
                 <?php
                 if (isset($data['message'])) {
@@ -27,17 +33,17 @@
             <form action="<?= $link->url("auth.edit") ?>" method="post">
                 <div class="form-group">
                     <label for="name">Meno</label>
-                    <input name="name" required class="form-control minSirka" autofocus autocomplete="on" placeholder="Zadajte meno" id="name" value="<?= $auth->getLoggedUserName() ?>">
+                    <input name="name" required class="form-control minSirka" autofocus autocomplete="on" placeholder="Zadajte meno" id="name" value="<?= $user->getName() ?>">
                     <small id="nameHelp" class="form-text text-vypis"></small>
                 </div>
                 <div class="form-group">
                     <label for="surname">Priezvisko</label>
-                    <input name="surname" required class="form-control minSirka" placeholder="Zadajte priezvisko" id="surname" value="<?= $auth->getLoggedUserSurname() ?>">
+                    <input name="surname" required class="form-control minSirka" placeholder="Zadajte priezvisko" id="surname" value="<?= $user->getSurname() ?>">
                     <small id="surnameHelp" class="form-text text-vypis"></small>
                 </div>
                 <div class="form-group">
                     <label for="login">Email</label>
-                    <input name="login" required type="email" class="form-control minSirka" id="login" placeholder="Zadajte email" value="<?= $auth->getLoggedUserEmail() ?>" disabled>
+                    <input name="login" required type="email" class="form-control minSirka" id="login" placeholder="Zadajte email" value="<?= $user->getEmail() ?>" disabled>
                 </div>
                 <div class="form-group">
                     <label for="newLogin">Nový email</label>

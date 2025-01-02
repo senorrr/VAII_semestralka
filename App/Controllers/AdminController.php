@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Category;
+use App\Models\User;
 
 /**
  * Class HomeController
@@ -20,8 +21,12 @@ class AdminController extends AControllerBase
      */
     public function authorize($action)
     {
-        //todo pridaj kontrolu ze ci je to admin
-        return $this->app->getAuth()->isLogged();
+        switch ($action) {
+            case 'index':
+            case 'category':
+                return $this->app->getAuth()->isLogged() && $this->app->getAuth()->getPermissionLevel() > 0;
+            default: return false;
+        }
     }
 
     /**

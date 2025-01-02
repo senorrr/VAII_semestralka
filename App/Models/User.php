@@ -9,7 +9,9 @@ class User extends Model
     protected $surname;
     protected $email;
     protected $password;
-    
+
+    protected $permissions;
+
 
     /**
      * @return mixed
@@ -82,6 +84,22 @@ class User extends Model
     public function setSurname($surname): void
     {
         $this->surname = $surname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * @param mixed $permissions
+     */
+    public function setPermissions($permissions): void
+    {
+        $this->permissions = $permissions;
     }
 
 }

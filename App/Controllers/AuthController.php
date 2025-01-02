@@ -33,7 +33,7 @@ class AuthController extends AControllerBase
         $data = null;
 
         if (isset($formData['remove'])) {
-            $user = $this->app->getAuth()->getLoggedUser();
+            $user = User::getOne($this->app->getAuth()->getLoggedUserId());
             if ($user->getPassword() == $formData['oldPassword']) {
                 $this->app->getAuth()->logout();
                 $user->delete();
@@ -44,14 +44,13 @@ class AuthController extends AControllerBase
             }
         }
         if (isset($formData['submit'])) {
-            if ($formData['oldPassword'] == $this->app->getAuth()->getLoggedUserPassword()) {
+            $user = User::getOne($this->app->getAuth()->getLoggedUserId());
+            if ($formData['oldPassword'] == $user->getPassword()) {
                 if ($formData['name'] != null && $formData['surname'] != null && !ctype_space($formData['name']) &&
                     !ctype_space($formData['surname'])) { //ctype_space funkcia vrati podla toho ci je su medzery
                     if (sizeof($formData) == 5) {
                         // zmena mailu
-                        if ($formData['newLogin'] != $this->app->getAuth()->getLoggedUserEmail()) {
-                            $user = $this->app->getAuth()->getLoggedUser();
-
+                        if ($formData['newLogin'] != $user->getEmail()) {
                             $userWithEmail = User::getAll('`email` LIKE ?', [$formData['newLogin']], limit: 1)[0];
                             if (isset($userWithEmail) && $userWithEmail->getEmail() == $formData['newLogin']) {
                                 $data = ['message' => 'Daný mail už je použitý pri inom užívateľovi!'];
@@ -70,7 +69,7 @@ class AuthController extends AControllerBase
                         if ($formData['newPassword'] == $formData['confirmPassword']) {
                             if ($formData['oldPassword'] != $formData['newPassword']) {
                                 //ked nemenim mail ale menim hesla
-                                $this->app->getAuth()->edit($this->app->getAuth()->getLoggedUserEmail(), $formData['newPassword'],
+                                $this->app->getAuth()->edit($user->getEmail(), $formData['newPassword'],
                                     $formData['name'], $formData['surname']);
                                 $data = ['message' => 'Úspešná zmena!'];
                                 return $this->html($data);
@@ -81,7 +80,7 @@ class AuthController extends AControllerBase
                             $data = ['message' => "Heslá sa nezhodovali"];
                         }
                     } else {
-                        $this->app->getAuth()->edit($this->app->getAuth()->getLoggedUserEmail(), $formData['oldPassword'],
+                        $this->app->getAuth()->edit($user->getEmail(), $formData['oldPassword'],
                             $formData['name'], $formData['surname']);
                         $data = ['message' => 'Úspešná zmena!'];
                         return $this->html($data);
@@ -136,7 +135,7 @@ class AuthController extends AControllerBase
             if ($formData['login'] != null && $formData['password'] != null) {
                 $logged = $this->app->getAuth()->login($formData['login'], $formData['password']);
                 if ($logged) {
-                    return $this->redirect($this->url("admin.index"));
+                    return $this->redirect($this->url("advert.add"));
                 }
                 $data = ['login'=>$formData['login']];
             }

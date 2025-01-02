@@ -59,6 +59,7 @@ class DbAuthenticator implements IAuthenticator
         $novy->setPassword($password);
         $novy->setName($name);
         $novy->setSurname($surname);
+        $novy->setPermissions(0);
         $novy->save();
         $_SESSION['user'] = $novy->getId();
         return true;
@@ -92,40 +93,6 @@ class DbAuthenticator implements IAuthenticator
     }
 
     /**
-     * Get the name of the logged-in user
-     * @return string
-     * @throws \Exception
-     */
-    public function getLoggedUserName(): string
-    {
-        return User::getOne($_SESSION['user'])->getName();
-    }
-    public function getLoggedUserSurname(): string
-    {
-        return User::getOne($_SESSION['user'])->getSurname();
-    }
-
-
-    public function getLoggedUserEmail(): string
-    {
-        return User::getOne($_SESSION['user'])->getEmail();
-    }
-    public function getLoggedUserId(): int
-    {
-        return $_SESSION['user'];
-    }
-
-    /**
-     * Get the context of the logged-in user
-     * @return string
-     */
-    public function getLoggedUser(): User
-    {
-        $user = User::getAll('`email` LIKE ?', [$this->getLoggedUserEmail()], limit: 1)[0];
-        return $user;
-    }
-
-    /**
      * Return if the user is authenticated or not
      * @return bool
      */
@@ -134,9 +101,13 @@ class DbAuthenticator implements IAuthenticator
         return isset($_SESSION['user']) && $_SESSION['user'] != null;
     }
 
-
-    public function getLoggedUserPassword(): string
+    public function getLoggedUserId(): int
     {
-        return User::getOne($_SESSION['user'])->getPassword();
+        return $_SESSION["user"];
+    }
+
+    public function getPermissionLevel(): int
+    {
+        return User::getOne($this->getLoggedUserId())->getPermissions();
     }
 }

@@ -299,5 +299,8 @@ a {
 
 .mojNavbar {
     background-color: #00437e;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 10px 10px;
+    border-bottom: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
 }
