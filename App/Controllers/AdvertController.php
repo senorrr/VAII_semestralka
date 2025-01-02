@@ -104,6 +104,15 @@ class AdvertController extends AControllerBase
                     $advert->setPrice($formdata['price']);
                     $advert->setVillageId($formdata['villageId']);
                     $advert->setCategoryId($formdata['categoryId']);
+
+                    $advert->setMonday(isset($formdata['monday']));
+                    $advert->setTuesday(isset($formdata['tuesday']));
+                    $advert->setWednesday(isset($formData['wednesday']));
+                    $advert->setThursday(isset($formdata['thursday']));
+                    $advert->setFriday(isset($formdata['friday']));
+                    $advert->setSaturday(isset($formdata['saturday']));
+                    $advert->setSunday(isset($formdata['sunday']));
+
                     $advert->save();
 
                     $data['id'] = $advertId;

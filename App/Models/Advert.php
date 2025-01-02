@@ -185,13 +185,6 @@ class Advert extends Model
         return $this->monday;
     }
 
-    /**
-     * @param mixed $monday
-     */
-    public function setMonday($monday): void
-    {
-        $this->monday = $monday;
-    }
 
     /**
      * @return mixed
@@ -199,14 +192,6 @@ class Advert extends Model
     public function getTuesday()
     {
         return $this->tuesday;
-    }
-
-    /**
-     * @param mixed $tuesday
-     */
-    public function setTuesday($tuesday): void
-    {
-        $this->tuesday = $tuesday;
     }
 
     /**
@@ -218,14 +203,6 @@ class Advert extends Model
     }
 
     /**
-     * @param mixed $wednesday
-     */
-    public function setWednesday($wednesday): void
-    {
-        $this->wednesday = $wednesday;
-    }
-
-    /**
      * @return mixed
      */
     public function getThursday()
@@ -233,13 +210,7 @@ class Advert extends Model
         return $this->thursday;
     }
 
-    /**
-     * @param mixed $thursday
-     */
-    public function setThursday($thursday): void
-    {
-        $this->thursday = $thursday;
-    }
+
 
     /**
      * @return mixed
@@ -249,13 +220,6 @@ class Advert extends Model
         return $this->friday;
     }
 
-    /**
-     * @param mixed $friday
-     */
-    public function setFriday($friday): void
-    {
-        $this->friday = $friday;
-    }
 
     /**
      * @return mixed
@@ -266,14 +230,6 @@ class Advert extends Model
     }
 
     /**
-     * @param mixed $saturday
-     */
-    public function setSaturday($saturday): void
-    {
-        $this->saturday = $saturday;
-    }
-
-    /**
      * @return mixed
      */
     public function getSunday()
@@ -281,12 +237,32 @@ class Advert extends Model
         return $this->sunday;
     }
 
-    /**
-     * @param mixed $sunday
-     */
-    public function setSunday($sunday): void
-    {
-        $this->sunday = $sunday;
+    public function setMonday($monday) {
+        $this->monday = $monday ? 1 : 0;
+    }
+
+    public function setTuesday($tuesday) {
+        $this->tuesday = $tuesday ? 1 : 0;
+    }
+
+    public function setWednesday($wednesday) {
+        $this->wednesday = $wednesday ? 1 : 0;
+    }
+
+    public function setThursday($thursday) {
+        $this->thursday = $thursday ? 1 : 0;
+    }
+
+    public function setFriday($friday) {
+        $this->friday = $friday ? 1 : 0;
+    }
+
+    public function setSaturday($saturday) {
+        $this->saturday = $saturday ? 1 : 0;
+    }
+
+    public function setSunday($sunday) {
+        $this->sunday = $sunday ? 1 : 0;
     }
 
 
