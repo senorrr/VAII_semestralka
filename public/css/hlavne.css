@@ -45,7 +45,7 @@ html {
     color: goldenrod;
 }
 
-.nav-link {
+.nav-link, .mojNavbar-text {
     position: relative;
     font-size: 1.5em;
     color: #efefef;
@@ -72,7 +72,7 @@ html {
     color: goldenrod;
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after, .mojNavbar-text:hover::after {
     content: "";
     height: 2px;
     width: 100%;
@@ -292,3 +292,12 @@ a {
     width: 250px !important;
 }
 
+.mojNavbar-text {
+    color: white;
+    font-size: 0.9em;
+}
+
+.mojNavbar {
+    background-color: #00437e;
+    border-radius: 0 0 5px 5px;
+}

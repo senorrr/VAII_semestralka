@@ -4,7 +4,7 @@
 ?>
 
 <body>
-    <div class="container mt-5">
+    <div class="container mt-3">
         <h2 class="mb-4">Moje rezervácie</h2>
         <table class="table table-bordered table-striped text-center">
             <thead>

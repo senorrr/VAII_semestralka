@@ -266,6 +266,7 @@ class AdvertController extends AControllerBase
         return $this->html($dataSent);
     }
 
+
     private function getCounfOfCategoryAdverts($catId)
     {
         $con = Connection::connect();

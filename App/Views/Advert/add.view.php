@@ -5,7 +5,7 @@
 use App\Models\Category;
 
 ?>
-<div class="container">
+<div class="container mt-3">
     <h2>Pridanie inzerátu</h2>
     <div class="text-center text-vypis">
         <?php

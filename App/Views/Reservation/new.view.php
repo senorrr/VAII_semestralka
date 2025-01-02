@@ -3,7 +3,7 @@
 /** @var \App\Core\LinkGenerator $link */
 ?>
 
-<div class="container">
+<div class="container mt-3">
     <h2 class="text-center">Vytvorenie požičania inzerátu číslo: <?=$data?></h2>
 
     <div class="pozadieInzerat">

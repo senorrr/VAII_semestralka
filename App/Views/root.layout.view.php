@@ -15,7 +15,7 @@
 
     <script src="public/js/script.js"></script>
 </head>
-<body class = "wrapper">
+<body class="wrapper">
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="<?= $link->url("home.index") ?>"><img class="logo" src="public/images/logo.png" alt="logo"> </a>
@@ -60,7 +60,7 @@
     </div>
 </nav>
 
-<div class="container-fluid mt-3">
+<div class="container-fluid">
     <div class="web-content">
         <?= $contentHTML ?>
     </div>

@@ -8,9 +8,9 @@ use App\Config\Configuration;
 ?>
 
 
-<div class="container">
+<div class="container mt-3">
     <div class="row justify-content-center">
-        <div class="col-11 col-md-6 col-lg-5 gy-2">
+        <div class="col-11 col-md-6 col-lg-5">
             <h2 class="text-center">Prihlásenie</h2>
             <div class="text-center text-vypis">
                 <?php

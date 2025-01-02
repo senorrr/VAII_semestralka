@@ -10,7 +10,7 @@ use App\Models\Village;
 
 ?>
 
-<div class="container">
+<div class="container mt-3">
     <div class="text-center">
         <h2><?= $data['text']?></h2>
     </div>

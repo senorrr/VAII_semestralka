@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Models\Village;
 
 ?>
-<div class="container">
+<div class="container mt-3">
     <div class="text-center text-vypis">
         <?php
         if (isset($data['message'])) {

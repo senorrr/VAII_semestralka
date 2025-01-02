@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Models\Village;
 
 ?>
-<div class="container">
+<div class="container mt-3">
     <?php
     $advert = Advert::getOne($data);
     $images = Photo::getAll('`advertId` LIKE ?', [$data]);

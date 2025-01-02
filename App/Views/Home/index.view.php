@@ -3,7 +3,7 @@
 /** @var int $data */
 ?>
 <link href="../public/css/kategorieDomov.css" rel="stylesheet">
-<div class="">
+<div class="mt-3">
     <h2>Počet inzerátov na stránke: <?= $data?></h2>
 </div>
 <div class="container-fluid">

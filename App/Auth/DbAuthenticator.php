@@ -27,8 +27,9 @@ class DbAuthenticator implements IAuthenticator
      */
     public function login($login, $password): bool
     {
-        $user = User::getAll('`email` LIKE ?', [$login], limit: 1)[0];
-        if ($user != null) {
+        $users = User::getAll('`email` LIKE ?', [$login], limit: 1);
+        if (sizeof($users) > 0) {
+            $user = $users[0];
             if ($user->getPassword() == $password) {
                 $_SESSION['user'] = $user->getId();
                 return true;

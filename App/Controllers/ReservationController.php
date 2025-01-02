@@ -32,7 +32,10 @@ class ReservationController extends AControllerBase
         $advertId = $this->app->getRequest()->getGet()['0'];
         $formData = $this->app->getRequest()->getPost();
         if (isset($formData['from']) && $formData['to'] && isset($advertId)) {
-            if ($formData['from'] <= $formData['to']) {
+            $date = new \DateTime();
+            $currentDate = $date->format('Y-m-d');
+
+            if ($formData['from'] <= $formData['to'] && $formData['from'] >= $currentDate && $formData['to'] >= $currentDate) {
                 $reservation = new Reservation();
                 $reservation->setAdvertId($advertId);
                 $reservation->setReservedBy($this->app->getAuth()->getLoggedUserId());
