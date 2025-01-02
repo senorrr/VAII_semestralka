@@ -18,6 +18,7 @@ class AdvertController extends AControllerBase
     {
         switch ($action) {
             case 'add' :
+            case 'remove' :
             case 'edit' :
                 return $this->app->getAuth()->isLogged();
             case 'index':
@@ -42,6 +43,17 @@ class AdvertController extends AControllerBase
             return $this->html($data);
         }
         return $this->redirect($this->url(('home.index')));
+    }
+
+    public function remove(): Response
+    {
+        //todo mozno presmeruj na vsetky moje inzeraty
+        $advertId = $this->app->getRequest()->getGet()['0'];
+        if (isset($advertId['0'])) {
+            $advert = Advert::getOne($advertId['0']);
+            $advert->delete();
+        }
+        return $this->redirect($this->url('home.index'));
     }
 
     public function edit(): Response

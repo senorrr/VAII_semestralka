@@ -246,8 +246,4 @@ class Advert extends Model
     {
         $this->sunday = $sunday;
     }
-
-
-
-
 }

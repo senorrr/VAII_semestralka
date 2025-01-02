@@ -19,5 +19,5 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `surname`) VALUES
-                                                                       (1,	'admin@gmail.com',	'admin',	'Admin',	'Adminec'),
-                                                                       (2,	'marek@gmail.com',	'123',	'Marek',	'Figo');
+           (1,	'admin@gmail.com',	'admin',	'Admin',	'Adminec'),
+           (2,	'marek@gmail.com',	'123',	'Marek',	'Figo');

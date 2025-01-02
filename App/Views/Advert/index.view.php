@@ -86,7 +86,7 @@ use App\Models\Village;
             <?php
                 if ($auth->isLogged() && $auth->getLoggedUserId() == $advert->getOwnerId()) {
                     echo '<button class="btn btn-primary me-1" onclick="window.location.href=\'' . $link->url('advert.edit', [$advert->getId()]) . '\'">Edituj</button>';
-                    echo '<button class="btn btn-danger">Vymaž</button>';
+                    echo '<button class="btn btn-danger" onclick="window.location.href=\'' . $link->url('advert.remove', [[$advert->getId()]]) . '\'">Vymaž</button>';
 
                 }
             ?>
