@@ -36,9 +36,9 @@ CREATE TABLE `adverts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 INSERT INTO `adverts` (`views`, `id`, `dateOfCreate`, `timeOfLastEdit`, `text`, `title`, `ownerId`, `categoryId`, `villageId`, `price`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`) VALUES
-                                                                                                                                                                                                                          (3,	1,	'2024-12-07',	'2024-12-07 10:33:15',	'Toto je auticko',	'Auticko',	2,	1,	11,	1222,	0,	0,	0,	0,	0,	0,	0),
-                                                                                                                                                                                                                          (1,	2,	'2024-12-07',	'2024-12-31 00:28:25',	'Vŕtačka 1100W -  den/10e',	'Vrtacka',	1,	3,	110,	10,	0,	0,	0,	0,	0,	0,	0),
-                                                                                                                                                                                                                          (27,	3,	'2024-12-07',	'2024-12-07 14:55:06',	'Kompaktný a prenosný dizajn: JBL Go 3 je malý a ľahký, takže ho môžeš ľahko vziať kamkoľvek. Má rozmery 9 x 7 x 4 cm a váži len 211 gramov. Vodoodolnosť a prachuvzdornosť: S certifikáciou IP67 je reproduktor odolný voči vode a prachu, čo ho robí ideálnym pre vonkajšie použitie. Výdrž batérie: Batéria vydrží približne 5 hodín prehrávania na jedno nabitie. Zvuková kvalita: Napriek svojej veľkosti ponúka JBL Go 3 čistý a relatívne silný zvuk s bohatými basmi. Bluetooth 5.1: Spoľahlivé a rýchle pripojenie cez Bluetooth 5.1, čo zaručuje stabilné prehrávanie hudby. Dizajn a farby: Dostupný v rôznych farebných prevedeniach, takže si môžeš vybrať ten, ktorý ti najviac vyhovuje.',	'Reproduktory',	1,	4,	690,	15,	0,	0,	0,	0,	0,	0,	0);
+      (25,	1,	'2024-12-07',	'2025-01-02 10:23:42',	'Špecifikácie:  Rok výroby: 2020 Najazdené: 45,000 km Motor: 3.0 TDI V6 Výkon: 286 koní Prevodovka: Automatická Pohon: Quattro (4x4) Farba: Čierna metalíza Interiér: Kožený, čierny Výbava:  Adaptívny tempomat Navigačný systém MMI LED svetlomety Parkovacie senzory Panoramatická strecha Vyhrievané sedadlá Prémiový zvukový systém Bang & Olufsen',	'Auticko',	2,	1,	11,	1222,	1,	1,	1,	1,	1,	1,	1),
+      (2,	2,	'2024-12-07',	'2024-12-31 00:28:25',	'Vŕtačka 1100W -  den/10e',	'Vrtacka',	1,	3,	110,	10,	0,	0,	0,	0,	0,	0,	0),
+      (31,	3,	'2024-12-07',	'2024-12-07 14:55:06',	'Kompaktný a prenosný dizajn: JBL Go 3 je malý a ľahký, takže ho môžeš ľahko vziať kamkoľvek. Má rozmery 9 x 7 x 4 cm a váži len 211 gramov. Vodoodolnosť a prachuvzdornosť: S certifikáciou IP67 je reproduktor odolný voči vode a prachu, čo ho robí ideálnym pre vonkajšie použitie. Výdrž batérie: Batéria vydrží približne 5 hodín prehrávania na jedno nabitie. Zvuková kvalita: Napriek svojej veľkosti ponúka JBL Go 3 čistý a relatívne silný zvuk s bohatými basmi. Bluetooth 5.1: Spoľahlivé a rýchle pripojenie cez Bluetooth 5.1, čo zaručuje stabilné prehrávanie hudby. Dizajn a farby: Dostupný v rôznych farebných prevedeniach, takže si môžeš vybrať ten, ktorý ti najviac vyhovuje.',	'Reproduktory',	1,	4,	690,	15,	0,	0,	0,	0,	0,	0,	0);
 
 DELIMITER ;;
 
@@ -50,4 +50,4 @@ END;;
 
 DELIMITER ;
 
--- 2025-01-02 09:28:59
+-- 2025-01-02 11:23:22

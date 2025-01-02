@@ -20,5 +20,5 @@ CREATE TABLE `photos` (
 
 INSERT INTO `photos` (`id`, `advertId`, `url`) VALUES
        (1,	1,	'https://www.klokocka.cz/temp/cache/carPics/img1100x825e/787072/1O15701.jpg'),
-       (3,	1,	'https://cdn.jdpower.com/JDP_2023%20Audi%20A6%20Allroad%20Interior%20Dashboard.jpg');
+       (2,	1,	'https://cdn.jdpower.com/JDP_2023%20Audi%20A6%20Allroad%20Interior%20Dashboard.jpg');
 -- 2024-12-28 15:08:08
