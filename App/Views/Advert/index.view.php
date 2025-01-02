@@ -109,7 +109,7 @@ use App\Models\Village;
             <h3 class="col"><?=$advert->getViews()?></h3>
         </div>
         <div class="d-flex justify-content-center">
-            <button class="btn btn-success me-1">Rezervuj</button>
+            <button class="btn btn-success me-1" onclick="window.location.href='<?= $link->url('reservation.index') ?>'">Rezervuj</button>
             <?php
                 if ($auth->isLogged() && $auth->getLoggedUserId() == $advert->getOwnerId()) {
                     echo '<button class="btn btn-primary me-1" onclick="window.location.href=\'' . $link->url('advert.edit', [$advert->getId()]) . '\'">Edituj</button>';
