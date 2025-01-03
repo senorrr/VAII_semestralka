@@ -9,36 +9,36 @@ use App\Models\Status;
     <h2 class="mb-4">Požičané odo mňa</h2>
     <table class="table table-bordered table-striped text-center">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Inzerát ID</th>
-                <th>Od</th>
-                <th>Do</th>
-                <th>Rezervoval</th>
-                <th>Správa</th>
-                <th>Status</th>
-                <th>Celková cena</th>
-                <th>Akcie</th>
-            </tr>
+        <tr>
+            <th class="d-none d-md-table-cell">ID</th>
+            <th class="d-none d-md-table-cell">Inzerát ID</th>
+            <th>Od</th>
+            <th>Do</th>
+            <th>Rezervoval</th>
+            <th class="d-none d-lg-table-cell">Správa</th>
+            <th>Status</th>
+            <th>Celková cena</th>
+            <th>Akcie</th>
+        </tr>
         </thead>
         <tbody>
-            <?php foreach ($data as $reservation): ?>
-                <tr>
-                    <td><?= $reservation['id'] ?></td>
-                    <td><?= $reservation['advertId'] ?></td>
-                    <td><?= $reservation['from'] ?></td>
-                    <td><?= $reservation['to'] ?></td>
-                    <td><?= $reservation['reservedBy'] ?></td>
-                    <td><?= $reservation['message'] ?></td>
-                    <td><?= $reservation['statusId'] ?></td>
-                    <td><?= $reservation['totalCost'] ?></td>
-                    <td>
-                        <button class="btn btn-success btn-sm">Schváliť</button>
-                        <button class="btn btn-danger btn-sm">Zamietnuť</button>
-                        <button class="btn btn-primary btn-sm">Dokončiť</button>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+        <?php foreach ($data as $reservation): ?>
+            <tr>
+                <td class="d-none d-md-table-cell"><?= $reservation['id'] ?></td>
+                <td class="d-none d-md-table-cell"><?= $reservation['advertId'] ?></td>
+                <td><?= date_format(date_create($reservation['from']), 'd.m.Y') ?></td>
+                <td><?= date_format(date_create($reservation['to']), 'd.m.Y') ?></td>
+                <td><?= $reservation['reservedBy'] ?></td>
+                <td class="d-none d-lg-table-cell"><?= $reservation['message'] ?></td>
+                <td><?= Status::getOne($reservation['statusId'])->getPopis() ?></td>
+                <td><?= $reservation['totalCost'] ?></td>
+                <td>
+                    <button class="btn btn-success btn-sm mb-1">Schváliť</button>
+                    <button class="btn btn-danger btn-sm mb-1">Zamietnuť</button>
+                    <button class="btn btn-primary btn-sm">Dokončiť</button>
+                </td>
+            </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>
