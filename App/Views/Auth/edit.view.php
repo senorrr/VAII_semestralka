@@ -7,15 +7,15 @@ $user = \App\Models\User::getOne($auth->getLoggedUserId())
 
 <div class="text-center">
 
-<div class="d-inline-flex align-content-center justify-content-center mt-0 mojNavbar text-center">
-    <a class="mojNavbar-text me-4" href="<?= $link->url("reservation.myReservations")?>"> <h4> Moje rezervácie</a>
-    <a class="mojNavbar-text me-4" href="">Moje inzeráty</a>
+    <div class="d-inline-flex align-content-center justify-content-center mt-0 mojNavbar text-center">
+    <a class="mojNavbar-text me-4" href="<?= $link->url("reservation.myReservations")?>"> <h4> Moje požičania</a>
+    <a class="mojNavbar-text me-4" href="<?= $link->url('reservation.reservedFromMe')?>">Požičané odo mnňa</a>
     <?php
     if ($auth->isLogged() && $auth->getPermissionLevel() > 0) {
         echo '<a class="mojNavbar-text me-4" href="' . $link->url('admin.index') . ' ">Admin panel</a>';
     }
     ?>
-</div>
+    </div>
 </div>
 
 

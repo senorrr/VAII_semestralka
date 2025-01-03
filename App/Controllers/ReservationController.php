@@ -3,9 +3,12 @@
 namespace App\Controllers;
 
 use App\Core\AControllerBase;
+use App\Core\DB\Connection;
 use App\Core\Responses\Response;
 use App\Models\Advert;
 use App\Models\Reservation;
+use App\Models\User;
+use PDO;
 
 class ReservationController extends AControllerBase
 {
@@ -14,6 +17,7 @@ class ReservationController extends AControllerBase
         switch ($action) {
             case 'new':
             case 'myReservations':
+            case 'reservedFromMe':
                 return $this->app->getAuth()->isLogged();
             default: return false;
         }
@@ -41,7 +45,7 @@ class ReservationController extends AControllerBase
                 $reservation->setReservedBy($this->app->getAuth()->getLoggedUserId());
                 $reservation->setFrom($formData['from']);
                 $reservation->setTo($formData['to']);
-                $reservation->setStatus(1);
+                $reservation->setStatusId(1);
                 $advert = Advert::getOne($advertId);
                 $cost = $reservation->getTo() - $reservation->getFrom();
                 $cost += 1;
@@ -61,5 +65,24 @@ class ReservationController extends AControllerBase
     {
         $resevations = Reservation::getAll(whereClause: '`reservedBy` LIKE ?', whereParams: [$this->app->getAuth()->getLoggedUserId()]);
         return $this->html($resevations);
+    }
+
+    public function reservedFromMe():Response
+    {
+        $con = Connection::connect();
+        $sql = "SELECT rs.id, rs.advertId, rs.from, rs.to, rs.reservedBy, rs.message, rs.statusId, rs.totalCost
+                    FROM `reservations` AS `rs`
+                        JOIN `adverts` ON rs.advertId = adverts.id
+                            WHERE adverts.ownerId like ?";
+        $stmt = $con->prepare($sql);
+        $stmt->execute([$this->app->getAuth()->getLoggedUserId()]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        //musim pouzit referenciu aby to funogalo
+        foreach ($result as &$reservation) {
+            $reservedBy = User::getOne($reservation['reservedBy']);
+            $reservation['reservedBy'] = $reservedBy->getName() . ' ' . $reservedBy->getSurname();
+        }
+        return $this->html($result);
     }
 }

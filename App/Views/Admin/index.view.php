@@ -11,9 +11,6 @@ use App\Models\Category; ?>
 
 <div class="container">
     <h2>Admin</h2>
-
-    Zmen aby len admin mohol prist
-
     <div>
         <form>
             <label for="spravovanie">Vyber spravovanie</label>
