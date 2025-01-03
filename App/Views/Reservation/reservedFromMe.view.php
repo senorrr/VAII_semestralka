@@ -33,9 +33,13 @@ use App\Models\Status;
                 <td><?= Status::getOne($reservation['statusId'])->getPopis() ?></td>
                 <td><?= $reservation['totalCost'] ?></td>
                 <td>
-                    <button class="btn btn-success btn-sm mb-1">Schváliť</button>
-                    <button class="btn btn-danger btn-sm mb-1">Zamietnuť</button>
-                    <button class="btn btn-primary btn-sm">Dokončiť</button>
+                    <button type="button" class="btn btn-success btn-sm mb-1"
+                            onclick="window.location.href='<?= $link->url('reservation.changeStatus', ['approve', $reservation['id']]) ?>'">Schváliť</button>
+
+                    <button type="button" class="btn btn-danger btn-sm mb-1"
+                            onclick="window.location.href='<?= $link->url('reservation.changeStatus', ['cancel', $reservation['id']]) ?>'">Zamietnuť</button>
+                    <button type="button" class="btn btn-primary btn-sm"
+                            onclick="window.location.href='<?= $link->url('reservation.changeStatus', ['finish', $reservation['id']]) ?>'">Dokončiť</button>
                 </td>
             </tr>
         <?php endforeach; ?>

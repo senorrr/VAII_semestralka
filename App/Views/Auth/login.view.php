@@ -17,7 +17,8 @@ use App\Config\Configuration;
                 if (isset($data['message'])) {
                     echo $data['message'];
                 }
-                ?>            </div>
+                ?>
+            </div>
             <form method="post" action="<?= $link->url("login") ?>">
                 <div class="form-signin" >
                     <label for="email">Email</label>
