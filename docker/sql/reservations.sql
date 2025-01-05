@@ -27,6 +27,6 @@ CREATE TABLE `reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 INSERT INTO `reservations` (`id`, `advertId`, `from`, `to`, `reservedBy`, `message`, `statusId`, `totalCost`) VALUES
-  (2,	1,	'2025-01-02',	'2025-01-03',	1,	'Dobry den',	1,	1222),
-  (3,	1,	'2025-01-04',	'2025-01-05',	1,	'Mam zaujem si pozicat toto auto na dlhsiu dobu',	1,	1222);
+        (2,	1,	'2025-01-02',	'2025-01-03',	1,	'Dobry den',	1,	1222),
+        (3,	1,	'2025-01-04',	'2025-01-05',	1,	'Mam zaujem si pozicat toto auto na dlhsiu dobu',	1,	1222);
 -- 2025-01-02 21:16:15

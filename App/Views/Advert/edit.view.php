@@ -74,6 +74,16 @@ use App\Models\Village;
                 <div class="inzerat-oramovanie-edit d-flex align-items-center">
                     <input class="form-control ms-3" type="url" placeholder="Zadajte url adresu fotky" name="url" id="url">
                     <button class="btn btn-primary ms-2" type="submit" name="submitPhoto">Pridaj fotku</button>
+                    nefunguje
+                    <?php
+                        //todo toto nefunguje
+                    /*
+                     * treba dorobit 1 AJAX pozor musi to byt iny sposob ako uz mam teraz
+                     * hashovanie hesiel! password salted hash
+                     * oddelit JS do samotneho suboru
+                     */
+
+                    ?>
                     <button class="btn btn-danger mx-2" type="submit" name="submitRemovePhoto">Načítaj url fotky</button>
                 </div>
             <div class="m-2">
@@ -133,6 +143,28 @@ use App\Models\Village;
 </div>
 
 <script>
+    document.getElementById('city').addEventListener('input', function() {
+        var text = document.getElementById('city');
+        if (text.value.length > 2) {
+            fetch('http://127.0.0.1/?c=Home&a=getCity', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(text.value)
+            }).then(response => response.json()).then(cities => {
+                const datalist = document.getElementById('cities');
+                datalist.innerHTML = '';
+                if (text.value !== cities[0]) {
+                    cities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city;
+                        datalist.appendChild(option);
+                    });
+                }
+            })
+        }
+    });
     //pridanie fotky
     document.addEventListener('DOMContentLoaded', function() {
         const pridaj = document.querySelector('button[name="submitPhoto"]');
