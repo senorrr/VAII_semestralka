@@ -57,18 +57,26 @@ class AdvertController extends AControllerBase
         return $this->redirect($this->url('home.index'));
     }
 
-    public function addNewPhoto():Response
+    public function addNewPhoto(): Response
     {
         $formdata = $this->app->getRequest()->getPost();
         if (isset($formdata['url'])) {
             $advertId = $this->app->getRequest()->getGet()['0'];
             if ($advertId != null && trim($formdata['url']) != '') {
-                $photo = new Photo();
-                $photo->setAdvertId($advertId);
-                $photo->setUrl($formdata['url']);
-                $photo->save();
-                $data['success'] = true;
-                $data['message'] = 'Fotka úspšene pridaná';
+                $url = trim($formdata['url']);
+                $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                $extension = strtolower(pathinfo($url, PATHINFO_EXTENSION));
+                if (in_array($extension, $validExtensions)) {
+                    $photo = new Photo();
+                    $photo->setAdvertId($advertId);
+                    $photo->setUrl($url);
+                    $photo->save();
+                    $data['success'] = true;
+                    $data['message'] = 'Fotka úspšene pridaná';
+                } else {
+                    $data['success'] = false;
+                    $data['message'] = 'URL musí končiť na jpg, jpeg, png alebo gif';
+                }
             } else {
                 $data['success'] = false;
                 $data['message'] = 'Fotka nebola úspšene pridaná';
@@ -210,13 +218,21 @@ class AdvertController extends AControllerBase
                 $advert->save();        //tu mu nastavi auto increment ID
                 $data = ['id' => $advert->getId()];
 
+                $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
                 $i = 1;
                 while (isset($formData['photo' . $i])) {
                     if (!empty($formData['photo' . $i])) {
-                        $photo = new Photo();
-                        $photo->setUrl($formData['photo' . $i]);
-                        $photo->setAdvertId($advert->getId());
-                        $photo->save();
+                        $url = trim($formData['photo' . $i]);
+                        $extension = strtolower(pathinfo($url, PATHINFO_EXTENSION));
+                        if (in_array($extension, $validExtensions)) {
+                            $photo = new Photo();
+                            $photo->setUrl($url);
+                            $photo->setAdvertId($advert->getId());
+                            $photo->save();
+                        } else {
+                            $formData['message'] = 'URL musí končiť na jpg, jpeg, png alebo gif';
+                            return $this->html($formData);
+                        }
                     }
                     $i++;
                 }
@@ -228,6 +244,7 @@ class AdvertController extends AControllerBase
         $formData += ['message' => 'Údaje neboli správne vyplnené!'];
 
         return $this->html($formData);
+
     }
 
     public function all(): Response
