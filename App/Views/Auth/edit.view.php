@@ -53,9 +53,8 @@ $user = \App\Models\User::getOne($auth->getLoggedUserId())
                 <div class="form-group">
                     <label for="oldPassword">Heslo</label>
                     <input name="oldPassword" required type="password" class="form-control minSirka" id="oldPassword"
-                           placeholder="Zadajte aktuálne heslo" title="Musí obsahovať minimálne 8 znakov a jedno veľké písmeno"
+                           placeholder="Zadajte aktuálne heslo" title="Musí obsahovať minimálne 8 znakov a jedno veľké písmeno" pattern="(?=.*[A-Z]).{8,}"
                            autocomplete="password">
-                    <!--TODO: do paternu daj toto: pattern="(?=.*[A-Z]).{8,}"   -->
 
                 </div>
                 <div class="form-group">

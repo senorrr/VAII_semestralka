@@ -71,20 +71,28 @@ use App\Models\Village;
                 <?php
             }
             ?>
-                <div class="inzerat-oramovanie-edit d-flex align-items-center">
-                    <input class="form-control ms-3" type="url" placeholder="Zadajte url adresu fotky" name="url" id="url">
-                    <button class="btn btn-primary ms-2" type="submit" name="submitPhoto">Pridaj fotku</button>
-                    nefunguje
-                    <?php
-                        //todo toto nefunguje
-                    /*
-                     * treba dorobit 1 AJAX pozor musi to byt iny sposob ako uz mam teraz
-                     * hashovanie hesiel! password salted hash
-                     * oddelit JS do samotneho suboru
-                     */
+                <div class="inzerat-oramovanie-edit">
+                    <div class="d-flex align-items-center">
+                        <input class="form-control ms-3" type="url" placeholder="Zadajte url adresu fotky" name="url" id="url">
+                        <button class="btn btn-primary ms-2" id="submitPhoto" type="button" name="submitPhoto">Pridaj fotku</button>
+                        <?php
+                        /*
+                         * //todo treba dorobit
+                         * hashovanie hesiel! password salted hash
+                         * oddelit JS do samotneho suboru
+                         */
 
-                    ?>
-                    <button class="btn btn-danger mx-2" type="submit" name="submitRemovePhoto">Načítaj url fotky</button>
+                        ?>
+                        <button class="btn btn-danger mx-2" type="submit" name="submitRemovePhoto">Načítaj url fotky</button>
+
+                    </div>
+                    <div class="text-center text-vypis" id="message">
+                        <?php
+                        if (isset($data['message'])) {
+                            echo $data['message'];
+                        }
+                        ?>
+                    </div>
                 </div>
             <div class="m-2">
                 <textarea name="text"  maxlength="1500" class="form-control" id="description"
@@ -140,9 +148,58 @@ use App\Models\Village;
             </div>
         </form>
     </div>
-</div>
 
 <script>
+    //AJAX na odoslanie form
+    document.getElementById('submitPhoto').addEventListener('click', function(event) {
+        const urlInput = document.querySelector('input[name="url"]');
+        if (urlInput.value.trim() !== '') {
+            var url = urlInput.value;
+            var formData = new FormData();
+            var fetchUrl = 'http://127.0.0.1/?c=advert&a=addNewPhoto&0=' + '<?= $advert->getId()?>';
+            formData.append('url', url);
+            fetch(fetchUrl, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var carouselInner = document.querySelector('.carousel-inner');
+                    var carouselIndicators = document.querySelector('.carousel-indicators');
+                    var newItemIndex = carouselInner.children.length;
+
+                    // novy  carousel item
+                    var newItem = document.createElement('div');
+                    newItem.classList.add('carousel-item');
+                    newItem.innerHTML = `<img class="d-block w-100 mx-auto" src="${url}" alt="New Slide">`;
+                    carouselInner.appendChild(newItem);
+
+                    // novy ten spodny indicator
+                    var newIndicator = document.createElement('button');
+                    newIndicator.type = 'button';
+                    newIndicator.dataset.bsTarget = '#carouselExampleIndicators';
+                    newIndicator.dataset.bsSlideTo = newItemIndex;
+                    newIndicator.setAttribute('aria-label', 'Slide ' + (newItemIndex + 1));
+                    carouselIndicators.appendChild(newIndicator);
+
+                    // ak je to prva fotka....
+                    if (newItemIndex === 0) {
+                        newItem.classList.add('active');
+                        newIndicator.classList.add('active');
+                        newIndicator.setAttribute('aria-current', 'true');
+                    }
+
+                    // nastav na najnovsiu fotku
+                    var carousel = new bootstrap.Carousel(document.querySelector('#carouselExampleIndicators'));
+                    carousel.to(newItemIndex);
+                    var messageBox = document.getElementById('message');
+                    messageBox.textContent = data['message'];
+                });
+        }
+    });
+
+
+    //na mesto ten isty ako pri vyvarani
     document.getElementById('city').addEventListener('input', function() {
         var text = document.getElementById('city');
         if (text.value.length > 2) {
@@ -164,17 +221,6 @@ use App\Models\Village;
                 }
             })
         }
-    });
-    //pridanie fotky
-    document.addEventListener('DOMContentLoaded', function() {
-        const pridaj = document.querySelector('button[name="submitPhoto"]');
-        pridaj.addEventListener('click', function(event) {
-            const urlInput = document.querySelector('input[name="url"]');
-            if (urlInput.value.trim() === '') {
-                event.preventDefault();
-            }
-        });
-
     });
 
     //ked zacnem editovat url adresu nech zmeni tlacidlo

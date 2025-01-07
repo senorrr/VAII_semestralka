@@ -20,6 +20,7 @@ class AdvertController extends AControllerBase
             case 'add' :
             case 'remove' :
             case 'edit' :
+            case 'addNewPhoto' :
                 return $this->app->getAuth()->isLogged();
             case 'index':
             case 'all':
@@ -56,27 +57,29 @@ class AdvertController extends AControllerBase
         return $this->redirect($this->url('home.index'));
     }
 
+    public function addNewPhoto():Response
+    {
+        $formdata = $this->app->getRequest()->getPost();
+        if (isset($formdata['url'])) {
+            $advertId = $this->app->getRequest()->getGet()['0'];
+            if ($advertId != null && trim($formdata['url']) != '') {
+                $photo = new Photo();
+                $photo->setAdvertId($advertId);
+                $photo->setUrl($formdata['url']);
+                $photo->save();
+                $data['message'] = 'Fotka úspšene pridaná';
+            } else {
+                $data['message'] = 'Fotka nebola úspšene pridaná';
+            }
+            return $this->json($data);
+        }
+        $data['message'] = 'Chybna alebo žiadna URL';
+        return $this->json($data);
+    }
+
     public function edit(): Response
     {
         $formdata = $this->app->getRequest()->getPost();
-        if (isset($formdata['submitPhoto'])) {
-            $advertId = $this->app->getRequest()->getGet()['0'];
-            if ($advertId != null) {
-                $photo = new Photo();
-                $photo->setAdvertId($advertId);
-                if (trim($formdata['url']) != '') {
-                    $photo->setUrl($formdata['url']);
-                    $photo->save();
-                    $data['id'] = $advertId;
-                    $data['message'] = 'Fotka úspšene pridaná';
-
-                    return $this->redirect($this->url('advert.index', [$data]));
-                } else {
-                    return $this->html($advertId);
-                }
-            }
-        }
-
         if (isset($formdata['submitRemovePhoto'])) {
             $advertId = $this->app->getRequest()->getGet()['0'];
             if ($advertId != null) {

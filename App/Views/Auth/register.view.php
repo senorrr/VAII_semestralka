@@ -37,8 +37,9 @@
                 </div>
                 <div class="form-group">
                     <label for="new_password">Heslo</label>
-                    <input name="password" required type="password" class="form-control minSirka" id="new_password" placeholder="Zadajte heslo" title="Musí obsahovať minimálne 8 znakov a jedno veľké písmeno" autocomplete="new-password">
-                    <!--TODO: do paternu daj toto: pattern="(?=.*[A-Z]).{8,}"   -->
+                    <input name="password" required type="password" class="form-control minSirka" id="new_password"
+                           placeholder="Zadajte heslo" title="Musí obsahovať minimálne 8 znakov a jedno veľké písmeno"
+                           autocomplete="new-password" pattern="(?=.*[A-Z]).{8,}">
 
                 </div>
                 <div class="form-group">

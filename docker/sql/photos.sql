@@ -9,7 +9,7 @@ SET NAMES utf8mb4;
 
 DROP TABLE IF EXISTS `photos`;
 CREATE TABLE `photos` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `advertId` int(11) NOT NULL,
   `url` varchar(500) NOT NULL,
   PRIMARY KEY (`id`),
