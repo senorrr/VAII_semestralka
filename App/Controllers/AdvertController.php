@@ -67,12 +67,15 @@ class AdvertController extends AControllerBase
                 $photo->setAdvertId($advertId);
                 $photo->setUrl($formdata['url']);
                 $photo->save();
+                $data['success'] = true;
                 $data['message'] = 'Fotka úspšene pridaná';
             } else {
+                $data['success'] = false;
                 $data['message'] = 'Fotka nebola úspšene pridaná';
             }
             return $this->json($data);
         }
+        $data['success'] = false;
         $data['message'] = 'Chybna alebo žiadna URL';
         return $this->json($data);
     }

@@ -164,34 +164,36 @@ use App\Models\Village;
             })
                 .then(response => response.json())
                 .then(data => {
-                    var carouselInner = document.querySelector('.carousel-inner');
-                    var carouselIndicators = document.querySelector('.carousel-indicators');
-                    var newItemIndex = carouselInner.children.length;
+                    if (data['success'] === true) {
+                        var carouselInner = document.querySelector('.carousel-inner');
+                        var carouselIndicators = document.querySelector('.carousel-indicators');
+                        var newItemIndex = carouselInner.children.length;
 
-                    // novy  carousel item
-                    var newItem = document.createElement('div');
-                    newItem.classList.add('carousel-item');
-                    newItem.innerHTML = `<img class="d-block w-100 mx-auto" src="${url}" alt="New Slide">`;
-                    carouselInner.appendChild(newItem);
+                        // novy  carousel item
+                        var newItem = document.createElement('div');
+                        newItem.classList.add('carousel-item');
+                        newItem.innerHTML = `<img class="d-block w-100 mx-auto" src="${url}" alt="New Slide">`;
+                        carouselInner.appendChild(newItem);
 
-                    // novy ten spodny indicator
-                    var newIndicator = document.createElement('button');
-                    newIndicator.type = 'button';
-                    newIndicator.dataset.bsTarget = '#carouselExampleIndicators';
-                    newIndicator.dataset.bsSlideTo = newItemIndex;
-                    newIndicator.setAttribute('aria-label', 'Slide ' + (newItemIndex + 1));
-                    carouselIndicators.appendChild(newIndicator);
+                        // novy ten spodny indicator
+                        var newIndicator = document.createElement('button');
+                        newIndicator.type = 'button';
+                        newIndicator.dataset.bsTarget = '#carouselExampleIndicators';
+                        newIndicator.dataset.bsSlideTo = newItemIndex;
+                        newIndicator.setAttribute('aria-label', 'Slide ' + (newItemIndex + 1));
+                        carouselIndicators.appendChild(newIndicator);
 
-                    // ak je to prva fotka....
-                    if (newItemIndex === 0) {
-                        newItem.classList.add('active');
-                        newIndicator.classList.add('active');
-                        newIndicator.setAttribute('aria-current', 'true');
+                        // ak je to prva fotka....
+                        if (newItemIndex === 0) {
+                            newItem.classList.add('active');
+                            newIndicator.classList.add('active');
+                            newIndicator.setAttribute('aria-current', 'true');
+                        }
+
+                        // nastav na najnovsiu fotku
+                        var carousel = new bootstrap.Carousel(document.querySelector('#carouselExampleIndicators'));
+                        carousel.to(newItemIndex);
                     }
-
-                    // nastav na najnovsiu fotku
-                    var carousel = new bootstrap.Carousel(document.querySelector('#carouselExampleIndicators'));
-                    carousel.to(newItemIndex);
                     var messageBox = document.getElementById('message');
                     messageBox.textContent = data['message'];
                 });
