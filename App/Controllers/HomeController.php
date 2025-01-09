@@ -27,7 +27,7 @@ class HomeController extends AControllerBase
     {
         $advertController = new AdvertController();
         return $this->html($advertController->getCounfOfAllAdverts());
-        //todo konzultuj!
+        //nie som si isty, ze ci to je dobry pristup, ale funguje to... inak by som mal duplicitny kod...
     }
 
 

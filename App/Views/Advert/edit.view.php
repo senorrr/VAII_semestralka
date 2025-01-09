@@ -79,7 +79,6 @@ use App\Models\Village;
                         /*
                          * //todo treba dorobit
                          * hashovanie hesiel! password salted hash
-                         * oddelit JS do samotneho suboru
                          */
 
                         ?>

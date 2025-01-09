@@ -48,7 +48,6 @@ class AdvertController extends AControllerBase
 
     public function remove(): Response
     {
-        //todo mozno presmeruj na vsetky moje inzeraty
         $advertId = $this->app->getRequest()->getGet()['0'];
         if (isset($advertId['0'])) {
             $advert = Advert::getOne($advertId['0']);
