@@ -54,7 +54,7 @@ abstract class AControllerBase
      * @param string $action
      * @return bool
      */
-    public function authorize(string $action)
+    public function authorize(string $action): bool
     {
         return true;
     }

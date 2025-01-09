@@ -6,14 +6,14 @@ use App\Core\Model;
 
 class Photo extends Model
 {
-    protected $url;
-    protected $id;
-    protected $advertId;
+    protected String $url;
+    protected int $id;
+    protected int $advertId;
 
     /**
      * @return mixed
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -27,9 +27,9 @@ class Photo extends Model
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getAdvertId()
+    public function getAdvertId(): int
     {
         return $this->advertId;
     }

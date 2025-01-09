@@ -8,6 +8,7 @@ use App\Core\Responses\Response;
 use App\Models\Advert;
 use App\Models\Reservation;
 use App\Models\User;
+use DateTime;
 use PDO;
 
 class ReservationController extends AControllerBase
@@ -37,7 +38,7 @@ class ReservationController extends AControllerBase
         $advertId = $this->app->getRequest()->getGet()['0'];
         $formData = $this->app->getRequest()->getPost();
         if (isset($formData['from']) && $formData['to'] && isset($advertId)) {
-            $date = new \DateTime();
+            $date = new DateTime();
             $currentDate = $date->format('Y-m-d');
 
             if ($formData['from'] <= $formData['to'] && $formData['from'] >= $currentDate && $formData['to'] >= $currentDate) {

@@ -6,14 +6,14 @@ use App\Core\Model;
 
 class Village extends Model
 {
-    protected $id;
-    protected $name;
+    protected int $id;
+    protected string $name;
     protected $zip;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -22,7 +22,7 @@ class Village extends Model
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

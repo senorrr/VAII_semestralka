@@ -6,21 +6,21 @@ use App\Core\Model;
 
 class Category extends Model
 {
-    protected $id;
-    protected $name;
-    protected $destinationOfPicture;
+    protected int $id;
+    protected String $name;
+    protected String $destinationOfPicture;
 
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name): void
     {
@@ -28,9 +28,9 @@ class Category extends Model
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getDestinationOfPicture()
+    public function getDestinationOfPicture(): string
     {
         return $this->destinationOfPicture;
     }
@@ -44,9 +44,9 @@ class Category extends Model
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }

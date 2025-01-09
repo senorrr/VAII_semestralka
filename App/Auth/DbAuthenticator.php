@@ -23,7 +23,6 @@ class DbAuthenticator implements IAuthenticator
      * @param $login
      * @param $password
      * @return bool
-     * @throws \Exception
      */
     public function login($login, $password): bool
     {

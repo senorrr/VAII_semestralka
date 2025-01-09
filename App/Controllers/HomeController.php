@@ -18,15 +18,11 @@ class HomeController extends AControllerBase
      * @param $action
      * @return bool
      */
-    public function authorize($action)
+    public function authorize($action): bool
     {
         return true;
     }
 
-    /**
-     * Example of an action (authorization needed)
-     * @return \App\Core\Responses\Response|\App\Core\Responses\ViewResponse
-     */
     public function index(): Response
     {
         $advertController = new AdvertController();
@@ -34,14 +30,6 @@ class HomeController extends AControllerBase
         //todo konzultuj!
     }
 
-    /**
-     * Example of an action accessible without authorization
-     * @return \App\Core\Responses\ViewResponse
-     */
-    public function contact(): Response
-    {
-        return $this->html();
-    }
 
     public function getCity():Response
     {

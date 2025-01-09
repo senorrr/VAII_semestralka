@@ -4,11 +4,12 @@ namespace App\Controllers;
 
 use App\Config\Configuration;
 use App\Core\AControllerBase;
+use App\Core\LinkGenerator;
 use App\Core\Responses\Response;
 use App\Core\Responses\ViewResponse;
 use App\Models\User;
 
-/** @var \App\Core\LinkGenerator $link */
+/** @var LinkGenerator $link */
 
 
 /**
@@ -18,7 +19,7 @@ use App\Models\User;
  */
 class AuthController extends AControllerBase
 {
-    public function authorize(string $action)
+    public function authorize(string $action): bool
     {
         switch ($action) {
             case 'edit' :
@@ -74,11 +75,10 @@ class AuthController extends AControllerBase
                             $user->setEmail($formData['newLogin']);
                             $user->save();
                             $data = ['message' => 'Úspešná zmena!'];
-                            return $this->html($data);
                         } else {
                             $data = ['message' => "Starý a nový mail sú rovnaké"];
-                            return $this->html($data);
                         }
+                        return $this->html($data);
                     } else if ($formData['newLogin'] == null && $formData['newPassword'] != null &&
                         $formData['confirmPassword'] != null) {
                         if ($formData['newPassword'] == $formData['confirmPassword']) {

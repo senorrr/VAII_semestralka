@@ -4,36 +4,36 @@ use App\Core\Model;
 
 class User extends Model
 {
-    protected $id;
-    protected $name;
-    protected $surname;
-    protected $email;
+    protected int $id;
+    protected string $name;
+    protected string$surname;
+    protected string$email;
     protected $password;
 
-    protected $permissions;
+    protected int $permissions;
 
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -55,15 +55,15 @@ class User extends Model
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name): void
     {
@@ -71,9 +71,9 @@ class User extends Model
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getSurname()
+    public function getSurname(): string
     {
         return $this->surname;
     }
@@ -87,17 +87,17 @@ class User extends Model
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getPermissions()
+    public function getPermissions(): int
     {
         return $this->permissions;
     }
 
     /**
-     * @param mixed $permissions
+     * @param int $permissions
      */
-    public function setPermissions($permissions): void
+    public function setPermissions(int $permissions): void
     {
         $this->permissions = $permissions;
     }

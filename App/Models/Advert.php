@@ -7,21 +7,21 @@ use DateTime;
 
 class Advert extends Model
 {
-    protected $id;
+    protected ?int $id;
     protected $dateOfCreate;
     protected $timeOfLastEdit;
-    protected $text;
-    protected $title;
-    protected $ownerId;
-    protected $categoryId;
-    protected $villageId;
-    protected $price;
-    protected $views;
+    protected ?String $text;
+    protected ?String $title;
+    protected ?int $ownerId;
+    protected ?int $categoryId;
+    protected ?int $villageId;
+    protected ?float $price;
+    protected ?int $views;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -67,7 +67,7 @@ class Advert extends Model
     /**
      * @param mixed $text
      */
-    public function setText($text): void
+    public function setText(String $text): void
     {
         $this->text = $text;
     }
@@ -83,7 +83,7 @@ class Advert extends Model
     /**
      * @param mixed $title
      */
-    public function setTitle($title): void
+    public function setTitle(?String $title): void
     {
         $this->title = $title;
     }
@@ -163,17 +163,16 @@ class Advert extends Model
     /**
      * @param mixed $views
      */
-    public function setViews($views): void
+    public function setViews(?int $views): void
     {
         $this->views = $views;
     }
 
-
-    protected  $monday;
-    protected  $tuesday;
-    protected  $wednesday;
-    protected  $thursday;
-    protected  $friday;
+    protected $monday;
+    protected $tuesday;
+    protected $wednesday;
+    protected $thursday;
+    protected $friday;
     protected $saturday;
     protected $sunday;
 
