@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Category;
-use App\Models\User;
 
 /**
  * Class HomeController

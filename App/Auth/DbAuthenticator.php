@@ -4,8 +4,6 @@ namespace App\Auth;
 
 use App\Core\IAuthenticator;
 use App\Models\User;
-use App\Core\DB\Connection;
-use PDO;
 
 class DbAuthenticator implements IAuthenticator
 {

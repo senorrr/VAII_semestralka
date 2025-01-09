@@ -119,15 +119,7 @@ class AdvertController extends AControllerBase
                     $advert->setVillageId($formdata['villageId']);
                     $advert->setCategoryId($formdata['categoryId']);
 
-                    $advert->setMonday(isset($formdata['monday']));
-                    $advert->setTuesday(isset($formdata['tuesday']));
-                    $advert->setWednesday(isset($formData['wednesday']));
-                    $advert->setThursday(isset($formdata['thursday']));
-                    $advert->setFriday(isset($formdata['friday']));
-                    $advert->setSaturday(isset($formdata['saturday']));
-                    $advert->setSunday(isset($formdata['sunday']));
-
-                    $advert->save();
+                    $this->setDays($advert, $formdata);
 
                     $data['id'] = $advertId;
                     $data['message'] = 'Inzerát úspšene upravený';
@@ -207,15 +199,7 @@ class AdvertController extends AControllerBase
                 $advert->setCategoryId($formData['categoryId']);
                 $advert->setViews(0);
 
-                $advert->setMonday(isset($formData['monday']));
-                $advert->setTuesday(isset($formData['tuesday']));
-                $advert->setWednesday(isset($formData['wednesday']));
-                $advert->setThursday(isset($formData['thursday']));
-                $advert->setFriday(isset($formData['friday']));
-                $advert->setSaturday(isset($formData['saturday']));
-                $advert->setSunday(isset($formData['sunday']));
-
-                $advert->save();        //tu mu nastavi auto increment ID
+                $this->setDays($advert, $formData);        //tu mu nastavi auto increment ID
                 $data = ['id' => $advert->getId()];
 
                 $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
@@ -251,11 +235,7 @@ class AdvertController extends AControllerBase
     {
         $inzeratyNaStrane = 20; //pocet inzeratov na jednu stranu
         $dataSent = [];
-        if (isset($_GET['1'])) {
-            $page = $_GET['1'];
-        } else {
-            $page = 1;
-        }
+        $page = $_GET['1'] ?? 1;
         $dataSent['page'] = $page;
         $dataGet = $this->app->getRequest()->getPost();
         if (sizeof($dataGet) > 0) {
@@ -371,5 +351,24 @@ class AdvertController extends AControllerBase
 
         $pagination .= '</ul></nav>';
         return $pagination;
+    }
+
+    /**
+     * @param Advert|null $advert
+     * @param array $formdata
+     * @return void
+     * @throws \Exception
+     */
+    private function setDays(?Advert $advert, array $formdata): void
+    {
+        $advert->setMonday(isset($formdata['monday']));
+        $advert->setTuesday(isset($formdata['tuesday']));
+        $advert->setWednesday(isset($formData['wednesday']));
+        $advert->setThursday(isset($formdata['thursday']));
+        $advert->setFriday(isset($formdata['friday']));
+        $advert->setSaturday(isset($formdata['saturday']));
+        $advert->setSunday(isset($formdata['sunday']));
+
+        $advert->save();
     }
 }
