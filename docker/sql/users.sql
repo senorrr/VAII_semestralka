@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
                          `id` int(11) NOT NULL AUTO_INCREMENT,
                          `email` varchar(100) NOT NULL,
-                         `password` varchar(50) NOT NULL,
+                         `password` varchar(255) NOT NULL,
                          `name` varchar(30) NOT NULL,
                          `surname` varchar(30) NOT NULL,
                          `permissions` tinyint(1) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 INSERT INTO `users` (`id`, `email`, `password`, `name`, `surname`, `permissions`) VALUES
-                                                                                      (1,	'admin@gmail.com',	'admin',	'Admin',	'Adminec',	1),
-                                                                                      (2,	'marek@gmail.com',	'123',	'Marek',	'Figo',	0);
+    (1,	'admin@gmail.com',	'$2y$10$a/42BLJBM6VtazDiM7OoDeXHFjBji3Sd4OeCrTprSoGlA3D5.M2W2',	'Admin',	'Adminec',	1),
+    (2,	'jano@bunt.com',	'$2y$10$dnKf0mNCPdIW8RA3/uQFzeFiuFzcmfNlxDK9jqP020PRT9HQULtmK',	'Jano',	'Bunt',	0);
 
 -- 2025-01-02 22:07:31

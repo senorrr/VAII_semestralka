@@ -50,7 +50,7 @@ class AuthController extends AControllerBase
 
         if (isset($formData['remove'])) {
             $user = User::getOne($this->app->getAuth()->getLoggedUserId());
-            if ($user->getPassword() == $formData['oldPassword']) {
+            if (password_verify($formData['oldPassword'], $user->getPassword())) {
                 $this->app->getAuth()->logout();
                 $user->delete();
                 return $this->redirect($this->url("home.index"));
@@ -59,11 +59,12 @@ class AuthController extends AControllerBase
                 return $this->html($data);
             }
         }
+
         if (isset($formData['submit'])) {
             $user = User::getOne($this->app->getAuth()->getLoggedUserId());
-            if ($formData['oldPassword'] == $user->getPassword()) {
+            if (password_verify($formData['oldPassword'], $user->getPassword())) {
                 if ($formData['name'] != null && $formData['surname'] != null && !ctype_space($formData['name']) &&
-                    !ctype_space($formData['surname'])) { //ctype_space funkcia vrati podla toho ci je su medzery
+                    !ctype_space($formData['surname'])) {
                     if (sizeof($formData) == 5) {
                         // zmena mailu
                         if ($formData['newLogin'] != $user->getEmail()) {
@@ -82,9 +83,9 @@ class AuthController extends AControllerBase
                     } else if ($formData['newLogin'] == null && $formData['newPassword'] != null &&
                         $formData['confirmPassword'] != null) {
                         if ($formData['newPassword'] == $formData['confirmPassword']) {
-                            if ($formData['oldPassword'] != $formData['newPassword']) {
-                                //ked nemenim mail ale menim hesla
-                                $this->app->getAuth()->edit($user->getEmail(), $formData['newPassword'],
+                            if (!password_verify($formData['newPassword'], $user->getPassword())) {
+                                // keď nemením mail ale mením heslá
+                                $this->app->getAuth()->edit($user->getEmail(), password_hash($formData['newPassword'], PASSWORD_DEFAULT),
                                     $formData['name'], $formData['surname']);
                                 $data = ['message' => 'Úspešná zmena!'];
                                 return $this->html($data);
@@ -95,7 +96,7 @@ class AuthController extends AControllerBase
                             $data = ['message' => "Heslá sa nezhodovali"];
                         }
                     } else {
-                        $this->app->getAuth()->edit($user->getEmail(), $formData['oldPassword'],
+                        $this->app->getAuth()->edit($user->getEmail(), $user->getPassword(),
                             $formData['name'], $formData['surname']);
                         $data = ['message' => 'Úspešná zmena!'];
                         return $this->html($data);
@@ -105,7 +106,6 @@ class AuthController extends AControllerBase
                 }
             } else {
                 $data = ['message' => "Nesprávne aktuálne heslo"];
-
             }
         }
         return $this->html($data);

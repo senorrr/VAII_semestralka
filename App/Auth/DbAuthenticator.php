@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Auth;
 
 use App\Core\IAuthenticator;
@@ -7,27 +6,17 @@ use App\Models\User;
 
 class DbAuthenticator implements IAuthenticator
 {
-    /**
-     * DummyAuthenticator constructor
-     */
     public function __construct()
     {
         session_start();
     }
 
-    /**
-     * Pokusi sa prihlasit s parametrami, ak sa zhoduju hesla a loginy tak prihlasi
-     *
-     * @param $login
-     * @param $password
-     * @return bool
-     */
     public function login($login, $password): bool
     {
         $users = User::getAll('`email` LIKE ?', [$login], limit: 1);
         if (sizeof($users) > 0) {
             $user = $users[0];
-            if ($user->getPassword() == $password) {
+            if (password_verify($password, $user->getPassword())) {
                 $_SESSION['user'] = $user->getId();
                 return true;
             }
@@ -35,14 +24,6 @@ class DbAuthenticator implements IAuthenticator
         return false;
     }
 
-    /**
-     * Skontroluje ze ci neexistuje uzivatel s danym emailom ak nie tak ho vytvori a ulozi do DB
-     * @param $login
-     * @param $password
-     * @param $name
-     * @param $surname
-     * @return bool
-     */
     public function register($login, $password, $name, $surname): bool
     {
         $users = User::getAll();
@@ -53,7 +34,7 @@ class DbAuthenticator implements IAuthenticator
         }
         $novy = new User();
         $novy->setEmail($login);
-        $novy->setPassword($password);
+        $novy->setPassword(password_hash($password, PASSWORD_DEFAULT));
         $novy->setName($name);
         $novy->setSurname($surname);
         $novy->setPermissions(0);
@@ -68,7 +49,7 @@ class DbAuthenticator implements IAuthenticator
         foreach ($users as $user) {
             if ($user->getEmail() == $login) {
                 $user->setEmail($login);
-                $user->setPassword($password);
+                $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
                 $user->setName($name);
                 $user->setSurname($surname);
                 $user->save();
@@ -78,9 +59,6 @@ class DbAuthenticator implements IAuthenticator
         return false;
     }
 
-    /**
-     * Logout the user
-     */
     public function logout(): void
     {
         if (isset($_SESSION["user"])) {
@@ -89,10 +67,6 @@ class DbAuthenticator implements IAuthenticator
         }
     }
 
-    /**
-     * Return if the user is authenticated or not
-     * @return bool
-     */
     public function isLogged(): bool
     {
         return isset($_SESSION['user']) && $_SESSION['user'] != null;
