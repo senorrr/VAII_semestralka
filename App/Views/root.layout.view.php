@@ -13,7 +13,7 @@
 
     <link href="../public/css/hlavne.css" rel="stylesheet">
 
-    <script src="public/js/script.js"></script>
+    <script src="../public/js/script.js"></script>
 </head>
 <body class="wrapper">
 <nav class="navbar navbar-expand-lg">
@@ -44,9 +44,6 @@
                         <a class="nav-link" href="<?= \App\Config\Configuration::LOGIN_URL ?>">Prihlásenie</a>
                     </li>
                 <?php } ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?= $link->url("home.contact") ?>">Kontakt</a>
-                </li>
 
             </ul>
             <form class="d-flex" role="search" action="<?= $link->url("advert.all")?>" method="post">

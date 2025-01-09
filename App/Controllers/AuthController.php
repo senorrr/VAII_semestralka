@@ -18,6 +18,21 @@ use App\Models\User;
  */
 class AuthController extends AControllerBase
 {
+    public function authorize(string $action)
+    {
+        switch ($action) {
+            case 'edit' :
+            case 'logout' :
+                return $this->app->getAuth()->isLogged();
+            case 'login':
+            case 'register':
+            case 'index':
+                return !$this->app->getAuth()->isLogged();
+            default:
+                return false;
+        }    }
+
+
     /**
      *
      * @return Response
