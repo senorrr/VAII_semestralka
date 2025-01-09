@@ -141,12 +141,12 @@ document.addEventListener('DOMContentLoaded', function() {
     //advert.edit
 
     //AJAX na odoslanie form
-    document.getElementById('submitPhoto').addEventListener('click', function(event) {
+    document.getElementById('submitPhoto').addEventListener('click', function() {
         const urlInput = document.querySelector('input[name="url"]');
         if (urlInput.value.trim() !== '') {
-            var url = urlInput.value;
-            var formData = new FormData();
-            var fetchUrl = 'http://127.0.0.1/?c=advert&a=addNewPhoto&0=' + '<?= $advert->getId()?>';
+            let url = urlInput.value;
+            let formData = new FormData();
+            let fetchUrl = 'http://127.0.0.1/?c=advert&a=addNewPhoto&0=' + '<?= $advert->getId()?>';
             formData.append('url', url);
             fetch(fetchUrl, {
                 method: 'POST',
@@ -155,18 +155,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => response.json())
                 .then(data => {
                     if (data['success'] === true) {
-                        var carouselInner = document.querySelector('.carousel-inner');
-                        var carouselIndicators = document.querySelector('.carousel-indicators');
-                        var newItemIndex = carouselInner.children.length;
+                        let carouselInner = document.querySelector('.carousel-inner');
+                        let carouselIndicators = document.querySelector('.carousel-indicators');
+                        let newItemIndex = carouselInner.children.length;
 
                         // novy  carousel item
-                        var newItem = document.createElement('div');
+                        let newItem = document.createElement('div');
                         newItem.classList.add('carousel-item');
                         newItem.innerHTML = `<img class="d-block w-100 mx-auto" src="${url}" alt="New Slide">`;
                         carouselInner.appendChild(newItem);
 
                         // novy ten spodny indicator
-                        var newIndicator = document.createElement('button');
+                        let newIndicator = document.createElement('button');
                         newIndicator.type = 'button';
                         newIndicator.dataset.bsTarget = '#carouselExampleIndicators';
                         newIndicator.dataset.bsSlideTo = newItemIndex;
@@ -181,10 +181,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
 
                         // nastav na najnovsiu fotku
-                        var carousel = new bootstrap.Carousel(document.querySelector('#carouselExampleIndicators'));
+                        let carousel = new bootstrap.Carousel(document.querySelector('#carouselExampleIndicators'));
                         carousel.to(newItemIndex);
                     }
-                    var messageBox = document.getElementById('message');
+                    let messageBox = document.getElementById('message');
                     messageBox.textContent = data['message'];
                 });
         }
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //AJAX na ziskanie nazvu mesta
     document.getElementById('city').addEventListener('input', function() {
-        var text = document.getElementById('city');
+        let text = document.getElementById('city');
         if (text.value.length > 2) {
             fetch('http://127.0.0.1/?c=Home&a=getCity', {
                 method: 'POST',
@@ -255,21 +255,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-    function renameFields() {
-        var photoFields = document.getElementById('photos');
-        var inputs = photoFields.getElementsByTagName('input');
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].name = 'photo' + (i + 1);
-            inputs[i].placeholder = 'Zadajte url adresu ' + (i + 1) + '. fotky';
-        }
-    }
-
     //advert.add
     document.getElementById('pridajFotku').addEventListener('click', function() {
-        var photoFields = document.getElementById('photos');
-        var newField = document.createElement('input');
-        var count = photoFields.getElementsByTagName('input').length + 1;
+        let photoFields = document.getElementById('photos');
+        let newField = document.createElement('input');
+        let count = photoFields.getElementsByTagName('input').length + 1;
 
         newField.name = 'photo' + count;
         newField.type = 'url';
@@ -277,11 +267,11 @@ document.addEventListener('DOMContentLoaded', function() {
         newField.placeholder = 'Zadajte url adresu ' + count + '. fotky';
         newField.required = true;
 
-        var newDiv = document.createElement('div');
+        let newDiv = document.createElement('div');
         newDiv.className = 'col url-input d-flex align-items-center';
         newDiv.appendChild(newField);
 
-        var removeButton = document.createElement('button');
+        let removeButton = document.createElement('button');
         removeButton.className = 'btn btn-danger';
         removeButton.textContent = 'X';
         removeButton.setAttribute('onclick', 'removePhotoField(this)');
@@ -290,16 +280,11 @@ document.addEventListener('DOMContentLoaded', function() {
         photoFields.appendChild(newDiv);
     });
 
-    function removePhotoField(button) {
-        var photoFields = document.getElementById('photos');
-        photoFields.removeChild(button.parentNode);
-        renameFields();
-    }
 
     //admin.index
 
     document.getElementById('spravovanie').addEventListener('change', function() {
-        var selectedValue = this.value;
+        let selectedValue = this.value;
         if (selectedValue === 'Kategórie') {
             window.location.href = 'http://localhost/?c=admin&a=category';
         } else if (selectedValue === 'Inzeráty') {
