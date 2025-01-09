@@ -1,10 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
-//auth.edit
-    document.getElementById('name').addEventListener('input', validateName);
-    document.getElementById('surname').addEventListener('input', validateSurname);
-    document.getElementById("newPassword").addEventListener("input", checkPasswords);
-    document.getElementById("confirmPassword").addEventListener("input", checkPasswords);
-    document.getElementById("newLogin").addEventListener("input", disableNewPassword);
+    // auth.edit
+    const nameInput = document.getElementById('name');
+    if (nameInput) {
+        nameInput.addEventListener('input', validateName);
+    }
+
+    const surnameInput = document.getElementById('surname');
+    if (surnameInput) {
+        surnameInput.addEventListener('input', validateSurname);
+    }
+
+    const newPasswordInput = document.getElementById("newPassword");
+    if (newPasswordInput) {
+        newPasswordInput.addEventListener("input", checkPasswords);
+    }
+
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    if (confirmPasswordInput) {
+        confirmPasswordInput.addEventListener("input", checkPasswords);
+    }
+
+    const newLoginInput = document.getElementById("newLogin");
+    if (newLoginInput) {
+        newLoginInput.addEventListener("input", disableNewPassword);
+    }
 
     function disableNewPassword() {
         let oldMail = document.getElementById("login").value;
@@ -45,12 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
             nameHelp.textContent = "Meno nemôže byť len z medzier!";
             submitBtn.disabled = true;
             submitBtn.classList.add("btn-disabled");
-            return false
+            return false;
         } else {
             nameHelp.textContent = "";
             submitBtn.disabled = false;
             submitBtn.classList.remove("btn-disabled");
-            return true
+            return true;
         }
     }
 
@@ -59,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let submitBtn = document.getElementById("submitBtn");
         let surnameHelp = document.getElementById("surnameHelp");
 
-        if(surname ==='') {
+        if (surname === '') {
             surnameHelp.textContent = "";
             submitBtn.disabled = false;
             submitBtn.classList.remove("btn-disabled");
@@ -70,12 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
             surnameHelp.textContent = "Priezvisko nemôže byť len z medzier!";
             submitBtn.disabled = true;
             submitBtn.classList.add("btn-disabled");
-            return false
+            return false;
         } else {
             surnameHelp.textContent = "";
             submitBtn.disabled = false;
             submitBtn.classList.remove("btn-disabled");
-            return true
+            return true;
         }
     }
 
@@ -111,10 +130,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    //auth.register
+    // auth.register
+    const newPasswordRegisterInput = document.getElementById("new_password");
+    if (newPasswordRegisterInput) {
+        newPasswordRegisterInput.addEventListener("input", checkPasswordsRegister);
+    }
 
-    document.getElementById("new_password").addEventListener("input", checkPasswordsRegister);
-    document.getElementById("confirm_password").addEventListener("input", checkPasswordsRegister);
+    const confirmPasswordRegisterInput = document.getElementById("confirm_password");
+    if (confirmPasswordRegisterInput) {
+        confirmPasswordRegisterInput.addEventListener("input", checkPasswordsRegister);
+    }
 
     function checkPasswordsRegister() {
         let password = document.getElementById("new_password").value;
@@ -134,4 +159,4 @@ document.addEventListener('DOMContentLoaded', function() {
             return true;
         }
     }
-})
+});
