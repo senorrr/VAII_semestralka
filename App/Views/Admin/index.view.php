@@ -7,7 +7,7 @@
 //todo pridaj uzivatelov
 //todo pridaj xko ked je admin pri zobrazeni inzeratov
 use App\Models\Category; ?>
-<link href="../public/css/admin.css" rel="stylesheet">
+<link href="../../../public/css/admin.css" rel="stylesheet">
 
 <div class="container">
     <h2>Admin</h2>
@@ -17,7 +17,7 @@ use App\Models\Category; ?>
             <select name="spravovanie" class="form-control admin-nav" id="spravovanie">
                 <option selected>Domov</option>
                 <option>Kategórie</option>
-                <option>Uzivatelia</option>
+                <option>Uživatelia</option>
             </select>
         </form>
     </div>

@@ -34,7 +34,7 @@ use App\Models\Village;
                         <?php endforeach; ?>
                     </select>
                 </div>
-            <h3 class="col-auto mt-2">Číslo inzerátu: <?= $advert->getId()?></h3>
+            <h3 class="col-auto mt-2" id="advertId">Číslo inzerátu: <?= $advert->getId()?></h3>
             </div>
 
             <?php
@@ -75,13 +75,6 @@ use App\Models\Village;
                     <div class="d-flex align-items-center">
                         <input class="form-control ms-3" type="url" placeholder="Zadajte url adresu fotky" name="url" id="url">
                         <button class="btn btn-primary ms-2" id="submitPhoto" type="button" name="submitPhoto">Pridaj fotku</button>
-                        <?php
-                        /*
-                         * //todo treba dorobit
-                         * hashovanie hesiel! password salted hash
-                         */
-
-                        ?>
                         <button class="btn btn-danger mx-2" type="submit" name="submitRemovePhoto">Načítaj url fotky</button>
 
                     </div>
@@ -105,8 +98,11 @@ use App\Models\Village;
             <div class="row inzerat-oramovanie-edit">
                 <label for="lokalita" class="col-3 col-sm-2 col-lg-1 mt-2">Lokalita:</label>
                 <div class="col">
-                    <input class="form-control col obmedzenie-sirky" name="city" id="city" value="<?=Village::getOne($advert->getVillageId())->getName()?>">
+                    <input class="form-control col obmedzenie-sirky" name="city" id="city" list="cities" value="<?=Village::getOne($advert->getVillageId())->getName()?>">
+                    <datalist id="cities">
+                    </datalist>
                 </div>
+
             </div>
             <div class="row inzerat-oramovanie-edit">
                 <label for="cena" class="col-3 col-sm-2 col-lg-1 mt-2">Cena: </label>

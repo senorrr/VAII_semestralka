@@ -15,14 +15,13 @@ use App\Models\Category; ?>
         }
         ?>
     </div>
-    Zmen aby len admin mohol prist
     <div>
         <form>
             <label for="spravovanie">Vyber spravovanie</label>
             <select name="spravovanie" class="form-control admin-nav" id="spravovanie">
                 <option>Domov</option>
                 <option selected>Kategórie</option>
-                <option>Inzeráty</option>
+                <option>Uživatelia</option>
             </select>
         </form>
     </div>
