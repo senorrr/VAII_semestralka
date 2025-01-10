@@ -9,7 +9,7 @@
 use App\Models\Category; ?>
 <link href="../../../public/css/admin.css" rel="stylesheet">
 
-<div class="container">
+<div class="container mt-3">
     <h2>Admin</h2>
     <div>
         <form>
@@ -17,7 +17,7 @@ use App\Models\Category; ?>
             <select name="spravovanie" class="form-control admin-nav" id="spravovanie">
                 <option selected>Domov</option>
                 <option>Kategórie</option>
-                <option>Uživatelia</option>
+                <option>Užívatelia</option>
             </select>
         </form>
     </div>

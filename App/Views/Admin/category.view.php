@@ -4,9 +4,9 @@
 /** @var \App\Core\IAuthenticator $auth */
 
 use App\Models\Category; ?>
-<link href="../public/css/admin.css" rel="stylesheet">
+<link href="../../../public/css/admin.css" rel="stylesheet">
 
-<div class="container">
+<div class="container mt-3">
     <h2>Admin</h2>
     <div class="text-center text-vypis">
         <?php
@@ -21,12 +21,12 @@ use App\Models\Category; ?>
             <select name="spravovanie" class="form-control admin-nav" id="spravovanie">
                 <option>Domov</option>
                 <option selected>Kategórie</option>
-                <option>Uživatelia</option>
+                <option>Užívatelia</option>
             </select>
         </form>
     </div>
 
-
+<div class="mx-2">
     <div class="row d-flex text-center text-vypis row-cols-1 justify-content-between">
         <div class="col-md-auto stlpec-admin">
             <form action="<?=$link->url("admin.category")?>" method="post">
@@ -87,4 +87,5 @@ use App\Models\Category; ?>
             </a>
         </div>
     </div>
+</div>
 </div>

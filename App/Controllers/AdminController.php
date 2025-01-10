@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\AControllerBase;
 use App\Core\Responses\Response;
 use App\Models\Category;
+use http\Client\Curl\User;
 
 /**
  * Class HomeController
@@ -23,6 +24,10 @@ class AdminController extends AControllerBase
         switch ($action) {
             case 'index':
             case 'category':
+            case 'users':
+            case 'givePermission':
+            case 'takePermission':
+            case 'deleteUser':
                 return $this->app->getAuth()->isLogged() && $this->app->getAuth()->getPermissionLevel() > 0;
             default: return false;
         }
@@ -31,6 +36,37 @@ class AdminController extends AControllerBase
     public function index(): Response
     {
         return $this->html();
+    }
+
+    public function users()
+    {
+        return $this->html();
+    }
+
+    public function givePermission(): Response
+    {
+        $userId = $this->app->getRequest()->getGet()['0'];
+        $user = \App\Models\User::getOne($userId);
+        $user->setPermissions(1);
+        $user->save();
+        return $this->redirect($this->url('admin.users'));
+    }
+
+    public function takePermission(): Response
+    {
+        $userId = $this->app->getRequest()->getGet()['0'];
+        $user = \App\Models\User::getOne($userId);
+        $user->setPermissions(0);
+        $user->save();
+        return $this->redirect($this->url('admin.users'));
+    }
+
+    public function deleteUser(): Response
+    {
+        $userId = $this->app->getRequest()->getGet()['0'];
+        $user = \App\Models\User::getOne($userId);
+        $user->delete();
+        return $this->redirect($this->url('admin.users'));
     }
 
     public function category(): Response
