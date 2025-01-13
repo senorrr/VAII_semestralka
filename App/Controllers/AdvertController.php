@@ -60,27 +60,36 @@ class AdvertController extends AControllerBase
     {
         $formdata = $this->app->getRequest()->getPost();
         if (isset($formdata['url'])) {
-            $advertId = $this->app->getRequest()->getGet()['0'];
-            if ($advertId != null && trim($formdata['url']) != '') {
-                $url = trim($formdata['url']);
-                $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-                $extension = strtolower(pathinfo($url, PATHINFO_EXTENSION));
-                if (in_array($extension, $validExtensions)) {
-                    $photo = new Photo();
-                    $photo->setAdvertId($advertId);
-                    $photo->setUrl($url);
-                    $photo->save();
-                    $data['success'] = true;
-                    $data['message'] = 'Fotka úspšene pridaná';
+            $pattern = '/[^a-zA-Z0-9\-._~:\/?#\[\]@!$&\'()*+,;=%]/';
+            if (!preg_match($pattern, $formdata['url'])) {
+
+                $advertId = $this->app->getRequest()->getGet()['0'];
+                if ($advertId != null && trim($formdata['url']) != '') {
+                    $url = trim($formdata['url']);
+                    $validExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+                    $extension = strtolower(pathinfo($url, PATHINFO_EXTENSION));
+                    if (in_array($extension, $validExtensions)) {
+                        $photo = new Photo();
+                        $photo->setAdvertId($advertId);
+                        $photo->setUrl($url);
+                        $photo->save();
+                        $data['success'] = true;
+                        $data['message'] = 'Fotka úspšene pridaná';
+                    } else {
+                        $data['success'] = false;
+                        $data['message'] = 'URL musí končiť na jpg, jpeg, png alebo gif';
+                    }
                 } else {
                     $data['success'] = false;
-                    $data['message'] = 'URL musí končiť na jpg, jpeg, png alebo gif';
+                    $data['message'] = 'Fotka nebola úspšene pridaná';
                 }
+                return $this->json($data);
             } else {
                 $data['success'] = false;
-                $data['message'] = 'Fotka nebola úspšene pridaná';
+                $data['message'] = 'URL obsahuje iné znaky ako Anglická abeceda';
+                return $this->json($data);
             }
-            return $this->json($data);
+
         }
         $data['success'] = false;
         $data['message'] = 'Chybna alebo žiadna URL';

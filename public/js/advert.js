@@ -12,10 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
         submitPhotoButton.addEventListener('click', function() {
             const urlInput = document.querySelector('input[name="url"]');
             if (urlInput.value.trim() !== '') {
+                const regex = /[^a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=%]/;
                 let url = urlInput.value;
                 let formData = new FormData();
                 const actualUrl = window.location.href;
-                let match = actualUrl.match(/(\d+)(?!.*\d)/); //kod od umelej inteligencie
+                let match = actualUrl.match(/(\d+)(?!.*\d)/); //prevzaty kod
                 let id = match ? match[0] : null;
                 if (id) {
                     let fetchUrl = 'http://127.0.0.1/?c=advert&a=addNewPhoto&0=' + id;
@@ -84,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     }
                                     carousel.to(newItemIndex);
                                 }
+                                urlInput.value = '';
                             }
                             let messageBox = document.getElementById('message');
                             messageBox.textContent = data['message'];
